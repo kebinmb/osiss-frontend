@@ -1,0 +1,827 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="container my-4">
+  <h2 class="mb-4 text-primary">ONLINE STUDENT INFORMATION SHEET SYSTEM</h2>
+
+  <div formGroupName="studentRequest" class="row g-3">
+    <!-- Basic Info -->
+    <fieldset class="border rounded p-4 mt-4">
+      <legend class="float-none w-auto px-2 text-secondary">
+        Student's Information
+      </legend>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Learner's Reference Number (LRN)</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lrn"
+            placeholder="Learner's Reference Number"
+          />
+        </div>
+
+        <div class="col-md-4">
+          <label for="campus" class="form-label">Campus</label>
+          <select class="form-select" id="campus" formControlName="campus">
+            <option value="" disabled selected>Select Campus</option>
+            <option value="Talisay">Talisay</option>
+            <option value="Alijis">Alijis</option>
+            <option value="Fortune Towne">Fortune Towne</option>
+            <option value="Binalbagan">Binalbagan</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="course" class="form-label">Course</label>
+          <input
+            type="text"
+            class="form-control"
+            id="course"
+            formControlName="course"
+            placeholder="Enter Course"
+          />
+        </div>
+
+        <div class="col-md-4">
+          <label for="dateAdmitted" class="form-label">Date Admitted</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dateAdmitted"
+            formControlName="dateAdmitted"
+            placeholder="YYYY-MM-DD"
+          />
+        </div>
+
+        <div class="col-md-4">
+          <label for="semester" class="form-label">Semester</label>
+          <select class="form-select" id="semester" formControlName="semester">
+            <option value="" disabled selected>Select Semester</option>
+            <option value="First Semester">First Semester</option>
+            <option value="Second Semester">Second Semester</option>
+            <option value="Summer">Summer</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="academicYear" class="form-label">Academic Year</label>
+          <input
+            type="text"
+            class="form-control"
+            id="academicYear"
+            formControlName="academicYear"
+            placeholder="e.g., 2024-2025"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <!--Personal Information-->
+    <fieldset class="border rounded p-4 mt-4">
+      <legend class="float-none w-auto px-2 text-secondary">
+        Personal Information
+      </legend>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label for=" firstName" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            placeholder="Enter your First Name"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            placeholder="Enter your Last Name"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="middleName" class="form-label">Middle Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="middleName"
+            placeholder="Enter your Middle Name"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="extensionName" class="form-label">Suffixes</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="extensionName"
+            placeholder="e.g., Jr., Sr., etc."
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="birthDate" class="form-label">Birth Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="birthDate"
+            formControlName="birthDate"
+            placeholder="YYYY-MM-DD"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="birthPlace" class="form-label">Birth Place</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="birthPlace"
+            placeholder="e.g., Talisay City, Bacolod City, etc."
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Gender at Birth</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.gender')?.value === 'Male'
+              "
+              (change)="onGenderCheckboxChange('Male')"
+              id="genderMale"
+            />
+            <label class="form-check-label" for="genderMale">Male</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.gender')?.value === 'Female'
+              "
+              (change)="onGenderCheckboxChange('Female')"
+              id="genderFemale"
+            />
+            <label class="form-check-label" for="genderFemale">Female</label>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label d-block mb-2 fw-semibold text-secondary"
+            >Civil Status</label
+          >
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.civilStatus')?.value ===
+                'Single'
+              "
+              (change)="onCivilStatusCheck('Single')"
+              id="civilStatusSingle"
+            />
+            <label class="form-check-label" for="civilStatusSingle"
+              >Single</label
+            >
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.civilStatus')?.value ===
+                'Married'
+              "
+              (change)="onCivilStatusCheck('Married')"
+              id="civilStatusMarried"
+            />
+            <label class="form-check-label" for="civilStatusMarried"
+              >Married</label
+            >
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.civilStatus')?.value ===
+                'Live-in Relationship'
+              "
+              (change)="onCivilStatusCheck('Live-in Relationship')"
+              id="civilStatusLiveIn"
+            />
+            <label class="form-check-label" for="civilStatusLiveIn"
+              >Live-in Relationship</label
+            >
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.civilStatus')?.value ===
+                'Widowed'
+              "
+              (change)="onCivilStatusCheck('Widowed')"
+              id="civilStatusWidowed"
+            />
+            <label class="form-check-label" for="civilStatusWidowed"
+              >Widowed</label
+            >
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked]="
+                studentForm.get('studentRequest.civilStatus')?.value ===
+                'Separated'
+              "
+              (change)="onCivilStatusCheck('Separated')"
+              id="civilStatusSeparated"
+            />
+            <label class="form-check-label" for="civilStatusSeparated"
+              >Separated</label
+            >
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="emailAddress" class="form-label">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="emailAddress"
+            placeholder="example_email123@domain.com"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.emailAddress')?.invalid &&
+              studentForm.get('studentRequest.emailAddress')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['required']"
+          >
+            Email is required.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['email']"
+          >
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="citizenship" class="form-label">Citizenship</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="citizenship"
+            placeholder="e.g., Filipino etc."
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="religion" class="form-label">Religion</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="religion"
+            placeholder="e.g., Roman Catholic, Born Again, etc.,"
+          />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="mobileNumber" class="form-label">Mobile Number</label>
+          <input
+            type="tel"
+            id="mobileNumber"
+            class="form-control"
+            formControlName="mobileNumber"
+            placeholder="e.g., 09123456789"
+            maxlength="11"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.mobileNumber')?.invalid &&
+              studentForm.get('studentRequest.mobileNumber')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+    studentForm.get('studentRequest.mobileNumber')?.errors?.['required']
+  "
+          >
+            Mobile number is required.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+    studentForm.get('studentRequest.mobileNumber')?.errors?.['pattern']
+  "
+          >
+            Mobile number must start with 09 and be exactly 11 digits long.
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Address -->
+    <fieldset formGroupName="address" class="border rounded p-3 mt-4">
+      <legend class="float-none w-auto px-2 text-secondary">
+        Home Address
+      </legend>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Street</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="street"
+            placeholder="e.g., Lot 1 Block 12"
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Barangay</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="barangay"
+            placeholder="e.g., Brgy. Example"
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">City/Municipality</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="city"
+            placeholder="e.g., Talisay City, Municipality of Hinigaran"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Province</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="province"
+            placeholder="e.g., Negros Occidental"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Region</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="region"
+            placeholder="e.g., Region VI"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Zip Code</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="zipcode"
+            placeholder="e.g., 6100"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Parent Info (Father + Mother) -->
+    <div class="row g-4">
+      <!-- Father -->
+      <fieldset formGroupName="father" class="col-md-6">
+        <div class="border rounded p-4 shadow-sm">
+          <legend class="float-none w-auto px-2 text-secondary">
+            Father's Information
+          </legend>
+
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="Enter Father's First Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Middle Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="middleName"
+              placeholder="Enter Father's Middle Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Enter Father's Last Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="extension" class="form-label">Suffixes</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="extension"
+              placeholder="e.g., Jr., Sr., etc."
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Occupation</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="occupation"
+              placeholder="e.g., Farmer, Engineer, Teacher"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label">Citizenship</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="citizenship"
+              placeholder="e.g., Filipino"
+            />
+          </div>
+
+          <!-- Father's Address -->
+          <fieldset formGroupName="address" class="border-top pt-3">
+            <legend class="fs-6 text-muted mb-2">Father's Address</legend>
+            <div class="mb-2">
+              <label class="form-label">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="street"
+                placeholder="e.g., Lot 1 Block 12"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Barangay</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="barangay"
+                placeholder="e.g., Brgy. Example"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">City/Municipality</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="city"
+                placeholder="e.g., Talisay City, Municipality of Hinigaran"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Province</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="province"
+                placeholder="e.g., Negros Occidental"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Region</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="region"
+                placeholder="e.g., Region VI"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Zip Code</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="zipcode"
+                placeholder="e.g., 6100"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="educAttainment"
+                >Highest Educational Attainment</label
+              >
+              <select
+                class="form-select"
+                id="educAttainment"
+                formControlName="highestEducationalAttainment"
+              >
+                <option value="" disabled>Select one</option>
+                <option value="No Formal Education">No Formal Education</option>
+                <option value="Elementary Graduate">Elementary Graduate</option>
+                <option value="High School Graduate">
+                  High School Graduate
+                </option>
+                <option value="Vocational">Vocational</option>
+                <option value="College Level">College Level</option>
+                <option value="College Graduate">College Graduate</option>
+                <option value="Post Graduate">Post Graduate</option>
+              </select>
+            </div>
+          </fieldset>
+        </div>
+      </fieldset>
+
+      <!-- Mother -->
+      <fieldset formGroupName="mother" class="col-md-6">
+        <div class="border rounded p-4 shadow-sm">
+          <legend class="float-none w-auto px-2 text-secondary">
+            Mother's Information
+          </legend>
+
+          <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="Enter Mother's First Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Middle Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="middleName"
+              placeholder="Enter Mother's Middle Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Enter Mother's Maiden Last Name"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Occupation</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="occupation"
+              placeholder="e.g., Farmer, Engineer, Teacher"
+            />
+          </div>
+
+          <!-- Mother's Address -->
+          <fieldset formGroupName="address" class="border-top pt-3">
+            <legend class="fs-6 text-muted mb-2">Father's Address</legend>
+            <div class="mb-2">
+              <label class="form-label">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="street"
+                placeholder="e.g., Lot 1 Block 12"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Barangay</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="barangay"
+                placeholder="e.g., Brgy. Example"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">City/Municipality</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="city"
+                placeholder="e.g., Talisay City, Municipality of Hinigaran"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Province</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="province"
+                placeholder="e.g., Negros Occidental"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Region</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="region"
+                placeholder="e.g., Region VI"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Zip Code</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="zipcode"
+                placeholder="e.g., 6100"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="educAttainment"
+                >Highest Educational Attainment</label
+              >
+              <select
+                class="form-select"
+                id="educAttainment"
+                formControlName="highestEducationalAttainment"
+              >
+                <option value="" disabled>Select one</option>
+                <option value="No Formal Education">No Formal Education</option>
+                <option value="Elementary Graduate">Elementary Graduate</option>
+                <option value="High School Graduate">
+                  High School Graduate
+                </option>
+                <option value="Vocational">Vocational</option>
+                <option value="College Level">College Level</option>
+                <option value="College Graduate">College Graduate</option>
+                <option value="Post Graduate">Post Graduate</option>
+              </select>
+            </div>
+          </fieldset>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Emergency Contact -->
+    <fieldset formGroupName="emergencyContact" class="border rounded p-3 mt-4">
+      <legend class="float-none w-auto px-2 text-secondary">
+        Emergency Contact
+      </legend>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" formControlName="firstName" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" formControlName="lastName" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Contact Number</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="contactNumber"
+          />
+        </div>
+        <fieldset formGroupName="address" class="mt-3">
+          <legend class="fs-6 text-muted">Emergency Address</legend>
+          <input
+            type="text"
+            class="form-control mb-2"
+            formControlName="street"
+            placeholder="Street"
+          />
+          <input
+            type="text"
+            class="form-control mb-2"
+            formControlName="city"
+            placeholder="City"
+          />
+        </fieldset>
+      </div>
+    </fieldset>
+
+    <!-- Education Background -->
+    <fieldset
+      formGroupName="educationBackground"
+      class="border rounded p-3 mt-4"
+    >
+      <legend class="float-none w-auto px-2 text-secondary">
+        Education Background
+      </legend>
+      <input
+        type="text"
+        class="form-control mb-2"
+        formControlName="elementarySchool"
+        placeholder="Elementary School"
+      />
+      <input
+        type="text"
+        class="form-control mb-2"
+        formControlName="juniorHighSchool"
+        placeholder="Junior High School"
+      />
+      <input
+        type="text"
+        class="form-control mb-2"
+        formControlName="seniorHighSchool"
+        placeholder="Senior High School"
+      />
+    </fieldset>
+
+    <!-- Family Info -->
+    <fieldset formGroupName="family" class="border rounded p-3 mt-4">
+      <legend class="float-none w-auto px-2 text-secondary">Family Info</legend>
+      <input
+        type="number"
+        class="form-control mb-2"
+        formControlName="familySize"
+        placeholder="Family Size"
+      />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="monthlyGrossIncome"
+        placeholder="Monthly Gross Income"
+      />
+    </fieldset>
+
+    <!-- Equity Target Indicators -->
+    <fieldset
+      formArrayName="equityTargetIndicators"
+      class="border rounded p-3 mt-4"
+    >
+      <legend class="float-none w-auto px-2 text-secondary">
+        Equity Target Indicators
+      </legend>
+
+      <div
+        *ngFor="let group of equityTargetIndicators.controls; let i = index"
+        [formGroupName]="i"
+        class="border p-3 mb-2 bg-light"
+      >
+        <select class="form-select mb-2" formControlName="indicatorName">
+          <option value="" disabled selected>Select Indicator</option>
+          <option value="FIRST_GENERATION_COLLEGE_STUDENT">
+            First Generation College Student
+          </option>
+          <option value="FOUR_Ps_BENEFICIARY">4Ps Beneficiary</option>
+          <option value="SOLO_PARENT">Solo Parent</option>
+          <option value="RAISED_BY_A_SINGLE_OR_SOLO_PARENT">
+            Raised by a Single or Solo Parent
+          </option>
+          <option value="ORPHAN">Orphan</option>
+          <option value="PERSON_WITH_DISABILITY">Person with Disability</option>
+          <option
+            value="LIVING_IN_A_GEOGRAPHICALLY_ISOLATED_AND_DISADVANTAGED_AREA"
+          >
+            Living in a Geographically Isolated and Disadvantaged Area
+          </option>
+          <option value="MEMBER_OF_INDIGENOUS_PEOPLE">
+            Member of Indigenous People
+          </option>
+          <option
+            value="BELONGS_TO_A_FAMILY_OF_SUBSISTENCE_FARMERS_OR_FISHERFOLKS"
+          >
+            Belongs to a Family of Subsistence Farmers or Fisherfolks
+          </option>
+          <option value="BELONGS_TO_A_FAMILY_OF_REBEL_RETURNEES">
+            Belongs to a Family of Rebel Returnees
+          </option>
+        </select>
+
+        <textarea
+          rows="2"
+          class="form-control"
+          formControlName="details"
+          placeholder="Details"
+        ></textarea>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-outline-primary mt-2"
+        (click)="addEquityTargetIndicator()"
+      >
+        + Add Indicator
+      </button>
+    </fieldset>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button
+        type="submit"
+        [disabled]="studentForm.invalid"
+        class="btn btn-success px-4"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
