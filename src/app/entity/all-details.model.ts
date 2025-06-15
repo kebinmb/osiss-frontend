@@ -4,7 +4,7 @@ export interface Address {
   region: string;
   province: string;
   city: string;
-  zipcode: string;
+  zipCode: string;
 }
 
 export interface EducationBackground {
@@ -90,7 +90,7 @@ export interface Mother {
   address: Address;
   birthDate: Date;
   citizenship: string;
-  highestEducationalAttainment: string;
+  highestEducationAttainment: string;
 }
 
 export interface Student {
