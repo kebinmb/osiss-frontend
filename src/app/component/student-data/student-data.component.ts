@@ -8,6 +8,7 @@ import {
 } from 'src/app/services/saving.service';
 import { DataPrivacyComponent } from '../data-privacy/data-privacy.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-student-data',
@@ -82,7 +83,7 @@ export class StudentDataComponent implements OnInit {
 filteredCourses: { course: string; majors: string[] }[] = [];
 availableMajors: string[] = [];
 showMajorField = false;
-  constructor(private fb: FormBuilder, private savingService: SavingService,private dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, private savingService: SavingService,private dialog: MatDialog, private snackbar:MatSnackBar) { }
 ngAfterViewInit(): void {
     if (!sessionStorage.getItem('privacyAccepted')) {
       this.dialog.open(DataPrivacyComponent, {
@@ -242,9 +243,9 @@ ngAfterViewInit(): void {
         family: this.fb.group({
           familySize: [''],
           monthlyGrossIncome: [''],
-          firstGenerationStudent: [false, Validators.required],
-          memberOfIndigenousPeople: [false, Validators.required],
-          memberOfIndigenousCulturalCommunity: [false, Validators.required],
+          firstGenerationStudent: [false],
+          memberOfIndigenousPeople: [false],
+          memberOfIndigenousCulturalCommunity: [false],
           indigenousCommunity: [''],
           indigenousCulturalCommunityDetails: ['']
         }),
@@ -330,7 +331,7 @@ ngAfterViewInit(): void {
     };
     this.savingService.saveStudentDetails(payload).subscribe({
       next: (response) => {
-        alert(response.message);
+        this.snackbar.open('Data Saved Successfully','Close',{duration:3000})
       },
       error: (error) => {
         console.error(error);
@@ -342,7 +343,7 @@ ngAfterViewInit(): void {
     const currentValue = genderControl?.value;
 
     if (currentValue === value) {
-      genderControl?.setValue(''); // uncheck if same is clicked
+      genderControl?.setValue('');
     } else {
       genderControl?.setValue(value);
     }
