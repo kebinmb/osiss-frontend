@@ -6,6 +6,8 @@ import {
   AllDetailsRequest,
   SavingService,
 } from 'src/app/services/saving.service';
+import { DataPrivacyComponent } from '../data-privacy/data-privacy.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-student-data',
@@ -16,7 +18,6 @@ export class StudentDataComponent implements OnInit {
   studentForm!: FormGroup;
   memberOfIndigenousPeople!: FormControl;
   memberOfIndigenousCulturalCommunity!: FormControl;
-  captchaToken: string | null = null;
   indicatorOptions: string[] = [
     'FIRST_GENERATION_COLLEGE_STUDENT',
     'FOUR_Ps_BENEFICIARY',
@@ -30,11 +31,96 @@ export class StudentDataComponent implements OnInit {
     'BELONGS_TO_A_FAMILY_OF_REBEL_RETURNEES',
     'NOT_APPLICABLE'
   ];
+  campusCourses: {
+  [key: string]: Array<string | { course: string; majors: string[] }>
+} = {
+  Talisay: [
+    'BA in English Language',
+    'BA Social Science',
+    'BS Psychology',
+    'B of Public Administration',
+    'BS in Applied Mathematics',
+    'B of Elementary Education',
+    'B of Early Childhood Educ',
+    'B of Physical Education',
+    { course: 'B of Secondary Education', majors: ['English', 'Filipino', 'Mathematics', 'Science'] },
+    'B of Special Needs Education',
+    { course: 'B of Technology & Livelihood Education', majors:['Home Economics','Industrial Arts']},
+    { course: 'B of Industrial Technology', majors:['Architectural Drafting Technology','Automotive Technology','Electrical Technology','Electronics Technology','Apparel and Fashion Technology','Culinary Technology','Mechanical Technology','Heating, Ventilating, Air Conditioning and Refrigeration Technology']},
+    { course: 'BS in Industrial Technology',majors:['Architectural Drafting Technology','Automative Technology','Electrical Technology','Electronics Technology','Fashion and Apparel Technology','Foods Trade Technology','Mechanical Technology','Refrig and Air Conditioning Technology']},
+    'BS in Hospitality Management',
+    'BS in Information Systems',
+    'BS in Civil Engineering'
+  ],
+  Alijis: [
+    { course: 'B of Technical Vocational Educ',majors:['Electronics Technology','Electrical Technology']},
+    'BS in Computer Engineering',
+    'BS in Electronics Engineering',
+    { course: 'B of Industrial Technology',majors:['Architectural Drafting Techonology','Automotive Technology','Computer Technology','Electrical Technology','Electronics Technology','Foods Trade Technology','Mechanical Technology']},
+    'BS in Informations System',
+    'BS in Information Technology'
+  ],
 
-  constructor(private fb: FormBuilder, private savingService: SavingService) { }
-
+  'Fortune Towne': [
+    'BS in Accountancy',
+    'BS in Business Administration',
+    'BS in Entrepreneurship',
+    'BS in Information Systems',
+    'BS in Management Accounting',
+    'BS in Office Administration'
+  ],
+  Binalbagan: [
+    'B of Elementary Education',
+    'B of Secondary Education (Science)',
+    'B of Technology & Livelihood Educ',
+    'BS in Business Administration',
+    'BS in Criminology',
+    'BS in Fisheries',
+    'BS in Information Technology'
+  ],
+};
+filteredCourses: { course: string; majors: string[] }[] = [];
+availableMajors: string[] = [];
+showMajorField = false;
+  constructor(private fb: FormBuilder, private savingService: SavingService,private dialog: MatDialog) { }
+ngAfterViewInit(): void {
+    if (!sessionStorage.getItem('privacyAccepted')) {
+      this.dialog.open(DataPrivacyComponent, {
+        width: '500px',
+        disableClose: true
+      });
+    }
+  }
   ngOnInit() {
+
     this.initForm();
+    const studentRequest = this.studentForm.get('studentRequest');
+
+  studentRequest?.get('campus')?.valueChanges.subscribe((campus) => {
+    const courses = this.campusCourses[campus] || [];
+
+    this.filteredCourses = courses.map(item =>
+      typeof item === 'string' ? { course: item, majors: [] } : item
+    );
+
+    studentRequest.get('course')?.reset();
+    studentRequest.get('major')?.reset();
+    this.showMajorField = false;
+  });
+
+  studentRequest?.get('course')?.valueChanges.subscribe((selectedCourse) => {
+    const match = this.filteredCourses.find(c => c.course === selectedCourse);
+    if (match && match.majors.length) {
+      this.availableMajors = match.majors;
+      this.showMajorField = true;
+      studentRequest.get('major')?.setValidators(Validators.required);
+    } else {
+      this.availableMajors = [];
+      this.showMajorField = false;
+      studentRequest.get('major')?.clearValidators();
+    }
+    studentRequest.get('major')?.updateValueAndValidity();
+  });
     this.memberOfIndigenousPeople = this.studentForm.get(
       'studentRequest.family.memberOfIndigenousPeople'
     ) as FormControl;
@@ -94,6 +180,7 @@ export class StudentDataComponent implements OnInit {
         lrn: ['', Validators.required],
         campus: ['', Validators.required],
         course: ['', Validators.required],
+        major: [''],
         dateAdmitted: ['', Validators.required],
         semester: ['', Validators.required],
         academicYear: ['', Validators.required],
@@ -201,7 +288,6 @@ export class StudentDataComponent implements OnInit {
         }),
         equityTargetIndicatorsRequest: indicatorsArray,
       }),
-       captchaToken: [null, Validators.required]
     });
   }
 
@@ -228,11 +314,6 @@ export class StudentDataComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.captchaToken) {
-      // Show error to user
-      alert('Please complete the CAPTCHA before submitting.')
-      return;
-    }
     const selectedIndicators = this.equityTargetIndicators.value
       .filter((indicator: any) => indicator.selected)
       .map((indicator: any) => ({
@@ -249,7 +330,7 @@ export class StudentDataComponent implements OnInit {
     };
     this.savingService.saveStudentDetails(payload).subscribe({
       next: (response) => {
-        console.log(response);
+        alert(response.message);
       },
       error: (error) => {
         console.error(error);
@@ -276,17 +357,9 @@ export class StudentDataComponent implements OnInit {
       civilStatusControl?.setValue(value);
     }
   }
-  onCaptchaResolved(token: string | null): void {
-    if (token) {
-      console.log(token);
-      this.captchaToken = token;
-      this.studentForm.patchValue({ captchaToken: token });
-    } else {
-      this.captchaToken = null;
-      console.warn('reCAPTCHA token was null.');
-    }
-  }
+  openDataPrivacyModal(){
 
+  }
 
 
 }

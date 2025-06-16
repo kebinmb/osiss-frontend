@@ -6,12 +6,17 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentDataComponent } from './component/student-data/student-data.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RecaptchaModule } from 'ng-recaptcha';
+import { DataPrivacyComponent } from './component/data-privacy/data-privacy.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentDataComponent
+    StudentDataComponent,
+    DataPrivacyComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +24,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RecaptchaModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -97,6 +97,7 @@ export interface Student {
   lrn: string;
   campus: string;
   course: string;
+  major:string;
   dateAdmitted: Date;
   semester: string;
   academicYear: string;
