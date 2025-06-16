@@ -9,6 +9,7 @@ import {
 import { DataPrivacyComponent } from '../data-privacy/data-privacy.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-data',
@@ -83,7 +84,7 @@ export class StudentDataComponent implements OnInit {
 filteredCourses: { course: string; majors: string[] }[] = [];
 availableMajors: string[] = [];
 showMajorField = false;
-  constructor(private fb: FormBuilder, private savingService: SavingService,private dialog: MatDialog, private snackbar:MatSnackBar) { }
+  constructor(private fb: FormBuilder, private savingService: SavingService,private dialog: MatDialog, private snackbar:MatSnackBar, private router:Router) { }
 ngAfterViewInit(): void {
     if (!sessionStorage.getItem('privacyAccepted')) {
       this.dialog.open(DataPrivacyComponent, {
@@ -332,6 +333,8 @@ ngAfterViewInit(): void {
     this.savingService.saveStudentDetails(payload).subscribe({
       next: (response) => {
         this.snackbar.open('Data Saved Successfully','Close',{duration:3000})
+        this.studentForm.reset();
+        this.router.navigate(['thank-you'])
       },
       error: (error) => {
         console.error(error);
