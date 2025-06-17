@@ -17,14 +17,19 @@
           >
           <input
             type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
             class="form-control"
             formControlName="lrn"
             placeholder="Learner's Reference Number"
+            (keypress)="isNumberKey($event)"
+            (paste)="preventNonNumericPaste($event)"
             [class.is-invalid]="
               studentForm.get('studentRequest.lrn')?.invalid &&
               studentForm.get('studentRequest.lrn')?.touched
             "
           />
+
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.lrn')?.errors?.['required']"
@@ -138,52 +143,25 @@
         </div>
 
         <div class="col-md-4">
-          <label for="semester" class="form-label"
-            >Semester <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
+          <label for="semester" class="form-label"> Semester </label>
+          <input
+            type="text"
+            class="form-control"
             id="semester"
             formControlName="semester"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.semester')?.invalid &&
-              studentForm.get('studentRequest.semester')?.touched
-            "
-          >
-            <option value="" disabled>Select Semester</option>
-            <option value="First Semester">First Semester</option>
-            <option value="Second Semester">Second Semester</option>
-            <option value="Summer">Summer</option>
-          </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.semester')?.errors?.['required']"
-          >
-            Semester is required.
-          </div>
+            readonly
+          />
         </div>
 
         <div class="col-md-4">
-          <label for="academicYear" class="form-label"
-            >Academic Year <span class="text-danger">*</span></label
-          >
+          <label for="academicYear" class="form-label"> Academic Year </label>
           <input
             type="text"
             class="form-control"
             id="academicYear"
             formControlName="academicYear"
-            placeholder="e.g., 2024-2025"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.academicYear')?.invalid &&
-              studentForm.get('studentRequest.academicYear')?.touched
-            "
+            readonly
           />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.academicYear')?.errors?.['required']"
-          >
-            Academic Year is required.
-          </div>
         </div>
       </div>
     </fieldset>
@@ -209,7 +187,7 @@
               studentForm.get('firstName')?.invalid &&
               studentForm.get('firstName')?.touched
             "
-            placeholder="First Name"
+            placeholder="FIRST NAME"
           />
           <div
             class="invalid-feedback"
@@ -219,15 +197,15 @@
           </div>
         </div>
 
-        <!-- middle name -->
+        <!-- Middle name -->
         <div class="col-md-4">
-          <label for="middleName" class="form-label">middle name</label>
+          <label for="middleName" class="form-label">Middle name</label>
           <input
             type="text"
             class="form-control"
             id="middleName"
             formControlName="middleName"
-            placeholder="middle name"
+            placeholder="Middle name"
           />
         </div>
 
@@ -457,6 +435,8 @@
             formControlName="mobileNumber"
             maxlength="11"
             pattern="^09\d{9}$"
+            (keypress)="isNumberKey($event)"
+            (paste)="preventNonNumericPaste($event)"
             [class.is-invalid]="
               studentForm.get('studentRequest.mobileNumber')?.invalid &&
               studentForm.get('studentRequest.mobileNumber')?.touched
@@ -613,6 +593,8 @@
             class="form-control"
             id="zipCode"
             formControlName="zipCode"
+            (keypress)="isNumberKey($event)"
+            (paste)="preventNonNumericPaste($event)"
             placeholder="e.g., 6100"
           />
         </div>
@@ -647,7 +629,7 @@
 
             <div class="col-md-6">
               <label class="form-label"
-                >middle name <span class="text-danger">*</span></label
+                >Middle name <span class="text-danger">*</span></label
               >
               <input
                 type="text"
@@ -657,9 +639,9 @@
                   studentForm.get('middleName')?.invalid &&
                   studentForm.get('middleName')?.touched
                 "
-                placeholder="middle name"
+                placeholder="Middle name"
               />
-              <div class="invalid-feedback">middle name is required.</div>
+              <div class="invalid-feedback">Middle name is required.</div>
             </div>
 
             <div class="col-md-6">
@@ -863,6 +845,8 @@
                     studentForm.get('address.zipCode')?.invalid &&
                     studentForm.get('address.zipCode')?.touched
                   "
+                  (keypress)="isNumberKey($event)"
+                  (paste)="preventNonNumericPaste($event)"
                   placeholder="e.g., 4114"
                 />
                 <div class="invalid-feedback">Zip Code is required.</div>
@@ -899,7 +883,7 @@
 
             <div class="col-md-6">
               <label class="form-label"
-                >middle name <span class="text-danger">*</span></label
+                >Middle name <span class="text-danger">*</span></label
               >
               <input
                 type="text"
@@ -909,9 +893,9 @@
                   studentForm.get('middleName')?.invalid &&
                   studentForm.get('middleName')?.touched
                 "
-                placeholder="middle name"
+                placeholder="Middle name"
               />
-              <div class="invalid-feedback">middle name is required.</div>
+              <div class="invalid-feedback">Middle name is required.</div>
             </div>
 
             <div class="col-md-6">
@@ -1105,6 +1089,8 @@
                     studentForm.get('address.zipCode')?.invalid &&
                     studentForm.get('address.zipCode')?.touched
                   "
+                  (keypress)="isNumberKey($event)"
+                  (paste)="preventNonNumericPaste($event)"
                   placeholder="e.g., 6000"
                 />
                 <div class="invalid-feedback">Zip Code is required.</div>
@@ -1264,7 +1250,7 @@
         </div>
 
         <div class="col-md-4">
-          <label class="form-label">middle name</label>
+          <label class="form-label">Middle name</label>
           <input
             type="text"
             class="form-control"
@@ -1287,6 +1273,8 @@
               studentForm.get('studentRequest.emergencyContact.contactNumber')
                 ?.touched
             "
+            (keypress)="isNumberKey($event)"
+            (paste)="preventNonNumericPaste($event)"
           />
 
           <div
@@ -1398,6 +1386,8 @@
               class="form-control"
               id="zipCode"
               formControlName="zipCode"
+              (keypress)="isNumberKey($event)"
+              (paste)="preventNonNumericPaste($event)"
               placeholder="e.g., 6100"
               required
             />
@@ -1721,6 +1711,8 @@
                 studentForm.get('studentRequest.emergencyContact.contactNumber')
                   ?.touched
               "
+              (keypress)="isNumberKey($event)"
+              (paste)="preventNonNumericPaste($event)"
             />
 
             <div
@@ -1749,14 +1741,13 @@
     </fieldset>
 
     <!-- Equity Target Indicators -->
-   <fieldset
-  formArrayName="equityTargetIndicatorsRequest"
-  class="border rounded p-3 mt-4"
->
-  <legend class="float-none w-auto px-2 text-secondary">
-    Equity Target Indicators <span class="text-danger">*</span>
-  </legend>
-
+    <fieldset
+      formArrayName="equityTargetIndicatorsRequest"
+      class="border rounded p-3 mt-4"
+    >
+      <legend class="float-none w-auto px-2 text-secondary">
+        Equity Target Indicators <span class="text-danger">*</span>
+      </legend>
 
       <div
         *ngFor="let group of equityTargetIndicators.controls; let i = index"
@@ -1776,15 +1767,30 @@
         </div>
 
         <textarea
-          *ngIf="group.get('selected')?.value"
+          *ngIf="
+            group.get('selected')?.value &&
+            indicatorOptions[i] !== 'NOT_APPLICABLE'
+          "
           class="form-control"
           rows="2"
-          placeholder="Details (required if selected)"
+          placeholder="Details"
           formControlName="details"
           [class.is-invalid]="
             group.get('details')?.invalid && group.get('details')?.touched
           "
         ></textarea>
+
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            group.get('selected')?.value &&
+            indicatorOptions[i] !== 'NOT_APPLICABLE' &&
+            group.get('details')?.hasError('required') &&
+            group.get('details')?.touched
+          "
+        >
+          Details are required when this indicator is selected.
+        </div>
 
         <div
           class="invalid-feedback"

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { atLeastOneSelectedValidator } from 'src/app/custom/atLeastOneSelectedValidator';
 import { Indicators } from 'src/app/entity/all-details.model';
 import {
@@ -31,98 +37,151 @@ export class StudentDataComponent implements OnInit {
     'MEMBER_OF_INDIGENOUS_PEOPLE',
     'BELONGS_TO_A_FAMILY_OF_SUBSISTENCE_FARMERS_OR_FISHERFOLKS',
     'BELONGS_TO_A_FAMILY_OF_REBEL_RETURNEES',
-    'NOT_APPLICABLE'
+    'NOT_APPLICABLE',
   ];
   campusCourses: {
-  [key: string]: Array<string | { course: string; majors: string[] }>
-} = {
-  Talisay: [
-    'BA in English Language',
-    'BA Social Science',
-    'BS Psychology',
-    'B of Public Administration',
-    'BS in Applied Mathematics',
-    'B of Elementary Education',
-    'B of Early Childhood Educ',
-    'B of Physical Education',
-    { course: 'B of Secondary Education', majors: ['English', 'Filipino', 'Mathematics', 'Science'] },
-    'B of Special Needs Education',
-    { course: 'B of Technology & Livelihood Education', majors:['Home Economics','Industrial Arts']},
-    { course: 'B of Industrial Technology', majors:['Architectural Drafting Technology','Automotive Technology','Electrical Technology','Electronics Technology','Apparel and Fashion Technology','Culinary Technology','Mechanical Technology','Heating, Ventilating, Air Conditioning and Refrigeration Technology']},
-    { course: 'BS in Industrial Technology',majors:['Architectural Drafting Technology','Automative Technology','Electrical Technology','Electronics Technology','Fashion and Apparel Technology','Foods Trade Technology','Mechanical Technology','Refrig and Air Conditioning Technology']},
-    'BS in Hospitality Management',
-    'BS in Information Systems',
-    'BS in Civil Engineering'
-  ],
-  Alijis: [
-    { course: 'B of Technical Vocational Educ',majors:['Electronics Technology','Electrical Technology']},
-    'BS in Computer Engineering',
-    'BS in Electronics Engineering',
-    { course: 'B of Industrial Technology',majors:['Architectural Drafting Techonology','Automotive Technology','Computer Technology','Electrical Technology','Electronics Technology','Foods Trade Technology','Mechanical Technology']},
-    'BS in Informations System',
-    'BS in Information Technology'
-  ],
+    [key: string]: Array<string | { course: string; majors: string[] }>;
+  } = {
+    Talisay: [
+      'BA in English Language',
+      'BA Social Science',
+      'BS Psychology',
+      'B of Public Administration',
+      'BS in Applied Mathematics',
+      'B of Elementary Education',
+      'B of Early Childhood Educ',
+      'B of Physical Education',
+      {
+        course: 'B of Secondary Education',
+        majors: ['English', 'Filipino', 'Mathematics', 'Science'],
+      },
+      'B of Special Needs Education',
+      {
+        course: 'B of Technology & Livelihood Education',
+        majors: ['Home Economics', 'Industrial Arts'],
+      },
+      {
+        course: 'B of Industrial Technology',
+        majors: [
+          'Architectural Drafting Technology',
+          'Automotive Technology',
+          'Electrical Technology',
+          'Electronics Technology',
+          'Apparel and Fashion Technology',
+          'Culinary Technology',
+          'Mechanical Technology',
+          'Heating, Ventilating, Air Conditioning and Refrigeration Technology',
+        ],
+      },
+      {
+        course: 'BS in Industrial Technology',
+        majors: [
+          'Architectural Drafting Technology',
+          'Automative Technology',
+          'Electrical Technology',
+          'Electronics Technology',
+          'Fashion and Apparel Technology',
+          'Foods Trade Technology',
+          'Mechanical Technology',
+          'Refrig and Air Conditioning Technology',
+        ],
+      },
+      'BS in Hospitality Management',
+      'BS in Information Systems',
+      'BS in Civil Engineering',
+    ],
+    Alijis: [
+      {
+        course: 'B of Technical Vocational Educ',
+        majors: ['Electronics Technology', 'Electrical Technology'],
+      },
+      'BS in Computer Engineering',
+      'BS in Electronics Engineering',
+      {
+        course: 'B of Industrial Technology',
+        majors: [
+          'Architectural Drafting Techonology',
+          'Automotive Technology',
+          'Computer Technology',
+          'Electrical Technology',
+          'Electronics Technology',
+          'Foods Trade Technology',
+          'Mechanical Technology',
+        ],
+      },
+      'BS in Informations System',
+      'BS in Information Technology',
+    ],
 
-  'Fortune Towne': [
-    'BS in Accountancy',
-    'BS in Business Administration',
-    'BS in Entrepreneurship',
-    'BS in Information Systems',
-    'BS in Management Accounting',
-    'BS in Office Administration'
-  ],
-  Binalbagan: [
-    'B of Elementary Education',
-    'B of Secondary Education (Science)',
-    'B of Technology & Livelihood Educ',
-    'BS in Business Administration',
-    'BS in Criminology',
-    'BS in Fisheries',
-    'BS in Information Technology'
-  ],
-};
-filteredCourses: { course: string; majors: string[] }[] = [];
-availableMajors: string[] = [];
-showMajorField = false;
-  constructor(private fb: FormBuilder, private savingService: SavingService,private dialog: MatDialog, private snackbar:MatSnackBar, private router:Router) { }
-ngAfterViewInit(): void {
+    'Fortune Towne': [
+      'BS in Accountancy',
+      'BS in Business Administration',
+      'BS in Entrepreneurship',
+      'BS in Information Systems',
+      'BS in Management Accounting',
+      'BS in Office Administration',
+    ],
+    Binalbagan: [
+      'B of Elementary Education',
+      'B of Secondary Education (Science)',
+      'B of Technology & Livelihood Educ',
+      'BS in Business Administration',
+      'BS in Criminology',
+      'BS in Fisheries',
+      'BS in Information Technology',
+    ],
+  };
+  filteredCourses: { course: string; majors: string[] }[] = [];
+  availableMajors: string[] = [];
+  showMajorField = false;
+  academicYear!: string;
+  semester!: string;
+  constructor(
+    private fb: FormBuilder,
+    private savingService: SavingService,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {}
+  ngAfterViewInit(): void {
     if (!sessionStorage.getItem('privacyAccepted')) {
       this.dialog.open(DataPrivacyComponent, {
         width: '500px',
-        disableClose: true
+        disableClose: true,
       });
     }
   }
   ngOnInit() {
-
     this.initForm();
     const studentRequest = this.studentForm.get('studentRequest');
 
-  studentRequest?.get('campus')?.valueChanges.subscribe((campus) => {
-    const courses = this.campusCourses[campus] || [];
+    studentRequest?.get('campus')?.valueChanges.subscribe((campus) => {
+      const courses = this.campusCourses[campus] || [];
 
-    this.filteredCourses = courses.map(item =>
-      typeof item === 'string' ? { course: item, majors: [] } : item
-    );
+      this.filteredCourses = courses.map((item) =>
+        typeof item === 'string' ? { course: item, majors: [] } : item
+      );
 
-    studentRequest.get('course')?.reset();
-    studentRequest.get('major')?.reset();
-    this.showMajorField = false;
-  });
-
-  studentRequest?.get('course')?.valueChanges.subscribe((selectedCourse) => {
-    const match = this.filteredCourses.find(c => c.course === selectedCourse);
-    if (match && match.majors.length) {
-      this.availableMajors = match.majors;
-      this.showMajorField = true;
-      studentRequest.get('major')?.setValidators(Validators.required);
-    } else {
-      this.availableMajors = [];
+      studentRequest.get('course')?.reset();
+      studentRequest.get('major')?.reset();
       this.showMajorField = false;
-      studentRequest.get('major')?.clearValidators();
-    }
-    studentRequest.get('major')?.updateValueAndValidity();
-  });
+    });
+
+    studentRequest?.get('course')?.valueChanges.subscribe((selectedCourse) => {
+      const match = this.filteredCourses.find(
+        (c) => c.course === selectedCourse
+      );
+      if (match && match.majors.length) {
+        this.availableMajors = match.majors;
+        this.showMajorField = true;
+        studentRequest.get('major')?.setValidators(Validators.required);
+      } else {
+        this.availableMajors = [];
+        this.showMajorField = false;
+        studentRequest.get('major')?.clearValidators();
+      }
+      studentRequest.get('major')?.updateValueAndValidity();
+    });
     this.memberOfIndigenousPeople = this.studentForm.get(
       'studentRequest.family.memberOfIndigenousPeople'
     ) as FormControl;
@@ -130,47 +189,65 @@ ngAfterViewInit(): void {
     this.memberOfIndigenousCulturalCommunity = this.studentForm.get(
       'studentRequest.family.memberOfIndigenousCulturalCommunity'
     ) as FormControl;
-    this.studentForm.get('studentRequest.educationBackground.studentType')?.valueChanges.subscribe(value => {
-      const collegeControls = [
-        'collegeType',
-        'collegeName',
-        'collegeAddress',
-        'yearGraduatedCollege',
-      ];
+    this.studentForm
+      .get('studentRequest.educationBackground.studentType')
+      ?.valueChanges.subscribe((value) => {
+        const collegeControls = [
+          'collegeType',
+          'collegeName',
+          'collegeAddress',
+          'yearGraduatedCollege',
+        ];
 
-      collegeControls.forEach(field => {
-        const control = this.studentForm.get(`studentRequest.educationBackground.${field}`);
-        if (value === 'Transferee') {
-          control?.setValidators([Validators.required]);
-        } else {
-          control?.clearValidators();
-          control?.setValue('');
-        }
-        control?.updateValueAndValidity();
+        collegeControls.forEach((field) => {
+          const control = this.studentForm.get(
+            `studentRequest.educationBackground.${field}`
+          );
+          if (value === 'Transferee') {
+            control?.setValidators([Validators.required]);
+          } else {
+            control?.clearValidators();
+            control?.setValue('');
+          }
+          control?.updateValueAndValidity();
+        });
       });
+    this.savingService.getEnrollmentDetails(1).subscribe({
+      next: (response) => {
+        this.studentForm.patchValue({
+          studentRequest: {
+            academicYear: response.academicYear,
+            semester: response.semester,
+          },
+        });
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
-
-
+    
   }
 
   initForm() {
     const indicatorsArray = this.fb.array(
-      this.indicatorOptions.map(indicator => {
+      this.indicatorOptions.map((indicator) => {
         const group = this.fb.group({
           indicatorName: [indicator],
           selected: [false],
-          details: ['']
+          details: [''],
         });
 
-        group.get('selected')?.valueChanges.subscribe((isSelected: boolean | null) => {
-          const detailsControl = group.get('details');
-          if (isSelected) {
-            detailsControl?.setValidators([Validators.required]);
-          } else {
-            detailsControl?.clearValidators();
-          }
-          detailsControl?.updateValueAndValidity();
-        });
+        group
+          .get('selected')
+          ?.valueChanges.subscribe((isSelected: boolean | null) => {
+            const detailsControl = group.get('details');
+            if (isSelected) {
+              // detailsControl?.setValidators([Validators.required]);
+            } else {
+              detailsControl?.clearValidators();
+            }
+            detailsControl?.updateValueAndValidity();
+          });
 
         return group;
       }),
@@ -184,8 +261,8 @@ ngAfterViewInit(): void {
         course: ['', Validators.required],
         major: [''],
         dateAdmitted: ['', Validators.required],
-        semester: ['', Validators.required],
-        academicYear: ['', Validators.required],
+        semester: [''],
+        academicYear: [''],
         firstName: ['', Validators.required],
         middleName: [''],
         lastName: ['', Validators.required],
@@ -197,7 +274,14 @@ ngAfterViewInit(): void {
         emailAddress: ['', Validators.email],
         citizenship: ['', Validators.required],
         religion: ['', Validators.required],
-        mobileNumber: ['', [Validators.pattern(/^09\d{9}$/), Validators.minLength(11), Validators.maxLength(11)]],
+        mobileNumber: [
+          '',
+          [
+            Validators.pattern(/^09\d{9}$/),
+            Validators.minLength(11),
+            Validators.maxLength(11),
+          ],
+        ],
         address: this.fb.group({
           street: [''],
           barangay: ['', Validators.required],
@@ -248,7 +332,7 @@ ngAfterViewInit(): void {
           memberOfIndigenousPeople: [false],
           memberOfIndigenousCulturalCommunity: [false],
           indigenousCommunity: [''],
-          indigenousCulturalCommunityDetails: ['']
+          indigenousCulturalCommunityDetails: [''],
         }),
         educationBackground: this.fb.group({
           studentType: ['', Validators.required],
@@ -272,7 +356,14 @@ ngAfterViewInit(): void {
 
           scholarshipProgram: [''],
           scholarshipOfficeAddress: [''],
-          contactNumber: ['', [Validators.pattern(/^09\d{9}$/), Validators.minLength(11), Validators.maxLength(11)]],
+          contactNumber: [
+            '',
+            [
+              Validators.pattern(/^09\d{9}$/),
+              Validators.minLength(11),
+              Validators.maxLength(11),
+            ],
+          ],
         }),
         emergencyContact: this.fb.group({
           firstName: ['', Validators.required],
@@ -286,13 +377,19 @@ ngAfterViewInit(): void {
             city: ['', Validators.required],
             zipCode: ['', Validators.required],
           }),
-          contactNumber: ['', [Validators.pattern(/^09\d{9}$/), Validators.minLength(11), Validators.maxLength(11)]],
+          contactNumber: [
+            '',
+            [
+              Validators.pattern(/^09\d{9}$/),
+              Validators.minLength(11),
+              Validators.maxLength(11),
+            ],
+          ],
         }),
         equityTargetIndicatorsRequest: indicatorsArray,
       }),
     });
   }
-
 
   addEquityTargetIndicator() {
     const indicatorsArray = this.studentForm.get(
@@ -306,41 +403,105 @@ ngAfterViewInit(): void {
     );
   }
   get equityTargetIndicators(): FormArray {
-    return this.studentForm.get('studentRequest.equityTargetIndicatorsRequest') as FormArray;
+    return this.studentForm.get(
+      'studentRequest.equityTargetIndicatorsRequest'
+    ) as FormArray;
   }
   formatIndicatorLabel(value: string): string {
     return value
       .replace(/_/g, ' ')
       .toLowerCase()
-      .replace(/\b\w/g, char => char.toUpperCase());
+      .replace(/\b\w/g, (char) => char.toUpperCase());
   }
 
   onSubmit() {
+    const rawAdmitionDate = this.studentForm.get(
+      'studentRequest.dateAdmitted'
+    )?.value;
+    let formattedAdmitiondate = null;
+
+    const rawPersonalBirthDate = this.studentForm.get(
+      'studentRequest.birthDate'
+    )?.value;
+    let formattedPersonalBirthDate = null;
+
+    const rawFatherBirthDate = this.studentForm.get(
+      'studentRequest.father.birthDate'
+    )?.value;
+    let formattedFatherBirthDate = null;
+
+    const rawMotherBirthDate = this.studentForm.get(
+      'studentRequest.mother.birthDate'
+    )?.value;
+    let formattedMotherBirthDate = null;
+
+    if (rawMotherBirthDate) {
+      const jsDate = new Date(rawMotherBirthDate);
+      formattedMotherBirthDate = this.formatDateToDDMMYYYY(jsDate); // ❗ don't use `let` again
+    }
+
+    if (rawFatherBirthDate) {
+      const jsDate = new Date(rawFatherBirthDate);
+      formattedFatherBirthDate = this.formatDateToDDMMYYYY(jsDate);
+    }
+
+    if (rawAdmitionDate) {
+      const jsDate = new Date(rawAdmitionDate);
+      formattedAdmitiondate = this.formatDateToDDMMYYYY(jsDate);
+    }
+
+    if (rawPersonalBirthDate) {
+      const jsDate = new Date(rawPersonalBirthDate);
+      formattedPersonalBirthDate = this.formatDateToDDMMYYYY(jsDate);
+    }
+
     const selectedIndicators = this.equityTargetIndicators.value
       .filter((indicator: any) => indicator.selected)
       .map((indicator: any) => ({
         indicatorName: indicator.indicatorName,
-        details: indicator.details
+        details: indicator.details,
       }));
 
     const payload = {
       ...this.studentForm.value,
       studentRequest: {
         ...this.studentForm.value.studentRequest,
-        equityTargetIndicators: selectedIndicators
-      }
+        equityTargetIndicators: selectedIndicators,
+        dateAdmitted: formattedAdmitiondate,
+        birthDate: formattedPersonalBirthDate,
+        father: {
+          ...this.studentForm.value.studentRequest.father,
+          birthDate: formattedFatherBirthDate,
+        },
+        mother: {
+          ...this.studentForm.value.studentRequest.mother,
+          birthDate: formattedMotherBirthDate,
+        },
+      },
     };
+
     this.savingService.saveStudentDetails(payload).subscribe({
       next: (response) => {
-        this.snackbar.open('Data Saved Successfully','Close',{duration:3000})
+        this.snackbar.open('Data Saved Successfully', 'Close', {
+          duration: 3000,
+        });
         this.studentForm.reset();
-        this.router.navigate(['thank-you'])
+        this.router.navigate(['thank-you']);
       },
       error: (error) => {
         console.error(error);
       },
     });
   }
+
+  formatDateToDDMMYYYY(date: Date): string {
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const yyyy = date.getFullYear();
+
+    return `${dd}/${mm}/${yyyy}`;
+  }
+
   onGenderCheckboxChange(value: string): void {
     const genderControl = this.studentForm.get('studentRequest.gender');
     const currentValue = genderControl?.value;
@@ -352,7 +513,9 @@ ngAfterViewInit(): void {
     }
   }
   onCivilStatusCheck(value: string): void {
-    const civilStatusControl = this.studentForm.get('studentRequest.civilStatus');
+    const civilStatusControl = this.studentForm.get(
+      'studentRequest.civilStatus'
+    );
     const currentValue = civilStatusControl?.value;
 
     if (currentValue === value) {
@@ -361,9 +524,16 @@ ngAfterViewInit(): void {
       civilStatusControl?.setValue(value);
     }
   }
-  openDataPrivacyModal(){
-
+  openDataPrivacyModal() {}
+  isNumberKey(event: KeyboardEvent): boolean {
+    const charCode = event.charCode ? event.charCode : event.keyCode;
+    return charCode >= 48 && charCode <= 57;
   }
 
-
+  preventNonNumericPaste(event: ClipboardEvent): void {
+    const pastedInput = event.clipboardData?.getData('text') ?? '';
+    if (!/^\d+$/.test(pastedInput)) {
+      event.preventDefault();
+    }
+  }
 }

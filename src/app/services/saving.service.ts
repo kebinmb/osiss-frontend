@@ -1,8 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Student, Address, EducationBackground, EmergencyContact, EquityTargetIndicators, Family, Father, Mother } from '../entity/all-details.model';
+import { Student, Address, EducationBackground, EmergencyContact, EquityTargetIndicators, Family, Father, Mother, EnrollmentDetails } from '../entity/all-details.model';
 
 export interface AllDetailsRequest {
   studentRequest: Student;
@@ -39,4 +39,14 @@ private readonly savingAPI = environment.apiUrlSave;
       })
     );
   }
+
+  public getEnrollmentDetails(id: number): Observable<any> {
+  const params = new HttpParams().set('id', id.toString());
+  return this.http.post<any>(`${this.savingAPI}/get`, null, { params });
+}
+
+
+
+
+  
 }

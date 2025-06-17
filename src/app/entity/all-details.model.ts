@@ -129,3 +129,9 @@ export interface AllDetailsRequest {
   student: Student;
   equityTargetIndicators: EquityTargetIndicators[];
 }
+
+export interface EnrollmentDetails{
+  id:number;
+  academicYear:string;
+  semester:string;
+}
