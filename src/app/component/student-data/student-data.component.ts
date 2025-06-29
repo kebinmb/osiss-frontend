@@ -415,84 +415,68 @@ export class StudentDataComponent implements OnInit {
   }
 
   onSubmit() {
-    const rawAdmitionDate = this.studentForm.get(
-      'studentRequest.dateAdmitted'
-    )?.value;
-    let formattedAdmitiondate = null;
-
-    const rawPersonalBirthDate = this.studentForm.get(
-      'studentRequest.birthDate'
-    )?.value;
-    let formattedPersonalBirthDate = null;
-
-    const rawFatherBirthDate = this.studentForm.get(
-      'studentRequest.father.birthDate'
-    )?.value;
-    let formattedFatherBirthDate = null;
-
-    const rawMotherBirthDate = this.studentForm.get(
-      'studentRequest.mother.birthDate'
-    )?.value;
-    let formattedMotherBirthDate = null;
-
-    if (rawMotherBirthDate) {
-      const jsDate = new Date(rawMotherBirthDate);
-      formattedMotherBirthDate = this.formatDateToDDMMYYYY(jsDate); // ❗ don't use `let` again
-    }
-
-    if (rawFatherBirthDate) {
-      const jsDate = new Date(rawFatherBirthDate);
-      formattedFatherBirthDate = this.formatDateToDDMMYYYY(jsDate);
-    }
-
-    if (rawAdmitionDate) {
-      const jsDate = new Date(rawAdmitionDate);
-      formattedAdmitiondate = this.formatDateToDDMMYYYY(jsDate);
-    }
-
-    if (rawPersonalBirthDate) {
-      const jsDate = new Date(rawPersonalBirthDate);
-      formattedPersonalBirthDate = this.formatDateToDDMMYYYY(jsDate);
-    }
-
-    const selectedIndicators = this.equityTargetIndicators.value
-      .filter((indicator: any) => indicator.selected)
-      .map((indicator: any) => ({
-        indicatorName: indicator.indicatorName,
-        details: indicator.details,
-      }));
-
-    const payload = {
-      ...this.studentForm.value,
-      studentRequest: {
-        ...this.studentForm.value.studentRequest,
-        equityTargetIndicators: selectedIndicators,
-        dateAdmitted: formattedAdmitiondate,
-        birthDate: formattedPersonalBirthDate,
-        father: {
-          ...this.studentForm.value.studentRequest.father,
-          birthDate: formattedFatherBirthDate,
-        },
-        mother: {
-          ...this.studentForm.value.studentRequest.mother,
-          birthDate: formattedMotherBirthDate,
-        },
-      },
-    };
-
-    this.savingService.saveStudentDetails(payload).subscribe({
-      next: (response) => {
-        this.snackbar.open('Data Saved Successfully', 'Close', {
-          duration: 3000,
-        });
-        this.studentForm.reset();
-        this.router.navigate(['thank-you']);
-      },
-      error: (error) => {
-        console.error(error);
-      },
+  // 🔒 Check if the form is invalid first
+  if (this.studentForm.invalid) {
+    this.studentForm.markAllAsTouched(); // Mark fields as touched to trigger validation messages
+    this.snackbar.open('Please fill out all required fields correctly.', 'Close', {
+      duration: 4000,
     });
+    return;
   }
+
+  // ✅ Process and format the dates
+  const rawAdmitionDate = this.studentForm.get('studentRequest.dateAdmitted')?.value;
+  const rawPersonalBirthDate = this.studentForm.get('studentRequest.birthDate')?.value;
+  const rawFatherBirthDate = this.studentForm.get('studentRequest.father.birthDate')?.value;
+  const rawMotherBirthDate = this.studentForm.get('studentRequest.mother.birthDate')?.value;
+
+  const formattedAdmitiondate = rawAdmitionDate ? this.formatDateToDDMMYYYY(new Date(rawAdmitionDate)) : null;
+  const formattedPersonalBirthDate = rawPersonalBirthDate ? this.formatDateToDDMMYYYY(new Date(rawPersonalBirthDate)) : null;
+  const formattedFatherBirthDate = rawFatherBirthDate ? this.formatDateToDDMMYYYY(new Date(rawFatherBirthDate)) : null;
+  const formattedMotherBirthDate = rawMotherBirthDate ? this.formatDateToDDMMYYYY(new Date(rawMotherBirthDate)) : null;
+
+  // ✅ Get selected indicators
+  const selectedIndicators = this.equityTargetIndicators.value
+    .filter((indicator: any) => indicator.selected)
+    .map((indicator: any) => ({
+      indicatorName: indicator.indicatorName,
+      details: indicator.details,
+    }));
+
+  // ✅ Prepare the payload
+  const payload = {
+    ...this.studentForm.value,
+    studentRequest: {
+      ...this.studentForm.value.studentRequest,
+      equityTargetIndicators: selectedIndicators,
+      dateAdmitted: formattedAdmitiondate,
+      birthDate: formattedPersonalBirthDate,
+      father: {
+        ...this.studentForm.value.studentRequest.father,
+        birthDate: formattedFatherBirthDate,
+      },
+      mother: {
+        ...this.studentForm.value.studentRequest.mother,
+        birthDate: formattedMotherBirthDate,
+      },
+    },
+  };
+
+  // ✅ Send data
+  this.savingService.saveStudentDetails(payload).subscribe({
+    next: (response) => {
+      this.snackbar.open('Data Saved Successfully', 'Close', {
+        duration: 3000,
+      });
+      this.studentForm.reset();
+      this.router.navigate(['thank-you']);
+    },
+    error: (error) => {
+      console.error(error);
+    },
+  });
+}
+
 
   formatDateToDDMMYYYY(date: Date): string {
     const dd = String(date.getDate()).padStart(2, '0');

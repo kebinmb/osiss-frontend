@@ -184,14 +184,14 @@
             id="firstName"
             formControlName="firstName"
             [class.is-invalid]="
-              studentForm.get('firstName')?.invalid &&
-              studentForm.get('firstName')?.touched
+              studentForm.get('studentRequest.firstName')?.invalid &&
+              studentForm.get('studentRequest.firstName')?.touched
             "
             placeholder="FIRST NAME"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('firstName')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.firstName')?.errors?.['required']"
           >
             FIRST NAME is required.
           </div>
@@ -220,14 +220,14 @@
             id="lastName"
             formControlName="lastName"
             [class.is-invalid]="
-              studentForm.get('lastName')?.invalid &&
-              studentForm.get('lastName')?.touched
+              studentForm.get('studentRequest.lastName')?.invalid &&
+              studentForm.get('studentRequest.lastName')?.touched
             "
             placeholder="LAST NAME"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('lastName')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.lastName')?.errors?.['required']"
           >
             LAST NAME is required.
           </div>
@@ -256,13 +256,13 @@
             id="birthDate"
             formControlName="birthDate"
             [class.is-invalid]="
-              studentForm.get('birthDate')?.invalid &&
-              studentForm.get('birthDate')?.touched
+              studentForm.get('studentRequest.birthDate')?.invalid &&
+              studentForm.get('studentRequest.birthDate')?.touched
             "
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('birthDate')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.birthDate')?.errors?.['required']"
           >
             Birth Date is required.
           </div>
@@ -279,14 +279,14 @@
             id="birthPlace"
             formControlName="birthPlace"
             [class.is-invalid]="
-              studentForm.get('birthPlace')?.invalid &&
-              studentForm.get('birthPlace')?.touched
+              studentForm.get('studentRequest.birthPlace')?.invalid &&
+              studentForm.get('studentRequest.birthPlace')?.touched
             "
             placeholder="e.g., City & Province, Bacolod City, Negros Occidental"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('birthPlace')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.birthPlace')?.errors?.['required']"
           >
             Birth Place is required.
           </div>
@@ -320,8 +320,8 @@
           <div
             class="text-danger small"
             *ngIf="
-              studentForm.get('gender')?.invalid &&
-              studentForm.get('gender')?.touched
+              studentForm.get('studentRequest.gender')?.invalid &&
+              studentForm.get('studentRequest.gender')?.touched
             "
           >
             Gender is required.
@@ -337,8 +337,8 @@
             class="form-select"
             formControlName="civilStatus"
             [class.is-invalid]="
-              studentForm.get('civilStatus')?.invalid &&
-              studentForm.get('civilStatus')?.touched
+              studentForm.get('studentRequest.civilStatus')?.invalid &&
+              studentForm.get('studentRequest.civilStatus')?.touched
             "
           >
             <option value="" disabled selected>Select status</option>
@@ -349,7 +349,7 @@
           </select>
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('civilStatus')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.civilStatus')?.errors?.['required']"
           >
             Civil Status is required.
           </div>
@@ -364,14 +364,14 @@
             id="emailAddress"
             formControlName="emailAddress"
             [class.is-invalid]="
-              studentForm.get('emailAddress')?.invalid &&
-              studentForm.get('emailAddress')?.touched
+              studentForm.get('studentRequest.emailAddress')?.invalid &&
+              studentForm.get('studentRequest.emailAddress')?.touched
             "
             placeholder="e.g., sample_personal_email@example.com"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('emailAddress')?.errors?.['email']"
+            *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['email']"
           >
             Please enter a valid email address.
           </div>
@@ -388,14 +388,14 @@
             id="citizenship"
             formControlName="citizenship"
             [class.is-invalid]="
-              studentForm.get('citizenship')?.invalid &&
-              studentForm.get('citizenship')?.touched
+              studentForm.get('studentRequest.citizenship')?.invalid &&
+              studentForm.get('studentRequest.citizenship')?.touched
             "
             placeholder="Filipino"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('citizenship')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.citizenship')?.errors?.['required']"
           >
             Citizenship is required.
           </div>
@@ -412,14 +412,14 @@
             id="religion"
             formControlName="religion"
             [class.is-invalid]="
-              studentForm.get('religion')?.invalid &&
-              studentForm.get('religion')?.touched
+              studentForm.get('studentRequest.religion')?.invalid &&
+              studentForm.get('studentRequest.religion')?.touched
             "
             placeholder="e.g., Roman Catholic, Muslim"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('religion')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.religion')?.errors?.['required']"
           >
             Religion is required.
           </div>
@@ -500,14 +500,14 @@
             id="barangay"
             formControlName="barangay"
             [class.is-invalid]="
-              studentForm.get('barangay')?.invalid &&
-              studentForm.get('barangay')?.touched
+              studentForm.get('studentRequest.address.barangay')?.invalid &&
+              studentForm.get('studentRequest.address.barangay')?.touched
             "
             placeholder="e.g., Brgy. Example"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('barangay')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.address.barangay')?.errors?.['required']"
           >
             Barangay is required.
           </div>
@@ -524,14 +524,14 @@
             id="city"
             formControlName="city"
             [class.is-invalid]="
-              studentForm.get('city')?.invalid &&
-              studentForm.get('city')?.touched
+              studentForm.get('studentRequest.address.city')?.invalid &&
+              studentForm.get('studentRequest.address.city')?.touched
             "
             placeholder="e.g., Talisay City, Municipality of Hinigaran"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('city')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.address.city')?.errors?.['required']"
           >
             City/Municipality is required.
           </div>
@@ -548,14 +548,14 @@
             id="province"
             formControlName="province"
             [class.is-invalid]="
-              studentForm.get('province')?.invalid &&
-              studentForm.get('province')?.touched
+              studentForm.get('studentRequest.address.province')?.invalid &&
+              studentForm.get('studentRequest.address.province')?.touched
             "
             placeholder="e.g., Negros Occidental"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('province')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.address.province')?.errors?.['required']"
           >
             Province is required.
           </div>
@@ -572,14 +572,14 @@
             id="region"
             formControlName="region"
             [class.is-invalid]="
-              studentForm.get('region')?.invalid &&
-              studentForm.get('region')?.touched
+              studentForm.get('studentRequest.address.region')?.invalid &&
+              studentForm.get('studentRequest.address.region')?.touched
             "
             placeholder="e.g., Region VI"
           />
           <div
             class="invalid-feedback"
-            *ngIf="studentForm.get('region')?.errors?.['required']"
+            *ngIf="studentForm.get('studentRequest.address.region')?.errors?.['required']"
           >
             Region is required.
           </div>
@@ -619,12 +619,13 @@
                 class="form-control"
                 formControlName="firstName"
                 [class.is-invalid]="
-                  studentForm.get('firstName')?.invalid &&
-                  studentForm.get('firstName')?.touched
+                  studentForm.get('studentRequest.father.firstName')?.invalid &&
+                  studentForm.get('studentRequest.father.firstName')?.touched
                 "
                 placeholder="FIRST NAME"
               />
-              <div class="invalid-feedback">FIRST NAME is required.</div>
+              <div class="invalid-feedback" 
+              *ngIf="studentForm.get('studentRequest.father.firstName')?.errors?.['required']">FIRST NAME is required.</div>
             </div>
 
             <div class="col-md-6">
@@ -641,7 +642,7 @@
                 "
                 placeholder="Middle name"
               />
-              <div class="invalid-feedback">Middle name is required.</div>
+              <!-- <div class="invalid-feedback">Middle name is required.</div> -->
             </div>
 
             <div class="col-md-6">
@@ -653,12 +654,12 @@
                 class="form-control"
                 formControlName="lastName"
                 [class.is-invalid]="
-                  studentForm.get('lastName')?.invalid &&
-                  studentForm.get('lastName')?.touched
+                  studentForm.get('studentRequest.father.lastName')?.invalid &&
+                  studentForm.get('studentRequest.father.lastName')?.touched
                 "
                 placeholder="LAST NAME"
               />
-              <div class="invalid-feedback">LAST NAME is required.</div>
+              <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.father.lastName')?.errors?.['required']">LAST NAME is required.</div>
             </div>
 
             <div class="col-md-6">
@@ -686,7 +687,7 @@
               "
               placeholder="e.g., Engineer, Farmer"
             />
-            <div class="invalid-feedback">Occupation is required.</div>
+            <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.father.occupation')?.errors?.['required']">Occupation is required.</div>
           </div>
 
           <div class="mb-3">
@@ -698,11 +699,11 @@
               class="form-control"
               formControlName="birthDate"
               [class.is-invalid]="
-                studentForm.get('birthDate')?.invalid &&
-                studentForm.get('birthDate')?.touched
+                studentForm.get('studentRequest.father.birthDate')?.invalid &&
+                studentForm.get('studentRequest.father.birthDate')?.touched
               "
             />
-            <div class="invalid-feedback">Birth date is required.</div>
+            <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.father.birthDate')?.errors?.['required']">Birth date is required.</div>
           </div>
 
           <div class="mb-3">
@@ -1808,7 +1809,7 @@
     <div class="d-flex justify-content-end mt-4">
       <button
         type="submit"
-        [disabled]="studentForm.invalid"
+       
         class="btn btn-success px-4"
       >
         Submit
