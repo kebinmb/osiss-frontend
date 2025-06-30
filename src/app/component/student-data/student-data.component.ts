@@ -326,8 +326,8 @@ export class StudentDataComponent implements OnInit {
           highestEducationAttainment: ['', Validators.required],
         }),
         family: this.fb.group({
-          familySize: [''],
-          monthlyGrossIncome: [''],
+          familySize: ['',Validators.required],
+          monthlyGrossIncome: ['',Validators.required],
           firstGenerationStudent: [false],
           memberOfIndigenousPeople: [false],
           memberOfIndigenousCulturalCommunity: [false],
