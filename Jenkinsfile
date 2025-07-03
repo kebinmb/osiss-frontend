@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Clone Repository') {
       steps {
-        git 'https://github.com/your-user/your-angular-project.git'
+        git 'https://github.com/kebinmb/osiss-frontend.git'
       }
     }
 
