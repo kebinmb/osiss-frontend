@@ -5,9 +5,7 @@ pipeline {
     ANGULAR_ENV = 'production'
   }
 
-  tools {
-    nodejs 'NodeJS-18'  // Optional: if you set up Node via Jenkins Tools
-  }
+
 
   stages {
     stage('Clone Repository') {
