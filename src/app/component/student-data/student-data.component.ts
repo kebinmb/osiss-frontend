@@ -39,98 +39,122 @@ export class StudentDataComponent implements OnInit {
     'BELONGS_TO_A_FAMILY_OF_REBEL_RETURNEES',
     'NOT_APPLICABLE',
   ];
+  sexualOrientations: string[] = [
+  'Male',
+  'Female',
+  'Heterosexual',
+  'Lesbian',
+  'Gay',
+  'Bisexual',
+  'Transgender',
+  'Rather not to say',
+  'Others'
+];
+isOtherGenderSelected = false;
   campusCourses: {
     [key: string]: Array<string | { course: string; majors: string[] }>;
   } = {
-    Talisay: [
-      'BA in English Language',
-      'BA Social Science',
-      'BS Psychology',
-      'B of Public Administration',
-      'BS in Applied Mathematics',
-      'B of Elementary Education',
-      'B of Early Childhood Educ',
-      'B of Physical Education',
-      {
-        course: 'B of Secondary Education',
-        majors: ['English', 'Filipino', 'Mathematics', 'Science'],
-      },
-      'B of Special Needs Education',
-      {
-        course: 'B of Technology & Livelihood Education',
-        majors: ['Home Economics', 'Industrial Arts'],
-      },
-      {
-        course: 'B of Industrial Technology',
-        majors: [
-          'Architectural Drafting Technology',
-          'Automotive Technology',
-          'Electrical Technology',
-          'Electronics Technology',
-          'Apparel and Fashion Technology',
-          'Culinary Technology',
-          'Mechanical Technology',
-          'Heating, Ventilating, Air Conditioning and Refrigeration Technology',
-        ],
-      },
-      {
-        course: 'BS in Industrial Technology',
-        majors: [
-          'Architectural Drafting Technology',
-          'Automative Technology',
-          'Electrical Technology',
-          'Electronics Technology',
-          'Fashion and Apparel Technology',
-          'Foods Trade Technology',
-          'Mechanical Technology',
-          'Refrig and Air Conditioning Technology',
-        ],
-      },
-      'BS in Hospitality Management',
-      'BS in Information Systems',
-      'BS in Civil Engineering',
-    ],
-    Alijis: [
-      {
-        course: 'B of Technical Vocational Educ',
-        majors: ['Electronics Technology', 'Electrical Technology'],
-      },
-      'BS in Computer Engineering',
-      'BS in Electronics Engineering',
-      {
-        course: 'B of Industrial Technology',
-        majors: [
-          'Architectural Drafting Techonology',
-          'Automotive Technology',
-          'Computer Technology',
-          'Electrical Technology',
-          'Electronics Technology',
-          'Foods Trade Technology',
-          'Mechanical Technology',
-        ],
-      },
-      'BS in Informations System',
-      'BS in Information Technology',
-    ],
+      Talisay: [
+        'BA in English Language',
+        'BA Social Science',
+        'BS Psychology',
+        'B of Public Administration',
+        'BS in Applied Mathematics',
+        'B of Elementary Education',
+        'B of Early Childhood Educ',
+        'B of Physical Education',
+        {
+          course: 'B of Secondary Education',
+          majors: ['English', 'Filipino', 'Mathematics', 'Science'],
+        },
+        'B of Special Needs Education',
+        {
+          course: 'B of Technology & Livelihood Education',
+          majors: ['Home Economics', 'Industrial Arts'],
+        },
+        {
+          course: 'B of Industrial Technology',
+          majors: [
+            'Architectural Drafting Technology',
+            'Automotive Technology',
+            'Electrical Technology',
+            'Electronics Technology',
+            'Apparel and Fashion Technology',
+            'Culinary Technology',
+            'Mechanical Technology',
+            'Heating, Ventilating, Air Conditioning and Refrigeration Technology',
+          ],
+        },
+        {
+          course: 'BS in Industrial Technology',
+          majors: [
+            'Architectural Drafting Technology',
+            'Automative Technology',
+            'Electrical Technology',
+            'Electronics Technology',
+            'Fashion and Apparel Technology',
+            'Foods Trade Technology',
+            'Mechanical Technology',
+            'Refrig and Air Conditioning Technology',
+          ],
+        },
+        'BS in Hospitality Management',
+        'BS in Information Systems',
+        'BS in Civil Engineering',
+      ],
+      Alijis: [
+        {
+          course: 'B of Technical Vocational Educ',
+          majors: ['Electronics Technology', 'Electrical Technology'],
+        },
+        'BS in Computer Engineering',
+        'BS in Electronics Engineering',
+        {
+          course: 'B of Industrial Technology',
+          majors: [
+            'Architectural Drafting Techonology',
+            'Automotive Technology',
+            'Computer Technology',
+            'Electrical Technology',
+            'Electronics Technology',
+            'Foods Trade Technology',
+            'Mechanical Technology',
+          ],
+        },
+        'BS in Informations System',
+        'BS in Information Technology',
+      ],
 
-    'Fortune Towne': [
-      'BS in Accountancy',
-      'BS in Business Administration',
-      'BS in Entrepreneurship',
-      'BS in Information Systems',
-      'BS in Management Accounting',
-      'BS in Office Administration',
-    ],
-    Binalbagan: [
-      'B of Elementary Education',
-      'B of Secondary Education (Science)',
-      'B of Technology & Livelihood Educ',
-      'BS in Business Administration',
-      'BS in Criminology',
-      'BS in Fisheries',
-      'BS in Information Technology',
-    ],
-  };
+      'Fortune Towne': [
+        'BS in Accountancy',
+        'BS in Business Administration',
+        'BS in Entrepreneurship',
+        'BS in Information Systems',
+        'BS in Management Accounting',
+        'BS in Office Administration',
+      ],
+      Binalbagan: [
+        'B of Elementary Education',
+        'B of Secondary Education (Science)',
+        'B of Technology & Livelihood Educ',
+        'BS in Business Administration',
+        'BS in Criminology',
+        'BS in Fisheries',
+        'BS in Information Technology',
+      ],
+    };
+  studentTypes = [
+    { label: 'Shiftee', value: 'SHIFTEE' },
+    { label: 'Returnee', value: 'RETURNEE' },
+    { label: 'Fresh Graduate', value: 'FRESH_GRADUATE' }
+  ];
+  yearLevels = [
+    { label: 'First Year', value: '1' },
+    { label: 'Second Year', value: '2' },
+    { label: 'Third Year', value: '3' },
+    { label: 'Fourth Year', value: '4' }
+  ];
+
   filteredCourses: { course: string; majors: string[] }[] = [];
   availableMajors: string[] = [];
   showMajorField = false;
@@ -142,7 +166,7 @@ export class StudentDataComponent implements OnInit {
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
     private router: Router
-  ) {}
+  ) { }
   ngAfterViewInit(): void {
     if (!sessionStorage.getItem('privacyAccepted')) {
       this.dialog.open(DataPrivacyComponent, {
@@ -225,7 +249,7 @@ export class StudentDataComponent implements OnInit {
         console.error(error);
       },
     });
-    
+
   }
 
   initForm() {
@@ -257,6 +281,9 @@ export class StudentDataComponent implements OnInit {
     this.studentForm = this.fb.group({
       studentRequest: this.fb.group({
         lrn: ['', Validators.required],
+        studentType: ['', Validators.required],
+        lastSchoolAttended: [''],
+        yearLevel: ['', Validators.required],
         campus: ['', Validators.required],
         course: ['', Validators.required],
         major: [''],
@@ -270,6 +297,9 @@ export class StudentDataComponent implements OnInit {
         birthDate: ['', Validators.required],
         birthPlace: ['', Validators.required],
         gender: ['', Validators.required],
+        otherGender: [''],
+        height:[null,Validators.required],
+        weight:[null,Validators.required],
         civilStatus: ['', Validators.required],
         emailAddress: ['', Validators.email],
         citizenship: ['', Validators.required],
@@ -326,8 +356,8 @@ export class StudentDataComponent implements OnInit {
           highestEducationAttainment: ['', Validators.required],
         }),
         family: this.fb.group({
-          familySize: ['',Validators.required],
-          monthlyGrossIncome: ['',Validators.required],
+          familySize: ['', Validators.required],
+          monthlyGrossIncome: ['', Validators.required],
           firstGenerationStudent: [false],
           memberOfIndigenousPeople: [false],
           memberOfIndigenousCulturalCommunity: [false],
@@ -389,7 +419,29 @@ export class StudentDataComponent implements OnInit {
         equityTargetIndicatorsRequest: indicatorsArray,
       }),
     });
+     this.studentForm.get('studentRequest.gender')?.valueChanges.subscribe(value => {
+    this.toggleOtherGenderField(value);
+  });
   }
+  onGenderChange() {
+  const selected = this.studentForm.get('studentRequest.gender')?.value;
+  this.toggleOtherGenderField(selected);
+}
+
+toggleOtherGenderField(value: string) {
+  const otherGenderControl = this.studentForm.get('studentRequest.otherGender');
+
+  if (value === 'Others') {
+    this.isOtherGenderSelected = true;
+    otherGenderControl?.setValidators([Validators.required]);
+  } else {
+    this.isOtherGenderSelected = false;
+    otherGenderControl?.clearValidators();
+    otherGenderControl?.setValue('');
+  }
+
+  otherGenderControl?.updateValueAndValidity();
+}
 
   addEquityTargetIndicator() {
     const indicatorsArray = this.studentForm.get(
@@ -435,6 +487,11 @@ export class StudentDataComponent implements OnInit {
   const formattedFatherBirthDate = rawFatherBirthDate ? this.formatDateToDDMMYYYY(new Date(rawFatherBirthDate)) : null;
   const formattedMotherBirthDate = rawMotherBirthDate ? this.formatDateToDDMMYYYY(new Date(rawMotherBirthDate)) : null;
 
+  // ✅ Handle conditional gender value
+  const gender = this.studentForm.get('studentRequest.gender')?.value;
+  const otherGender = this.studentForm.get('studentRequest.otherGender')?.value;
+  const resolvedGender = gender === 'Others' ? otherGender : gender;
+
   // ✅ Get selected indicators
   const selectedIndicators = this.equityTargetIndicators.value
     .filter((indicator: any) => indicator.selected)
@@ -449,6 +506,7 @@ export class StudentDataComponent implements OnInit {
     studentRequest: {
       ...this.studentForm.value.studentRequest,
       equityTargetIndicators: selectedIndicators,
+      gender: resolvedGender, // 👈 final gender value
       dateAdmitted: formattedAdmitiondate,
       birthDate: formattedPersonalBirthDate,
       father: {
@@ -476,6 +534,7 @@ export class StudentDataComponent implements OnInit {
     },
   });
 }
+
 
 
   formatDateToDDMMYYYY(date: Date): string {
@@ -508,7 +567,7 @@ export class StudentDataComponent implements OnInit {
       civilStatusControl?.setValue(value);
     }
   }
-  openDataPrivacyModal() {}
+  openDataPrivacyModal() { }
   isNumberKey(event: KeyboardEvent): boolean {
     const charCode = event.charCode ? event.charCode : event.keyCode;
     return charCode >= 48 && charCode <= 57;

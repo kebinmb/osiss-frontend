@@ -25,6 +25,55 @@
           </div>
         </div>
 
+        <div class="col-md-4">
+          <label class="form-label">Student Type <span class="text-danger">*</span></label>
+
+          <div class="form-check" *ngFor="let type of studentTypes">
+            <input class="form-check-input" type="radio" [value]="type.value" formControlName="studentType"
+              [id]="type.value" />
+            <label class="form-check-label" [for]="type.value">
+              {{ type.label }}
+            </label>
+          </div>
+
+          <div class="invalid-feedback d-block"
+            *ngIf="studentForm.get('studentType')?.invalid && studentForm.get('studentType')?.touched">
+            Student type is required.
+          </div>
+        </div>
+
+        <!-- Last School Attended (conditionally visible) -->
+        <div class="col-md-4" *ngIf="studentForm.get('studentRequest.studentType')?.value === 'SHIFTEE'">
+          <label class="form-label">Last School Attended <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="lastSchoolAttended"
+            placeholder="Enter the last school attended" [class.is-invalid]="
+      studentForm.get('studentRequest.lastSchoolAttended')?.invalid &&
+      studentForm.get('studentRequest.lastSchoolAttended')?.touched
+    " />
+
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.lastSchoolAttended')?.errors?.['required']">
+            Last School Attended is required.
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label" for="yearLevel">Year Level <span class="text-danger">*</span></label>
+          <select class="form-select" id="yearLevel" formControlName="yearLevel" [class.is-invalid]="
+      studentForm.get('studentRequest.yearLevel')?.invalid &&
+      studentForm.get('studentRequest.yearLevel')?.touched
+    ">
+            <option value="" disabled selected>Select year level</option>
+            <option *ngFor="let year of yearLevels" [value]="year.value">{{ year.label }}</option>
+          </select>
+
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.yearLevel')?.errors?.['required']">
+            Year level is required.
+          </div>
+        </div>
+
+
+
         <!-- Campus -->
         <div class="col-md-4">
           <label for="campus" class="form-label">Campus <span class="text-danger">*</span></label>
@@ -171,22 +220,73 @@
 
         <!-- Gender -->
         <div class="col-md-4">
-          <label class="form-label d-block">Gender <span class="text-danger">*</span></label>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" formControlName="gender" id="male" value="Male" />
-            <label class="form-check-label" for="male">Male</label>
+          <label class="form-label" for="gender">Sexual Orientation <span class="text-danger">*</span></label>
+          <select class="form-select" id="gender" formControlName="gender" (change)="onGenderChange()"
+            [class.is-invalid]="
+      studentForm.get('studentRequest.gender')?.invalid &&
+      studentForm.get('studentRequest.gender')?.touched
+    ">
+            <option value="" disabled selected>Select your orientation</option>
+            <option *ngFor="let option of sexualOrientations" [value]="option">{{ option }}</option>
+          </select>
+
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.gender')?.errors?.['required']">
+            Sexual orientation is required.
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" formControlName="gender" id="female" value="Female" />
-            <label class="form-check-label" for="female">Female</label>
-          </div>
-          <div class="text-danger small" *ngIf="
-              studentForm.get('studentRequest.gender')?.invalid &&
-              studentForm.get('studentRequest.gender')?.touched
-            ">
-            Gender is required.
+
+          <!-- "Others" text input -->
+          <div class="mt-2" *ngIf="isOtherGenderSelected">
+            <label class="form-label" for="otherGender">Please specify:</label>
+            <input type="text" id="otherGender" class="form-control" formControlName="otherGender"
+              placeholder="Enter your orientation" [class.is-invalid]="
+        studentForm.get('studentRequest.otherGender')?.invalid &&
+        studentForm.get('studentRequest.otherGender')?.touched
+      " />
+            <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.otherGender')?.errors?.['required']">
+              This field is required when 'Others' is selected.
+            </div>
           </div>
         </div>
+
+        <!-- Height Field -->
+<div class="col-md-4">
+  <label class="form-label" for="height">Height (cm) <span class="text-danger">*</span></label>
+  <input
+    type="number"
+    class="form-control"
+    id="height"
+    formControlName="height"
+    placeholder="Enter height in cm"
+    [class.is-invalid]="
+      studentForm.get('studentRequest.height')?.invalid &&
+      studentForm.get('studentRequest.height')?.touched
+    "
+  />
+  <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.height')?.errors?.['required']">
+    Height is required.
+  </div>
+</div>
+
+<!-- Weight Field -->
+<div class="col-md-4">
+  <label class="form-label" for="weight">Weight (kg) <span class="text-danger">*</span></label>
+  <input
+    type="number"
+    class="form-control"
+    id="weight"
+    formControlName="weight"
+    placeholder="Enter weight in kg"
+    [class.is-invalid]="
+      studentForm.get('studentRequest.weight')?.invalid &&
+      studentForm.get('studentRequest.weight')?.touched
+    "
+  />
+  <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.weight')?.errors?.['required']">
+    Weight is required.
+  </div>
+</div>
+
+
 
         <!-- Civil Status -->
         <div class="col-md-4">
