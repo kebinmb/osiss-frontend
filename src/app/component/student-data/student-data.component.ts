@@ -40,119 +40,119 @@ export class StudentDataComponent implements OnInit {
     'NOT_APPLICABLE',
   ];
   sexualOrientations: string[] = [
-  'Male',
-  'Female',
-  'Heterosexual',
-  'Lesbian',
-  'Gay',
-  'Bisexual',
-  'Transgender',
-  'Rather not to say',
-  'Others'
-];
-isOtherGenderSelected = false;
+    'Male',
+    'Female',
+    'Heterosexual',
+    'Lesbian',
+    'Gay',
+    'Bisexual',
+    'Transgender',
+    'Rather not to say',
+    'Others',
+  ];
+  isOtherGenderSelected = false;
   campusCourses: {
     [key: string]: Array<string | { course: string; majors: string[] }>;
   } = {
-      Talisay: [
-        'BA in English Language',
-        'BA Social Science',
-        'BS Psychology',
-        'B of Public Administration',
-        'BS in Applied Mathematics',
-        'B of Elementary Education',
-        'B of Early Childhood Educ',
-        'B of Physical Education',
-        {
-          course: 'B of Secondary Education',
-          majors: ['English', 'Filipino', 'Mathematics', 'Science'],
-        },
-        'B of Special Needs Education',
-        {
-          course: 'B of Technology & Livelihood Education',
-          majors: ['Home Economics', 'Industrial Arts'],
-        },
-        {
-          course: 'B of Industrial Technology',
-          majors: [
-            'Architectural Drafting Technology',
-            'Automotive Technology',
-            'Electrical Technology',
-            'Electronics Technology',
-            'Apparel and Fashion Technology',
-            'Culinary Technology',
-            'Mechanical Technology',
-            'Heating, Ventilating, Air Conditioning and Refrigeration Technology',
-          ],
-        },
-        {
-          course: 'BS in Industrial Technology',
-          majors: [
-            'Architectural Drafting Technology',
-            'Automative Technology',
-            'Electrical Technology',
-            'Electronics Technology',
-            'Fashion and Apparel Technology',
-            'Foods Trade Technology',
-            'Mechanical Technology',
-            'Refrig and Air Conditioning Technology',
-          ],
-        },
-        'BS in Hospitality Management',
-        'BS in Information Systems',
-        'BS in Civil Engineering',
-      ],
-      Alijis: [
-        {
-          course: 'B of Technical Vocational Educ',
-          majors: ['Electronics Technology', 'Electrical Technology'],
-        },
-        'BS in Computer Engineering',
-        'BS in Electronics Engineering',
-        {
-          course: 'B of Industrial Technology',
-          majors: [
-            'Architectural Drafting Techonology',
-            'Automotive Technology',
-            'Computer Technology',
-            'Electrical Technology',
-            'Electronics Technology',
-            'Foods Trade Technology',
-            'Mechanical Technology',
-          ],
-        },
-        'BS in Informations System',
-        'BS in Information Technology',
-      ],
+    Talisay: [
+      'BA in English Language',
+      'BA Social Science',
+      'BS Psychology',
+      'B of Public Administration',
+      'BS in Applied Mathematics',
+      'B of Elementary Education',
+      'B of Early Childhood Educ',
+      'B of Physical Education',
+      {
+        course: 'B of Secondary Education',
+        majors: ['English', 'Filipino', 'Mathematics', 'Science'],
+      },
+      'B of Special Needs Education',
+      {
+        course: 'B of Technology & Livelihood Education',
+        majors: ['Home Economics', 'Industrial Arts'],
+      },
+      {
+        course: 'B of Industrial Technology',
+        majors: [
+          'Architectural Drafting Technology',
+          'Automotive Technology',
+          'Electrical Technology',
+          'Electronics Technology',
+          'Apparel and Fashion Technology',
+          'Culinary Technology',
+          'Mechanical Technology',
+          'Heating, Ventilating, Air Conditioning and Refrigeration Technology',
+        ],
+      },
+      {
+        course: 'BS in Industrial Technology',
+        majors: [
+          'Architectural Drafting Technology',
+          'Automative Technology',
+          'Electrical Technology',
+          'Electronics Technology',
+          'Fashion and Apparel Technology',
+          'Foods Trade Technology',
+          'Mechanical Technology',
+          'Refrig and Air Conditioning Technology',
+        ],
+      },
+      'BS in Hospitality Management',
+      'BS in Information Systems',
+      'BS in Civil Engineering',
+    ],
+    Alijis: [
+      {
+        course: 'B of Technical Vocational Educ',
+        majors: ['Electronics Technology', 'Electrical Technology'],
+      },
+      'BS in Computer Engineering',
+      'BS in Electronics Engineering',
+      {
+        course: 'B of Industrial Technology',
+        majors: [
+          'Architectural Drafting Techonology',
+          'Automotive Technology',
+          'Computer Technology',
+          'Electrical Technology',
+          'Electronics Technology',
+          'Foods Trade Technology',
+          'Mechanical Technology',
+        ],
+      },
+      'BS in Informations System',
+      'BS in Information Technology',
+    ],
 
-      'Fortune Towne': [
-        'BS in Accountancy',
-        'BS in Business Administration',
-        'BS in Entrepreneurship',
-        'BS in Information Systems',
-        'BS in Management Accounting',
-        'BS in Office Administration',
-      ],
-      Binalbagan: [
-        'B of Elementary Education',
-        'B of Secondary Education (Science)',
-        'B of Technology & Livelihood Educ',
-        'BS in Business Administration',
-        'BS in Criminology',
-        'BS in Fisheries',
-        'BS in Information Technology',
-      ],
-    };
+    'Fortune Towne': [
+      'BS in Accountancy',
+      'BS in Business Administration',
+      'BS in Entrepreneurship',
+      'BS in Information Systems',
+      'BS in Management Accounting',
+      'BS in Office Administration',
+    ],
+    Binalbagan: [
+      'B of Elementary Education',
+      'B of Secondary Education (Science)',
+      'B of Technology & Livelihood Educ',
+      'BS in Business Administration',
+      'BS in Criminology',
+      'BS in Fisheries',
+      'BS in Information Technology',
+    ],
+  };
   studentTypes = [
     { label: 'Shiftee', value: 'SHIFTEE' },
     { label: 'Returnee', value: 'RETURNEE' },
-    { label: 'Fresh Graduate', value: 'FRESH_GRADUATE' }
+    { label: 'Fresh Graduate', value: 'FRESH_GRADUATE' },
   ];
   yearLevels = [
     { label: 'First Year', value: '1' },
     { label: 'Second Year', value: '2' },
     { label: 'Third Year', value: '3' },
-    { label: 'Fourth Year', value: '4' }
+    { label: 'Fourth Year', value: '4' },
   ];
 
   filteredCourses: { course: string; majors: string[] }[] = [];
@@ -166,7 +166,7 @@ isOtherGenderSelected = false;
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
     private router: Router
-  ) { }
+  ) {}
   ngAfterViewInit(): void {
     if (!sessionStorage.getItem('privacyAccepted')) {
       this.dialog.open(DataPrivacyComponent, {
@@ -249,7 +249,6 @@ isOtherGenderSelected = false;
         console.error(error);
       },
     });
-
   }
 
   initForm() {
@@ -282,7 +281,7 @@ isOtherGenderSelected = false;
       studentRequest: this.fb.group({
         lrn: ['', Validators.required],
         studentType: ['', Validators.required],
-        lastSchoolAttended: [''],
+        lastSchoolAttended: ['',Validators.required],
         yearLevel: ['', Validators.required],
         campus: ['', Validators.required],
         course: ['', Validators.required],
@@ -298,15 +297,16 @@ isOtherGenderSelected = false;
         birthPlace: ['', Validators.required],
         gender: ['', Validators.required],
         otherGender: [''],
-        placeToStudy:[],
-        roomIsShared:[],
-        discussWithGuidanceCounselor:[],
-        pwdDetails:[],
-        educationalNeeds:[],
-        consultedPsych:[],
-        concerns:[],
-        height:[null,Validators.required],
-        weight:[null,Validators.required],
+        placeToStudy: [false],
+        roomIsShared: [false],
+        discussWithGuidanceCounselor: [false],
+        isPwd:[false],
+        pwdDetails: ['',Validators.required],
+        educationalNeeds: [],
+        consultedPsych: [],
+        concerns: [],
+        height: [null, Validators.required],
+        weight: [null, Validators.required],
         civilStatus: ['', Validators.required],
         emailAddress: ['', Validators.email],
         citizenship: ['', Validators.required],
@@ -331,10 +331,17 @@ isOtherGenderSelected = false;
           lastName: ['', Validators.required],
           firstName: ['', Validators.required],
           middleName: ['', Validators.required],
+          age: ['', Validators.required],
+          mobileNumber: [''],
           extension: [''],
+          lifeStatus: [''],
+          birthPlace: [''],
+          religion: [''],
           birthDate: ['', Validators.required],
           citizenship: ['', Validators.required],
           occupation: ['', Validators.required],
+          causeOfDeath: ['', Validators.required],
+          yearOfDeath: ['', Validators.required],
           address: this.fb.group({
             street: ['', Validators.required],
             barangay: ['', Validators.required],
@@ -350,8 +357,16 @@ isOtherGenderSelected = false;
           firstName: ['', Validators.required],
           middleName: ['', Validators.required],
           birthDate: ['', Validators.required],
+          age: [''],
+          mobileNumber: [''],
+          birthPlace: [''],
+          religion: [''],
           citizenship: ['', Validators.required],
           occupation: ['', Validators.required],
+          highestEducationAttainment: ['', Validators.required],
+          lifeStatus: ['', Validators.required],
+          causeOfDeath: [''],
+          yearOfDeath: [''],
           address: this.fb.group({
             street: ['', Validators.required],
             barangay: ['', Validators.required],
@@ -360,36 +375,46 @@ isOtherGenderSelected = false;
             city: ['', Validators.required],
             zipCode: ['', Validators.required],
           }),
-          highestEducationAttainment: ['', Validators.required],
         }),
+
         family: this.fb.group({
           familySize: ['', Validators.required],
           monthlyGrossIncome: ['', Validators.required],
+          natureOfResidence: [''],
+          parentsMaritalStatus: [''],
+          ordinalPosition: [''],
+          employedSiblings: [''],
+          educationSponsor: [''],
+          weeklyAllowance: [''],
           firstGenerationStudent: [false],
           memberOfIndigenousPeople: [false],
           memberOfIndigenousCulturalCommunity: [false],
           indigenousCommunity: [''],
           indigenousCulturalCommunityDetails: [''],
+          siblings: this.fb.array([]), // Optional, if siblings will be dynamically added
         }),
+
         educationBackground: this.fb.group({
           studentType: ['', Validators.required],
           elementarySchool: ['', Validators.required],
           elementarySchoolAddress: ['', Validators.required],
           yearGraduatedElementarySchool: ['', Validators.required],
-
           juniorHighSchool: ['', Validators.required],
           juniorHighSchoolAddress: ['', Validators.required],
           yearGraduatedJuniorHighSchool: ['', Validators.required],
+          generalAverageJS: [''],
 
           seniorHighSchoolType: ['', Validators.required],
           seniorHighSchool: ['', Validators.required],
           seniorHighSchoolAddress: ['', Validators.required],
           yearGraduatedSeniorHighSchool: ['', Validators.required],
+          generalAverageSHS: [''],
 
           collegeType: ['', Validators.required],
           collegeName: ['', Validators.required],
           collegeAddress: ['', Validators.required],
           yearGraduatedCollege: ['', Validators.required],
+          generalAverageCollege: [''],
 
           scholarshipProgram: [''],
           scholarshipOfficeAddress: [''],
@@ -402,6 +427,7 @@ isOtherGenderSelected = false;
             ],
           ],
         }),
+
         emergencyContact: this.fb.group({
           firstName: ['', Validators.required],
           middleName: [''],
@@ -426,29 +452,33 @@ isOtherGenderSelected = false;
         equityTargetIndicatorsRequest: indicatorsArray,
       }),
     });
-     this.studentForm.get('studentRequest.gender')?.valueChanges.subscribe(value => {
-    this.toggleOtherGenderField(value);
-  });
+    this.studentForm
+      .get('studentRequest.gender')
+      ?.valueChanges.subscribe((value) => {
+        this.toggleOtherGenderField(value);
+      });
   }
   onGenderChange() {
-  const selected = this.studentForm.get('studentRequest.gender')?.value;
-  this.toggleOtherGenderField(selected);
-}
-
-toggleOtherGenderField(value: string) {
-  const otherGenderControl = this.studentForm.get('studentRequest.otherGender');
-
-  if (value === 'Others') {
-    this.isOtherGenderSelected = true;
-    otherGenderControl?.setValidators([Validators.required]);
-  } else {
-    this.isOtherGenderSelected = false;
-    otherGenderControl?.clearValidators();
-    otherGenderControl?.setValue('');
+    const selected = this.studentForm.get('studentRequest.gender')?.value;
+    this.toggleOtherGenderField(selected);
   }
 
-  otherGenderControl?.updateValueAndValidity();
-}
+  toggleOtherGenderField(value: string) {
+    const otherGenderControl = this.studentForm.get(
+      'studentRequest.otherGender'
+    );
+
+    if (value === 'Others') {
+      this.isOtherGenderSelected = true;
+      otherGenderControl?.setValidators([Validators.required]);
+    } else {
+      this.isOtherGenderSelected = false;
+      otherGenderControl?.clearValidators();
+      otherGenderControl?.setValue('');
+    }
+
+    otherGenderControl?.updateValueAndValidity();
+  }
 
   addEquityTargetIndicator() {
     const indicatorsArray = this.studentForm.get(
@@ -474,75 +504,95 @@ toggleOtherGenderField(value: string) {
   }
 
   onSubmit() {
-  // 🔒 Check if the form is invalid first
-  if (this.studentForm.invalid) {
-    this.studentForm.markAllAsTouched(); // Mark fields as touched to trigger validation messages
-    this.snackbar.open('Please fill out all required fields correctly.', 'Close', {
-      duration: 4000,
+    // 🔒 Check if the form is invalid first
+    if (this.studentForm.invalid) {
+      this.studentForm.markAllAsTouched(); // Mark fields as touched to trigger validation messages
+      this.snackbar.open(
+        'Please fill out all required fields correctly.',
+        'Close',
+        {
+          duration: 4000,
+        }
+      );
+      return;
+    }
+
+    // ✅ Process and format the dates
+    const rawAdmitionDate = this.studentForm.get(
+      'studentRequest.dateAdmitted'
+    )?.value;
+    const rawPersonalBirthDate = this.studentForm.get(
+      'studentRequest.birthDate'
+    )?.value;
+    const rawFatherBirthDate = this.studentForm.get(
+      'studentRequest.father.birthDate'
+    )?.value;
+    const rawMotherBirthDate = this.studentForm.get(
+      'studentRequest.mother.birthDate'
+    )?.value;
+
+    const formattedAdmitiondate = rawAdmitionDate
+      ? this.formatDateToDDMMYYYY(new Date(rawAdmitionDate))
+      : null;
+    const formattedPersonalBirthDate = rawPersonalBirthDate
+      ? this.formatDateToDDMMYYYY(new Date(rawPersonalBirthDate))
+      : null;
+    const formattedFatherBirthDate = rawFatherBirthDate
+      ? this.formatDateToDDMMYYYY(new Date(rawFatherBirthDate))
+      : null;
+    const formattedMotherBirthDate = rawMotherBirthDate
+      ? this.formatDateToDDMMYYYY(new Date(rawMotherBirthDate))
+      : null;
+
+    // ✅ Handle conditional gender value
+    const gender = this.studentForm.get('studentRequest.gender')?.value;
+    const otherGender = this.studentForm.get(
+      'studentRequest.otherGender'
+    )?.value;
+    const resolvedGender = gender === 'Others' ? otherGender : gender;
+
+    // ✅ Get selected indicators
+    const selectedIndicators = this.equityTargetIndicators.value
+      .filter((indicator: any) => indicator.selected)
+      .map((indicator: any) => ({
+        indicatorName: indicator.indicatorName,
+        details: indicator.details,
+      }));
+
+    // ✅ Prepare the payload
+    const payload = {
+      ...this.studentForm.value,
+      studentRequest: {
+        ...this.studentForm.value.studentRequest,
+        equityTargetIndicators: selectedIndicators,
+        gender: resolvedGender, // 👈 final gender value
+        dateAdmitted: formattedAdmitiondate,
+        birthDate: formattedPersonalBirthDate,
+        father: {
+          ...this.studentForm.value.studentRequest.father,
+          birthDate: formattedFatherBirthDate,
+        },
+        mother: {
+          ...this.studentForm.value.studentRequest.mother,
+          birthDate: formattedMotherBirthDate,
+        },
+      },
+    };
+
+    // ✅ Send data
+    this.savingService.saveStudentDetails(payload).subscribe({
+      next: (response) => {
+        this.snackbar.open('Data Saved Successfully', 'Close', {
+          duration: 3000,
+        });
+        this.studentForm.reset();
+        this.router.navigate(['thank-you']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
-    return;
   }
-
-  // ✅ Process and format the dates
-  const rawAdmitionDate = this.studentForm.get('studentRequest.dateAdmitted')?.value;
-  const rawPersonalBirthDate = this.studentForm.get('studentRequest.birthDate')?.value;
-  const rawFatherBirthDate = this.studentForm.get('studentRequest.father.birthDate')?.value;
-  const rawMotherBirthDate = this.studentForm.get('studentRequest.mother.birthDate')?.value;
-
-  const formattedAdmitiondate = rawAdmitionDate ? this.formatDateToDDMMYYYY(new Date(rawAdmitionDate)) : null;
-  const formattedPersonalBirthDate = rawPersonalBirthDate ? this.formatDateToDDMMYYYY(new Date(rawPersonalBirthDate)) : null;
-  const formattedFatherBirthDate = rawFatherBirthDate ? this.formatDateToDDMMYYYY(new Date(rawFatherBirthDate)) : null;
-  const formattedMotherBirthDate = rawMotherBirthDate ? this.formatDateToDDMMYYYY(new Date(rawMotherBirthDate)) : null;
-
-  // ✅ Handle conditional gender value
-  const gender = this.studentForm.get('studentRequest.gender')?.value;
-  const otherGender = this.studentForm.get('studentRequest.otherGender')?.value;
-  const resolvedGender = gender === 'Others' ? otherGender : gender;
-
-  // ✅ Get selected indicators
-  const selectedIndicators = this.equityTargetIndicators.value
-    .filter((indicator: any) => indicator.selected)
-    .map((indicator: any) => ({
-      indicatorName: indicator.indicatorName,
-      details: indicator.details,
-    }));
-
-  // ✅ Prepare the payload
-  const payload = {
-    ...this.studentForm.value,
-    studentRequest: {
-      ...this.studentForm.value.studentRequest,
-      equityTargetIndicators: selectedIndicators,
-      gender: resolvedGender, // 👈 final gender value
-      dateAdmitted: formattedAdmitiondate,
-      birthDate: formattedPersonalBirthDate,
-      father: {
-        ...this.studentForm.value.studentRequest.father,
-        birthDate: formattedFatherBirthDate,
-      },
-      mother: {
-        ...this.studentForm.value.studentRequest.mother,
-        birthDate: formattedMotherBirthDate,
-      },
-    },
-  };
-
-  // ✅ Send data
-  this.savingService.saveStudentDetails(payload).subscribe({
-    next: (response) => {
-      this.snackbar.open('Data Saved Successfully', 'Close', {
-        duration: 3000,
-      });
-      this.studentForm.reset();
-      this.router.navigate(['thank-you']);
-    },
-    error: (error) => {
-      console.error(error);
-    },
-  });
-}
-
-
 
   formatDateToDDMMYYYY(date: Date): string {
     const dd = String(date.getDate()).padStart(2, '0');
@@ -574,7 +624,7 @@ toggleOtherGenderField(value: string) {
       civilStatusControl?.setValue(value);
     }
   }
-  openDataPrivacyModal() { }
+  openDataPrivacyModal() {}
   isNumberKey(event: KeyboardEvent): boolean {
     const charCode = event.charCode ? event.charCode : event.keyCode;
     return charCode >= 48 && charCode <= 57;
