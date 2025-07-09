@@ -438,249 +438,361 @@
     </fieldset>
 
     <fieldset class="border rounded p-4 mt-4 shadow-sm bg-light-subtle">
-  <legend class="float-none w-auto px-3 text-secondary fw-semibold">
-    👤 Personal Information
-  </legend>
+      <legend class="float-none w-auto px-3 text-secondary fw-semibold">
+        👤 Personal Information
+      </legend>
 
-  <div class="row g-3">
-    <!-- Full Name -->
-    <div class="col-md-4">
-      <label for="firstName" class="form-label fw-semibold">First Name <span class="text-danger">*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="firstName"
-        formControlName="firstName"
-        placeholder="FIRST NAME"
-        [class.is-invalid]="studentForm.get('studentRequest.firstName')?.invalid && studentForm.get('studentRequest.firstName')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.firstName')?.errors?.['required']">
-        First name is required.
-      </div>
-    </div>
+      <div class="row g-3">
+        <!-- Full Name -->
+        <div class="col-md-4">
+          <label for="firstName" class="form-label fw-semibold"
+            >First Name <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            formControlName="firstName"
+            placeholder="FIRST NAME"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.firstName')?.invalid &&
+              studentForm.get('studentRequest.firstName')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.firstName')?.errors?.['required']"
+          >
+            First name is required.
+          </div>
+        </div>
 
-    <div class="col-md-4">
-      <label for="middleName" class="form-label fw-semibold">Middle Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="middleName"
-        formControlName="middleName"
-        placeholder="Middle name"
-      />
-    </div>
+        <div class="col-md-4">
+          <label for="middleName" class="form-label fw-semibold"
+            >Middle Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="middleName"
+            formControlName="middleName"
+            placeholder="Middle name"
+          />
+        </div>
 
-    <div class="col-md-4">
-      <label for="lastName" class="form-label fw-semibold">Last Name <span class="text-danger">*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="lastName"
-        formControlName="lastName"
-        placeholder="LAST NAME"
-        [class.is-invalid]="studentForm.get('studentRequest.lastName')?.invalid && studentForm.get('studentRequest.lastName')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.lastName')?.errors?.['required']">
-        Last name is required.
-      </div>
-    </div>
+        <div class="col-md-4">
+          <label for="lastName" class="form-label fw-semibold"
+            >Last Name <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            formControlName="lastName"
+            placeholder="LAST NAME"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.lastName')?.invalid &&
+              studentForm.get('studentRequest.lastName')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.lastName')?.errors?.['required']"
+          >
+            Last name is required.
+          </div>
+        </div>
 
-    <!-- Extension Name, Birth Date, Birth Place -->
-    <div class="col-md-4">
-      <label for="extensionName" class="form-label fw-semibold">Extension Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="extensionName"
-        formControlName="extensionName"
-        placeholder="e.g., Jr., Sr."
-      />
-    </div>
+        <!-- Extension Name, Birth Date, Birth Place -->
+        <div class="col-md-4">
+          <label for="extensionName" class="form-label fw-semibold"
+            >Extension Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="extensionName"
+            formControlName="extensionName"
+            placeholder="e.g., Jr., Sr."
+          />
+        </div>
 
-    <div class="col-md-4">
-      <label for="birthDate" class="form-label fw-semibold">Birth Date <span class="text-danger">*</span></label>
-      <input
-        type="date"
-        class="form-control"
-        id="birthDate"
-        formControlName="birthDate"
-        [class.is-invalid]="studentForm.get('studentRequest.birthDate')?.invalid && studentForm.get('studentRequest.birthDate')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.birthDate')?.errors?.['required']">
-        Birth Date is required.
-      </div>
-    </div>
+        <div class="col-md-4">
+          <label for="birthDate" class="form-label fw-semibold"
+            >Birth Date <span class="text-danger">*</span></label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="birthDate"
+            formControlName="birthDate"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.birthDate')?.invalid &&
+              studentForm.get('studentRequest.birthDate')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.birthDate')?.errors?.['required']"
+          >
+            Birth Date is required.
+          </div>
+        </div>
 
-    <div class="col-md-4">
-      <label for="birthPlace" class="form-label fw-semibold">Birth Place <span class="text-danger">*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="birthPlace"
-        formControlName="birthPlace"
-        placeholder="e.g., Bacolod City, Negros Occidental"
-        [class.is-invalid]="studentForm.get('studentRequest.birthPlace')?.invalid && studentForm.get('studentRequest.birthPlace')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.birthPlace')?.errors?.['required']">
-        Birth Place is required.
-      </div>
-    </div>
+        <div class="col-md-4">
+          <label for="birthPlace" class="form-label fw-semibold"
+            >Birth Place <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="birthPlace"
+            formControlName="birthPlace"
+            placeholder="e.g., Bacolod City, Negros Occidental"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.birthPlace')?.invalid &&
+              studentForm.get('studentRequest.birthPlace')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.birthPlace')?.errors?.['required']"
+          >
+            Birth Place is required.
+          </div>
+        </div>
 
-    <!-- Gender & Civil Status -->
-    <div class="col-md-6">
-      <label for="gender" class="form-label fw-semibold">Sexual Orientation <span class="text-danger">*</span></label>
-      <select
-        class="form-select"
-        id="gender"
-        formControlName="gender"
-        (change)="onGenderChange()"
-        [class.is-invalid]="studentForm.get('studentRequest.gender')?.invalid && studentForm.get('studentRequest.gender')?.touched"
-      >
-        <option value="" disabled selected>Select your orientation</option>
-        <option *ngFor="let option of sexualOrientations" [value]="option">{{ option }}</option>
-      </select>
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.gender')?.errors?.['required']">
-        Sexual orientation is required.
-      </div>
+        <!-- Gender & Civil Status -->
+        <div class="col-md-6">
+          <label for="gender" class="form-label fw-semibold"
+            >Sexual Orientation <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            id="gender"
+            formControlName="gender"
+            (change)="onGenderChange()"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.gender')?.invalid &&
+              studentForm.get('studentRequest.gender')?.touched
+            "
+          >
+            <option value="" disabled selected>Select your orientation</option>
+            <option *ngFor="let option of sexualOrientations" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.gender')?.errors?.['required']"
+          >
+            Sexual orientation is required.
+          </div>
 
-      <!-- Others Field -->
-      <div class="mt-2" *ngIf="isOtherGenderSelected">
-        <label for="otherGender" class="form-label fw-semibold">Please specify</label>
-        <input
-          type="text"
-          class="form-control"
-          id="otherGender"
-          formControlName="otherGender"
-          placeholder="Enter your orientation"
-          [class.is-invalid]="studentForm.get('studentRequest.otherGender')?.invalid && studentForm.get('studentRequest.otherGender')?.touched"
-        />
-        <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.otherGender')?.errors?.['required']">
-          This field is required when 'Others' is selected.
+          <!-- Others Field -->
+          <div class="mt-2" *ngIf="isOtherGenderSelected">
+            <label for="otherGender" class="form-label fw-semibold"
+              >Please specify</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="otherGender"
+              formControlName="otherGender"
+              placeholder="Enter your orientation"
+              [class.is-invalid]="
+                studentForm.get('studentRequest.otherGender')?.invalid &&
+                studentForm.get('studentRequest.otherGender')?.touched
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.otherGender')?.errors?.['required']"
+            >
+              This field is required when 'Others' is selected.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="civilStatus" class="form-label fw-semibold"
+            >Civil Status <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            id="civilStatus"
+            formControlName="civilStatus"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.civilStatus')?.invalid &&
+              studentForm.get('studentRequest.civilStatus')?.touched
+            "
+          >
+            <option value="" disabled selected>Select status</option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Widowed">Widowed</option>
+            <option value="Divorced">Divorced</option>
+          </select>
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.civilStatus')?.errors?.['required']"
+          >
+            Civil Status is required.
+          </div>
+        </div>
+
+        <!-- Height & Weight -->
+        <div class="col-md-6">
+          <label for="height" class="form-label fw-semibold"
+            >Height (cm) <span class="text-danger">*</span></label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="height"
+            formControlName="height"
+            placeholder="Enter height in cm"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.height')?.invalid &&
+              studentForm.get('studentRequest.height')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.height')?.errors?.['required']"
+          >
+            Height is required.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="weight" class="form-label fw-semibold"
+            >Weight (kg) <span class="text-danger">*</span></label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="weight"
+            formControlName="weight"
+            placeholder="Enter weight in kg"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.weight')?.invalid &&
+              studentForm.get('studentRequest.weight')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.weight')?.errors?.['required']"
+          >
+            Weight is required.
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-md-6">
+          <label for="emailAddress" class="form-label fw-semibold"
+            >Email Address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="emailAddress"
+            formControlName="emailAddress"
+            placeholder="e.g., sample@example.com"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.emailAddress')?.invalid &&
+              studentForm.get('studentRequest.emailAddress')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['email']"
+          >
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="mobileNumber" class="form-label fw-semibold"
+            >Mobile Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="mobileNumber"
+            formControlName="mobileNumber"
+            maxlength="11"
+            pattern="^09\\d{9}$"
+            (keypress)="isNumberKey($event)"
+            (paste)="preventNonNumericPaste($event)"
+            placeholder="e.g., 09123456789"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.mobileNumber')?.invalid &&
+              studentForm.get('studentRequest.mobileNumber')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['pattern']"
+          >
+            Mobile number must start with 09 and be exactly 11 digits.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['maxlength']"
+          >
+            Maximum of 11 digits allowed.
+          </div>
+        </div>
+
+        <!-- Citizenship & Religion -->
+        <div class="col-md-6">
+          <label for="citizenship" class="form-label fw-semibold"
+            >Citizenship <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="citizenship"
+            formControlName="citizenship"
+            placeholder="e.g., Filipino"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.citizenship')?.invalid &&
+              studentForm.get('studentRequest.citizenship')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.citizenship')?.errors?.['required']"
+          >
+            Citizenship is required.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="religion" class="form-label fw-semibold"
+            >Religion <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="religion"
+            formControlName="religion"
+            placeholder="e.g., Roman Catholic"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.religion')?.invalid &&
+              studentForm.get('studentRequest.religion')?.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.religion')?.errors?.['required']"
+          >
+            Religion is required.
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="col-md-6">
-      <label for="civilStatus" class="form-label fw-semibold">Civil Status <span class="text-danger">*</span></label>
-      <select
-        class="form-select"
-        id="civilStatus"
-        formControlName="civilStatus"
-        [class.is-invalid]="studentForm.get('studentRequest.civilStatus')?.invalid && studentForm.get('studentRequest.civilStatus')?.touched"
-      >
-        <option value="" disabled selected>Select status</option>
-        <option value="Single">Single</option>
-        <option value="Married">Married</option>
-        <option value="Widowed">Widowed</option>
-        <option value="Divorced">Divorced</option>
-      </select>
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.civilStatus')?.errors?.['required']">
-        Civil Status is required.
-      </div>
-    </div>
-
-    <!-- Height & Weight -->
-    <div class="col-md-6">
-      <label for="height" class="form-label fw-semibold">Height (cm) <span class="text-danger">*</span></label>
-      <input
-        type="number"
-        class="form-control"
-        id="height"
-        formControlName="height"
-        placeholder="Enter height in cm"
-        [class.is-invalid]="studentForm.get('studentRequest.height')?.invalid && studentForm.get('studentRequest.height')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.height')?.errors?.['required']">
-        Height is required.
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <label for="weight" class="form-label fw-semibold">Weight (kg) <span class="text-danger">*</span></label>
-      <input
-        type="number"
-        class="form-control"
-        id="weight"
-        formControlName="weight"
-        placeholder="Enter weight in kg"
-        [class.is-invalid]="studentForm.get('studentRequest.weight')?.invalid && studentForm.get('studentRequest.weight')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.weight')?.errors?.['required']">
-        Weight is required.
-      </div>
-    </div>
-
-    <!-- Contact Information -->
-    <div class="col-md-6">
-      <label for="emailAddress" class="form-label fw-semibold">Email Address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="emailAddress"
-        formControlName="emailAddress"
-        placeholder="e.g., sample@example.com"
-        [class.is-invalid]="studentForm.get('studentRequest.emailAddress')?.invalid && studentForm.get('studentRequest.emailAddress')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['email']">
-        Please enter a valid email address.
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <label for="mobileNumber" class="form-label fw-semibold">Mobile Number</label>
-      <input
-        type="text"
-        class="form-control"
-        id="mobileNumber"
-        formControlName="mobileNumber"
-        maxlength="11"
-        pattern="^09\\d{9}$"
-        (keypress)="isNumberKey($event)"
-        (paste)="preventNonNumericPaste($event)"
-        placeholder="e.g., 09123456789"
-        [class.is-invalid]="studentForm.get('studentRequest.mobileNumber')?.invalid && studentForm.get('studentRequest.mobileNumber')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['pattern']">
-        Mobile number must start with 09 and be exactly 11 digits.
-      </div>
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['maxlength']">
-        Maximum of 11 digits allowed.
-      </div>
-    </div>
-
-    <!-- Citizenship & Religion -->
-    <div class="col-md-6">
-      <label for="citizenship" class="form-label fw-semibold">Citizenship <span class="text-danger">*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="citizenship"
-        formControlName="citizenship"
-        placeholder="e.g., Filipino"
-        [class.is-invalid]="studentForm.get('studentRequest.citizenship')?.invalid && studentForm.get('studentRequest.citizenship')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.citizenship')?.errors?.['required']">
-        Citizenship is required.
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <label for="religion" class="form-label fw-semibold">Religion <span class="text-danger">*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="religion"
-        formControlName="religion"
-        placeholder="e.g., Roman Catholic"
-        [class.is-invalid]="studentForm.get('studentRequest.religion')?.invalid && studentForm.get('studentRequest.religion')?.touched"
-      />
-      <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.religion')?.errors?.['required']">
-        Religion is required.
-      </div>
-    </div>
-  </div>
-</fieldset>
-
+    </fieldset>
 
     <!-- Address -->
     <fieldset
@@ -1650,20 +1762,23 @@
       <!-- Family Size & Income -->
       <div class="row g-3 mb-4">
         <div class="col-md-6">
-          <label class="form-label" for="familySize"
-            >Family Size <span class="text-danger">*</span></label
-          >
-          <input
-            type="number"
+          <label class="form-label" for="familySize">
+            Family Size <span class="text-danger">*</span>
+          </label>
+          <select
             id="familySize"
-            class="form-control"
+            class="form-select"
             formControlName="familySize"
-            placeholder="Enter total family members"
             [class.is-invalid]="
               studentForm.get('studentRequest.family.familySize')?.invalid &&
               studentForm.get('studentRequest.family.familySize')?.touched
             "
-          />
+          >
+            <option value="" disabled selected>Select family size</option>
+            <option *ngFor="let size of familySizes" [value]="size">
+              {{ size }}
+            </option>
+          </select>
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.family.familySize')?.errors?.['required']"
@@ -1673,22 +1788,31 @@
         </div>
 
         <div class="col-md-6">
-          <label class="form-label" for="monthlyGrossIncome"
-            >Monthly Gross Income <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
+          <label class="form-label" for="monthlyGrossIncome">
+            Monthly Gross Income <span class="text-danger">*</span>
+          </label>
+          <select
             id="monthlyGrossIncome"
-            class="form-control"
+            class="form-select"
             formControlName="monthlyGrossIncome"
-            placeholder="e.g., ₱25,000"
             [class.is-invalid]="
               studentForm.get('studentRequest.family.monthlyGrossIncome')
                 ?.invalid &&
               studentForm.get('studentRequest.family.monthlyGrossIncome')
                 ?.touched
             "
-          />
+          >
+            <option value="" disabled selected>
+              Select gross income range
+            </option>
+            <option value="Less than ₱10,957">Less than ₱10,957</option>
+            <option value="₱10,958 - ₱21,193">₱10,958 - ₱21,193</option>
+            <option value="₱21,194 - ₱43,823">₱21,194 - ₱43,823</option>
+            <option value="₱43,824 - ₱76,668">₱43,824 - ₱76,668</option>
+            <option value="₱76,669 - ₱131,483">₱76,669 - ₱131,483</option>
+            <option value="₱131,484 - ₱219,139">₱131,484 - ₱219,139</option>
+            <option value="₱219,140 and above">₱219,140 and above</option>
+          </select>
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.family.monthlyGrossIncome')?.errors?.['required']"
@@ -1701,60 +1825,150 @@
       <!-- Nature of Residence & Parents' Marital Status -->
       <div class="row g-3 mb-4">
         <div class="col-md-6">
-          <label class="form-label" for="natureOfResidence"
-            >Nature of Residence</label
+          <label class="form-label d-block">
+            Nature of Residence <span class="text-danger">*</span>
+          </label>
+
+          <div
+            class="form-check"
+            *ngFor="let option of natureOfResidenceOptions"
           >
-          <input
-            type="text"
-            id="natureOfResidence"
-            class="form-control"
-            formControlName="natureOfResidence"
-            placeholder="e.g., Family Home, Boarding House"
-          />
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="option"
+              [value]="option"
+              (change)="onNatureOfResidenceChange($event)"
+              [checked]="selectedResidences.includes(option)"
+            />
+            <label class="form-check-label" [for]="option">{{ option }}</label>
+          </div>
+
+          <!-- Others input -->
+          <div class="form-check mt-2">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="othersCheckbox"
+              (change)="toggleOthers($event)"
+              [checked]="othersSelected"
+            />
+            <label class="form-check-label" for="othersCheckbox"
+              >Others, please specify:</label
+            >
+            <input
+              type="text"
+              class="form-control mt-2"
+              *ngIf="othersSelected"
+              [(ngModel)]="othersText"
+              (ngModelChange)="updateOthers()"
+              placeholder="Specify other type of residence"
+            />
+          </div>
         </div>
 
         <div class="col-md-6">
           <label class="form-label" for="parentsMaritalStatus"
             >Parents' Marital Status</label
           >
-          <input
-            type="text"
-            id="parentsMaritalStatus"
-            class="form-control"
-            formControlName="parentsMaritalStatus"
-            placeholder="e.g., Married, Single Parent"
-          />
+          <div
+            class="form-check"
+            *ngFor="let status of parentsMaritalStatusOptions"
+          >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [id]="status"
+              [value]="status"
+              (change)="onMaritalStatusChange($event)"
+              [checked]="selectedMaritalStatuses.includes(status)"
+            />
+            <label class="form-check-label" [for]="status">{{ status }}</label>
+          </div>
         </div>
       </div>
 
       <!-- Ordinal Position & Employed Siblings -->
       <div class="row g-3 mb-4">
         <div class="col-md-6">
-          <label class="form-label" for="ordinalPosition"
-            >Ordinal Position</label
-          >
-          <input
-            type="text"
+          <label class="form-label" for="ordinalPosition">
+            Ordinal Position <span class="text-danger">*</span>
+          </label>
+          <select
             id="ordinalPosition"
-            class="form-control"
+            class="form-select"
             formControlName="ordinalPosition"
-            placeholder="e.g., 1st Child, 2nd Child"
-          />
+          >
+            <option value="" disabled selected>Select ordinal position</option>
+            <option *ngFor="let pos of ordinalPositions" [value]="pos">
+              {{ pos }}
+            </option>
+          </select>
         </div>
 
-        <div class="col-md-6">
-          <label class="form-label" for="employedSiblings"
-            >Employed Siblings</label
-          >
-          <input
-            type="text"
-            id="employedSiblings"
-            class="form-control"
-            formControlName="employedSiblings"
-            placeholder="e.g., 2 siblings working"
-          />
-        </div>
+        <!-- Siblings Count Input -->
+<div class="col-md-6">
+  <label class="form-label" for="siblingsCount">
+    Number of Siblings <span class="text-danger">*</span>
+  </label>
+  <input
+    type="number"
+    min="0"
+    id="siblingsCount"
+    class="form-control"
+    formControlName="siblingsCount"
+    #siblingsInput
+    (input)="generateSiblingFields(siblingsInput.value)"
+    placeholder="Enter number of siblings"
+  />
+</div>
+
+<!-- Siblings Input Fields -->
+<div class="col-12" *ngIf="siblingsArray.controls.length > 0">
+  <label class="form-label mb-2 fw-semibold">Siblings' Details</label>
+  <div formArrayName="siblings">
+    <div
+      class="row g-2 mb-3"
+      *ngFor="let sibling of siblingsArray.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="firstName"
+          placeholder="First Name"
+        />
       </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="middleName"
+          placeholder="Middle Name"
+        />
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+          placeholder="Last Name"
+        />
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" formControlName="gender">
+          <option value="" disabled selected>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
 
       <!-- Education Sponsor & Weekly Allowance -->
       <div class="row g-3 mb-4">
@@ -1977,9 +2191,7 @@
 
       <!-- Nested Address Fieldset -->
       <fieldset formGroupName="address" class="border rounded p-3 mt-4">
-        <legend class="float-none w-auto px-2 text-muted">
-          🏠 Emergency Address
-        </legend>
+        <legend class="float-none w-auto px-2 text-muted">🏠Address</legend>
         <div class="row g-3">
           <!-- Street -->
           <div class="col-md-6 col-lg-4">

@@ -154,7 +154,40 @@ export class StudentDataComponent implements OnInit {
     { label: 'Third Year', value: '3' },
     { label: 'Fourth Year', value: '4' },
   ];
+  natureOfResidenceOptions: string[] = [
+  'Family Home',
+  'Boarding House',
+  'Rented Room',
+  "Relative's House",
+  'Rented Apartment',
+  'Dorm',
+  'House of Married Sibling'
+];
+parentsMaritalStatusOptions: string[] = [
+  'Married and Living Together',
+  'Single Parent',
+  'Annulled',
+  'Married but Separated',
+  'Not married but living together'
+];
+ordinalPositions: string[] = Array.from({ length: 20 }, (_, i) => {
+  const number = i + 1;
+  const suffix =
+    number === 1
+      ? 'st'
+      : number === 2
+      ? 'nd'
+      : number === 3
+      ? 'rd'
+      : 'th';
+  return `${number}${suffix} Child`;
+});
 
+selectedMaritalStatuses: string[] = [];
+selectedResidences: string[] = [];
+othersSelected = false;
+othersText = '';
+  familySizes: number[] = Array.from({ length: 15 }, (_, i) => i + 1);
   filteredCourses: { course: string; majors: string[] }[] = [];
   availableMajors: string[] = [];
   showMajorField = false;
@@ -383,7 +416,8 @@ export class StudentDataComponent implements OnInit {
           natureOfResidence: [''],
           parentsMaritalStatus: [''],
           ordinalPosition: [''],
-          employedSiblings: [''],
+          siblings: this.fb.array([]),
+          siblingsCount: [0], // this is optional if you want to trigger the generation
           educationSponsor: [''],
           weeklyAllowance: [''],
           firstGenerationStudent: [false],
@@ -391,7 +425,6 @@ export class StudentDataComponent implements OnInit {
           memberOfIndigenousCulturalCommunity: [false],
           indigenousCommunity: [''],
           indigenousCulturalCommunityDetails: [''],
-          siblings: this.fb.array([]), // Optional, if siblings will be dynamically added
         }),
 
         educationBackground: this.fb.group({
@@ -636,4 +669,85 @@ export class StudentDataComponent implements OnInit {
       event.preventDefault();
     }
   }
+  // Called when a checkbox is clicked
+onNatureOfResidenceChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const value = input.value;
+
+  if (input.checked) {
+    this.selectedResidences.push(value);
+  } else {
+    this.selectedResidences = this.selectedResidences.filter(item => item !== value);
+  }
+
+  this.updateFormControl();
+}
+
+// Toggle Others field
+toggleOthers(event: Event): void {
+  this.othersSelected = (event.target as HTMLInputElement).checked;
+  if (!this.othersSelected) {
+    this.othersText = '';
+  }
+  this.updateFormControl();
+}
+
+// Sync 'Others' input to the form
+updateOthers(): void {
+  this.updateFormControl();
+}
+
+// Update the actual form control value
+updateFormControl(): void {
+  const allSelections = [...this.selectedResidences];
+  if (this.othersSelected && this.othersText.trim()) {
+    allSelections.push(this.othersText.trim());
+  }
+
+  this.studentForm.get('studentRequest.family.natureOfResidence')?.setValue(allSelections);
+  this.studentForm.get('studentRequest.family.natureOfResidence')?.markAsTouched();
+}
+
+// Checkbox change handler
+onMaritalStatusChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  const value = input.value;
+
+  if (input.checked) {
+    this.selectedMaritalStatuses.push(value);
+  } else {
+    this.selectedMaritalStatuses = this.selectedMaritalStatuses.filter(item => item !== value);
+  }
+
+  this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.setValue(this.selectedMaritalStatuses);
+  this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.markAsTouched();
+}
+get siblingsArray(): FormArray {
+  return this.studentForm.get('studentRequest.family.siblings') as FormArray;
+}
+
+// Called when input value changes
+generateSiblingFields(value: string): void {
+  const num = parseInt(value, 10);
+  const array = this.siblingsArray;
+  array.clear();
+
+  if (!isNaN(num) && num > 0) {
+    for (let i = 0; i < num; i++) {
+      array.push(
+        this.fb.group({
+          firstName: [''],
+          middleName: [''],
+          lastName: [''],
+          gender: ['']
+        })
+      );
+    }
+  }
+}
+
+
+
+
+
 }
