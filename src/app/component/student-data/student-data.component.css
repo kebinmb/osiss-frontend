@@ -111,3 +111,19 @@ legend {
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
+
+.sibling-entry {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.sibling-entry:hover {
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.2);
+}
+
+label.form-label {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+

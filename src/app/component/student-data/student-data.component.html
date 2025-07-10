@@ -722,7 +722,6 @@
             id="mobileNumber"
             formControlName="mobileNumber"
             maxlength="11"
-            pattern="^09\\d{9}$"
             (keypress)="isNumberKey($event)"
             (paste)="preventNonNumericPaste($event)"
             placeholder="e.g., 09123456789"
@@ -1868,24 +1867,20 @@
         </div>
 
         <div class="col-md-6">
-          <label class="form-label" for="parentsMaritalStatus"
-            >Parents' Marital Status</label
-          >
-          <div
-            class="form-check"
-            *ngFor="let status of parentsMaritalStatusOptions"
-          >
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="status"
-              [value]="status"
-              (change)="onMaritalStatusChange($event)"
-              [checked]="selectedMaritalStatuses.includes(status)"
-            />
-            <label class="form-check-label" [for]="status">{{ status }}</label>
-          </div>
-        </div>
+  <label class="form-label mb-2">Parents' Marital Status</label>
+  <div *ngFor="let status of parentsMaritalStatusOptions">
+    <label class="form-check d-flex align-items-center gap-2">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [checked]="selectedMaritalStatus === status"
+        (change)="onMaritalStatusCheckboxChange(status)"
+      />
+      {{ status }}
+    </label>
+  </div>
+</div>
+
       </div>
 
       <!-- Ordinal Position & Employed Siblings -->
@@ -1907,95 +1902,104 @@
         </div>
 
         <!-- Siblings Count Input -->
-<div class="col-md-6">
-  <label class="form-label" for="siblingsCount">
-    Number of Siblings <span class="text-danger">*</span>
-  </label>
-  <input
-    type="number"
-    min="0"
-    id="siblingsCount"
-    class="form-control"
-    formControlName="siblingsCount"
-    #siblingsInput
-    (input)="generateSiblingFields(siblingsInput.value)"
-    placeholder="Enter number of siblings"
-  />
-</div>
-
-<!-- Siblings Input Fields -->
-<div class="col-12" *ngIf="siblingsArray.controls.length > 0">
-  <label class="form-label mb-2 fw-semibold">Siblings' Details</label>
-  <div formArrayName="siblings">
-    <div
-      class="row g-2 mb-3"
-      *ngFor="let sibling of siblingsArray.controls; let i = index"
-      [formGroupName]="i"
-    >
-      <div class="col-md-3">
-        <input
-          type="text"
-          class="form-control"
-          formControlName="firstName"
-          placeholder="First Name"
-        />
-      </div>
-      <div class="col-md-3">
-        <input
-          type="text"
-          class="form-control"
-          formControlName="middleName"
-          placeholder="Middle Name"
-        />
-      </div>
-      <div class="col-md-3">
-        <input
-          type="text"
-          class="form-control"
-          formControlName="lastName"
-          placeholder="Last Name"
-        />
-      </div>
-      <div class="col-md-3">
-        <select class="form-select" formControlName="gender">
-          <option value="" disabled selected>Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-
-      <!-- Education Sponsor & Weekly Allowance -->
-      <div class="row g-3 mb-4">
         <div class="col-md-6">
-          <label class="form-label" for="educationSponsor"
-            >Who Finances Your Schooling</label
-          >
+          <label class="form-label" for="siblingsCount">
+            Number of Siblings <span class="text-danger">*</span>
+          </label>
           <input
-            type="text"
-            id="educationSponsor"
+            type="number"
+            min="0"
+            id="siblingsCount"
             class="form-control"
-            formControlName="educationSponsor"
-            placeholder="e.g., Parents, Scholarship, Self"
+            formControlName="siblingsCount"
+            #siblingsInput
+            (input)="generateSiblingFields(siblingsInput.value)"
+            placeholder="Enter number of siblings"
           />
         </div>
 
-        <div class="col-md-6">
-          <label class="form-label" for="weeklyAllowance"
-            >Weekly Allowance</label
-          >
+        <!-- Siblings Input Fields -->
+        <div class="col-12" *ngIf="siblingsArray.controls.length > 0">
+          <label class="form-label mb-3 fs-5 fw-semibold text-primary d-block">
+            👨‍👩‍👧‍👦 Sibling's Details
+          </label>
+          <div formArrayName="siblings" class="d-flex flex-column gap-3">
+            <div
+              class="card shadow-sm border-0 p-3 sibling-entry"
+              *ngFor="let sibling of siblingsArray.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="row g-3 align-items-end">
+                <div class="col-md-3">
+                  <label class="form-label fw-medium">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    placeholder="Enter first name"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-medium">Middle Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="middleName"
+                    placeholder="Enter middle name"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-medium">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    placeholder="Enter last name"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-medium">Gender</label>
+                  <select class="form-select" formControlName="gender">
+                    <option value="" disabled>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education Sponsor & Weekly Allowance -->
+      <div class="col-md-12 mb-4">
+        <label class="form-label fw-semibold mb-2"
+          >Who Finances Your Schooling</label
+        >
+
+        <div class="form-check" *ngFor="let option of sponsorOptions">
           <input
-            type="text"
-            id="weeklyAllowance"
-            class="form-control"
-            formControlName="weeklyAllowance"
-            placeholder="e.g., ₱500"
+            class="form-check-input"
+            type="checkbox"
+            [value]="option.value"
+            [checked]="selectedSponsors.includes(option.value)"
+            (change)="onSponsorChange($event, option)"
+            [id]="option.value"
           />
+          <label class="form-check-label" [for]="option.value">
+            {{ option.label }}
+          </label>
+
+          <!-- Conditional input -->
+          <div *ngIf="showInput[option.value]" class="mt-2 ms-4">
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="option.placeholder"
+              [(ngModel)]="extraDetails[option.value]"
+              (ngModelChange)="updateEducationSponsor()"
+            />
+          </div>
         </div>
       </div>
 

@@ -155,38 +155,66 @@ export class StudentDataComponent implements OnInit {
     { label: 'Fourth Year', value: '4' },
   ];
   natureOfResidenceOptions: string[] = [
-  'Family Home',
-  'Boarding House',
-  'Rented Room',
-  "Relative's House",
-  'Rented Apartment',
-  'Dorm',
-  'House of Married Sibling'
-];
-parentsMaritalStatusOptions: string[] = [
-  'Married and Living Together',
-  'Single Parent',
-  'Annulled',
-  'Married but Separated',
-  'Not married but living together'
-];
-ordinalPositions: string[] = Array.from({ length: 20 }, (_, i) => {
-  const number = i + 1;
-  const suffix =
-    number === 1
-      ? 'st'
-      : number === 2
-      ? 'nd'
-      : number === 3
-      ? 'rd'
-      : 'th';
-  return `${number}${suffix} Child`;
-});
+    'Family Home',
+    'Boarding House',
+    'Rented Room',
+    "Relative's House",
+    'Rented Apartment',
+    'Dorm',
+    'House of Married Sibling',
+  ];
+  parentsMaritalStatusOptions: string[] = [
+    'Married and Living Together',
+    'Single Parent',
+    'Annulled',
+    'Married but Separated',
+    'Not married but living together',
+  ];
+  selectedMaritalStatus: string = '';
+  ordinalPositions: string[] = Array.from({ length: 20 }, (_, i) => {
+    const number = i + 1;
+    const suffix =
+      number === 1 ? 'st' : number === 2 ? 'nd' : number === 3 ? 'rd' : 'th';
+    return `${number}${suffix} Child`;
+  });
+  sponsorOptions = [
+    { label: 'Parents', value: 'Parents' },
+    { label: 'Spouse', value: 'Spouse' },
+    { label: 'Sibling(s)', value: 'Siblings' },
+    { label: 'Relative', value: 'Relative' },
+    {
+      label: 'Scholarship, Please Specify',
+      value: 'Scholarship',
+      placeholder: 'Enter scholarship name',
+    },
+    {
+      label: 'Self-supporting/working student, Please Specify',
+      value: 'Self-supporting',
+      placeholder: 'Enter how you support yourself',
+    },
+    {
+      label: 'Others, please specify',
+      value: 'Others',
+      placeholder: 'Enter other source',
+    },
+  ];
+  incomeRanges: string[] = [
+    'Less than ₱10,957',
+    '₱10,958 - ₱21,193',
+    '₱21,194 - ₱43,823',
+    '₱43,824 - ₱76,668',
+    '₱76,669 - ₱131,483',
+    '₱131,484 - ₱219,139',
+    '₱219,140 and above',
+  ];
 
-selectedMaritalStatuses: string[] = [];
-selectedResidences: string[] = [];
-othersSelected = false;
-othersText = '';
+  selectedSponsors: string[] = [];
+  showInput: { [key: string]: boolean } = {};
+  extraDetails: { [key: string]: string } = {};
+  selectedMaritalStatuses: string[] = [];
+  selectedResidences: string[] = [];
+  othersSelected = false;
+  othersText = '';
   familySizes: number[] = Array.from({ length: 15 }, (_, i) => i + 1);
   filteredCourses: { course: string; majors: string[] }[] = [];
   availableMajors: string[] = [];
@@ -314,7 +342,7 @@ othersText = '';
       studentRequest: this.fb.group({
         lrn: ['', Validators.required],
         studentType: ['', Validators.required],
-        lastSchoolAttended: ['',Validators.required],
+        lastSchoolAttended: ['', Validators.required],
         yearLevel: ['', Validators.required],
         campus: ['', Validators.required],
         course: ['', Validators.required],
@@ -333,8 +361,8 @@ othersText = '';
         placeToStudy: [false],
         roomIsShared: [false],
         discussWithGuidanceCounselor: [false],
-        isPwd:[false],
-        pwdDetails: ['',Validators.required],
+        isPwd: [false],
+        pwdDetails: ['', Validators.required],
         educationalNeeds: [],
         consultedPsych: [],
         concerns: [],
@@ -346,11 +374,7 @@ othersText = '';
         religion: ['', Validators.required],
         mobileNumber: [
           '',
-          [
-            Validators.pattern(/^09\d{9}$/),
-            Validators.minLength(11),
-            Validators.maxLength(11),
-          ],
+          [Validators.pattern(/^09\d{9}$/), Validators.maxLength(11)],
         ],
         address: this.fb.group({
           street: [''],
@@ -413,8 +437,8 @@ othersText = '';
         family: this.fb.group({
           familySize: ['', Validators.required],
           monthlyGrossIncome: ['', Validators.required],
-          natureOfResidence: [''],
-          parentsMaritalStatus: [''],
+          natureOfResidence: ['', Validators.required],
+          parentsMaritalStatus: ['', Validators.required],
           ordinalPosition: [''],
           siblings: this.fb.array([]),
           siblingsCount: [0], // this is optional if you want to trigger the generation
@@ -670,84 +694,113 @@ othersText = '';
     }
   }
   // Called when a checkbox is clicked
-onNatureOfResidenceChange(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  const value = input.value;
+  onNatureOfResidenceChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
 
-  if (input.checked) {
-    this.selectedResidences.push(value);
-  } else {
-    this.selectedResidences = this.selectedResidences.filter(item => item !== value);
-  }
-
-  this.updateFormControl();
-}
-
-// Toggle Others field
-toggleOthers(event: Event): void {
-  this.othersSelected = (event.target as HTMLInputElement).checked;
-  if (!this.othersSelected) {
-    this.othersText = '';
-  }
-  this.updateFormControl();
-}
-
-// Sync 'Others' input to the form
-updateOthers(): void {
-  this.updateFormControl();
-}
-
-// Update the actual form control value
-updateFormControl(): void {
-  const allSelections = [...this.selectedResidences];
-  if (this.othersSelected && this.othersText.trim()) {
-    allSelections.push(this.othersText.trim());
-  }
-
-  this.studentForm.get('studentRequest.family.natureOfResidence')?.setValue(allSelections);
-  this.studentForm.get('studentRequest.family.natureOfResidence')?.markAsTouched();
-}
-
-// Checkbox change handler
-onMaritalStatusChange(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  const value = input.value;
-
-  if (input.checked) {
-    this.selectedMaritalStatuses.push(value);
-  } else {
-    this.selectedMaritalStatuses = this.selectedMaritalStatuses.filter(item => item !== value);
-  }
-
-  this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.setValue(this.selectedMaritalStatuses);
-  this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.markAsTouched();
-}
-get siblingsArray(): FormArray {
-  return this.studentForm.get('studentRequest.family.siblings') as FormArray;
-}
-
-// Called when input value changes
-generateSiblingFields(value: string): void {
-  const num = parseInt(value, 10);
-  const array = this.siblingsArray;
-  array.clear();
-
-  if (!isNaN(num) && num > 0) {
-    for (let i = 0; i < num; i++) {
-      array.push(
-        this.fb.group({
-          firstName: [''],
-          middleName: [''],
-          lastName: [''],
-          gender: ['']
-        })
+    if (input.checked) {
+      this.selectedResidences.push(value);
+    } else {
+      this.selectedResidences = this.selectedResidences.filter(
+        (item) => item !== value
       );
     }
+
+    this.updateFormControl();
+  }
+
+  // Toggle Others field
+  toggleOthers(event: Event): void {
+    this.othersSelected = (event.target as HTMLInputElement).checked;
+    if (!this.othersSelected) {
+      this.othersText = '';
+    }
+    this.updateFormControl();
+  }
+
+  // Sync 'Others' input to the form
+  updateOthers(): void {
+    this.updateFormControl();
+  }
+
+  // Update the actual form control value
+  updateFormControl(): void {
+    const allSelections = [...this.selectedResidences];
+    if (this.othersSelected && this.othersText.trim()) {
+      allSelections.push(this.othersText.trim());
+    }
+
+    this.studentForm
+      .get('studentRequest.family.natureOfResidence')
+      ?.setValue(allSelections);
+    this.studentForm
+      .get('studentRequest.family.natureOfResidence')
+      ?.markAsTouched();
+  }
+
+  // Checkbox change handler
+  onMaritalStatusCheckboxChange(status: string) {
+  if (this.selectedMaritalStatus === status) {
+    // uncheck it
+    this.selectedMaritalStatus = '';
+    this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.setValue('');
+  } else {
+    // set the selected one and uncheck others
+    this.selectedMaritalStatus = status;
+    this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.setValue(status);
   }
 }
 
+  get siblingsArray(): FormArray {
+    return this.studentForm.get('studentRequest.family.siblings') as FormArray;
+  }
 
+  // Called when input value changes
+  generateSiblingFields(value: string): void {
+    const num = parseInt(value, 10);
+    const array = this.siblingsArray;
+    array.clear();
 
+    if (!isNaN(num) && num > 0) {
+      for (let i = 0; i < num; i++) {
+        array.push(
+          this.fb.group({
+            firstName: [''],
+            middleName: [''],
+            lastName: [''],
+            gender: [''],
+          })
+        );
+      }
+    }
+  }
+  onSponsorChange(event: any, option: any): void {
+    const checked = event.target.checked;
+    const value = option.value;
 
+    if (checked) {
+      this.selectedSponsors.push(value);
+      if (option.placeholder) this.showInput[value] = true;
+    } else {
+      this.selectedSponsors = this.selectedSponsors.filter((s) => s !== value);
+      this.showInput[value] = false;
+      delete this.extraDetails[value];
+    }
 
+    this.updateEducationSponsor();
+  }
+
+  updateEducationSponsor(): void {
+    const parts = this.selectedSponsors.map((value) => {
+      if (this.extraDetails[value]) {
+        return `${value}: ${this.extraDetails[value]}`;
+      }
+      return value;
+    });
+
+    const sponsorControl = this.studentForm.get(
+      'studentRequest.family.educationSponsor'
+    );
+    sponsorControl?.setValue(parts.join(', '));
+  }
 }
