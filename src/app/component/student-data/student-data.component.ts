@@ -690,6 +690,7 @@ yearOfDeathOptions: number[] = Array.from({ length: new Date().getFullYear() - 1
           siblings: this.fb.array([]),
           siblingsCount: [0,Validators.required], // this is optional if you want to trigger the generation
           educationSponsor: ['',Validators.required],
+          otherSponsor:[''],
           weeklyAllowance: ['',Validators.required],
           firstGenerationStudent: [false],
           memberOfIndigenousPeople: [false],
