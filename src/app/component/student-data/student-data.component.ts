@@ -16,6 +16,7 @@ import { DataPrivacyComponent } from '../data-privacy/data-privacy.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-data',
@@ -23,6 +24,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./student-data.component.css'],
 })
 export class StudentDataComponent implements OnInit {
+  regionOptions: any[] = [];
+  provinceOptions: any[] = [];
+  cityOptions: any[] = [];
+  barangayOptions: any[] = [];
+  selectedRegion: any;
+  selectedProvince: any;
+  selectedCity: any;
   studentForm!: FormGroup;
   memberOfIndigenousPeople!: FormControl;
   memberOfIndigenousCulturalCommunity!: FormControl;
@@ -39,6 +47,19 @@ export class StudentDataComponent implements OnInit {
     'BELONGS_TO_A_FAMILY_OF_REBEL_RETURNEES',
     'NOT_APPLICABLE',
   ];
+  suffixOptions: string[] = [
+  'Jr.',
+  'Sr.',
+  'II',
+  'III',
+  'IV',
+  'V',
+  'PhD',
+  'MD',
+  'Esq.'
+];
+ageOptions: number[] = Array.from({ length: 100 }, (_, i) => i + 1); // 1 to 100
+
   sexualOrientations: string[] = [
     'Male',
     'Female',
@@ -51,6 +72,229 @@ export class StudentDataComponent implements OnInit {
     'Others',
   ];
   isOtherGenderSelected = false;
+  heightOptions: number[] = Array.from({ length: 121 }, (_, i) => i + 100); // 100 to 220 cm
+  weightOptions: number[] = Array.from({ length: 121 }, (_, i) => i + 30); // 30 to 150 kg
+  religionOptions: string[] = [
+    'Roman Catholic',
+    'Protestant',
+    'Christian (Non-Catholic)',
+    'Iglesia ni Cristo',
+    'Seventh-day Adventist',
+    "Jehovah's Witness",
+    'Islam',
+    'Buddhism',
+    'Hinduism',
+    'Judaism',
+    'Atheist',
+    'Agnostic',
+    'Animism',
+    'Sikhism',
+    'Taoism',
+    'Baháʼí Faith',
+    'Shinto',
+    'Orthodox Christianity',
+    'Evangelical',
+    'Latter-day Saints (Mormon)',
+    'Unitarian Universalism',
+    'Zoroastrianism',
+    'Rastafarianism',
+    'Paganism',
+    'Other',
+  ];
+  citizenshipOptions: string[] = [
+    'Afghan',
+    'Albanian',
+    'Algerian',
+    'American',
+    'Andorran',
+    'Angolan',
+    'Antiguan and Barbudan',
+    'Argentine',
+    'Armenian',
+    'Australian',
+    'Austrian',
+    'Azerbaijani',
+    'Bahamian',
+    'Bahraini',
+    'Bangladeshi',
+    'Barbadian',
+    'Belarusian',
+    'Belgian',
+    'Belizean',
+    'Beninese',
+    'Bhutanese',
+    'Bolivian',
+    'Bosnian and Herzegovinian',
+    'Botswanan',
+    'Brazilian',
+    'Bruneian',
+    'Bulgarian',
+    'Burkinabé',
+    'Burmese',
+    'Burundian',
+    'Cabo Verdean',
+    'Cambodian',
+    'Cameroonian',
+    'Canadian',
+    'Central African',
+    'Chadian',
+    'Chilean',
+    'Chinese',
+    'Colombian',
+    'Comoran',
+    'Congolese',
+    'Costa Rican',
+    'Croatian',
+    'Cuban',
+    'Cypriot',
+    'Czech',
+    'Danish',
+    'Djiboutian',
+    'Dominican',
+    'Dutch',
+    'East Timorese',
+    'Ecuadorean',
+    'Egyptian',
+    'Emirati',
+    'Equatoguinean',
+    'Eritrean',
+    'Estonian',
+    'Eswatini',
+    'Ethiopian',
+    'Fijian',
+    'Finnish',
+    'French',
+    'Gabonese',
+    'Gambian',
+    'Georgian',
+    'German',
+    'Ghanaian',
+    'Greek',
+    'Grenadian',
+    'Guatemalan',
+    'Guinean',
+    'Guinea-Bissauan',
+    'Guyanese',
+    'Haitian',
+    'Honduran',
+    'Hungarian',
+    'Icelandic',
+    'Indian',
+    'Indonesian',
+    'Iranian',
+    'Iraqi',
+    'Irish',
+    'Israeli',
+    'Italian',
+    'Ivorian',
+    'Jamaican',
+    'Japanese',
+    'Jordanian',
+    'Kazakhstani',
+    'Kenyan',
+    'Kiribati',
+    'Kuwaiti',
+    'Kyrgyzstani',
+    'Lao',
+    'Latvian',
+    'Lebanese',
+    'Liberian',
+    'Libyan',
+    'Liechtensteiner',
+    'Lithuanian',
+    'Luxembourgish',
+    'Macedonian',
+    'Malagasy',
+    'Malawian',
+    'Malaysian',
+    'Maldivian',
+    'Malian',
+    'Maltese',
+    'Marshallese',
+    'Mauritanian',
+    'Mauritian',
+    'Mexican',
+    'Micronesian',
+    'Moldovan',
+    'Monégasque',
+    'Mongolian',
+    'Montenegrin',
+    'Moroccan',
+    'Mozambican',
+    'Namibian',
+    'Nauruan',
+    'Nepalese',
+    'New Zealander',
+    'Nicaraguan',
+    'Nigerien',
+    'Nigerian',
+    'North Korean',
+    'Norwegian',
+    'Omani',
+    'Pakistani',
+    'Palauan',
+    'Palestinian',
+    'Panamanian',
+    'Papua New Guinean',
+    'Paraguayan',
+    'Peruvian',
+    'Philippines',
+    'Polish',
+    'Portuguese',
+    'Qatari',
+    'Romanian',
+    'Russian',
+    'Rwandan',
+    'Saint Kitts and Nevis',
+    'Saint Lucian',
+    'Saint Vincentian',
+    'Samoan',
+    'San Marinese',
+    'Sao Tomean',
+    'Saudi',
+    'Senegalese',
+    'Serbian',
+    'Seychellois',
+    'Sierra Leonean',
+    'Singaporean',
+    'Slovak',
+    'Slovenian',
+    'Solomon Islander',
+    'Somali',
+    'South African',
+    'South Korean',
+    'South Sudanese',
+    'Spanish',
+    'Sri Lankan',
+    'Sudanese',
+    'Surinamese',
+    'Swedish',
+    'Swiss',
+    'Syrian',
+    'Taiwanese',
+    'Tajikistani',
+    'Tanzanian',
+    'Thai',
+    'Togolese',
+    'Tongan',
+    'Trinidadian and Tobagonian',
+    'Tunisian',
+    'Turkish',
+    'Turkmen',
+    'Tuvaluan',
+    'Ugandan',
+    'Ukrainian',
+    'Uruguayan',
+    'Uzbekistani',
+    'Vanuatuan',
+    'Vatican',
+    'Venezuelan',
+    'Vietnamese',
+    'Yemeni',
+    'Zambian',
+    'Zimbabwean',
+  ];
+
   campusCourses: {
     [key: string]: Array<string | { course: string; majors: string[] }>;
   } = {
@@ -207,7 +451,7 @@ export class StudentDataComponent implements OnInit {
     '₱131,484 - ₱219,139',
     '₱219,140 and above',
   ];
-
+yearOfDeathOptions: number[] = Array.from({ length: new Date().getFullYear() - 1899 }, (_, i) => new Date().getFullYear() - i);
   selectedSponsors: string[] = [];
   showInput: { [key: string]: boolean } = {};
   extraDetails: { [key: string]: string } = {};
@@ -226,7 +470,8 @@ export class StudentDataComponent implements OnInit {
     private savingService: SavingService,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
   ngAfterViewInit(): void {
     if (!sessionStorage.getItem('privacyAccepted')) {
@@ -237,6 +482,7 @@ export class StudentDataComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.loadRegions();
     this.initForm();
     const studentRequest = this.studentForm.get('studentRequest');
 
@@ -438,12 +684,13 @@ export class StudentDataComponent implements OnInit {
           familySize: ['', Validators.required],
           monthlyGrossIncome: ['', Validators.required],
           natureOfResidence: ['', Validators.required],
+          otherNatureOfResidence: [''],
           parentsMaritalStatus: ['', Validators.required],
-          ordinalPosition: [''],
+          ordinalPosition: ['',Validators.required],
           siblings: this.fb.array([]),
-          siblingsCount: [0], // this is optional if you want to trigger the generation
-          educationSponsor: [''],
-          weeklyAllowance: [''],
+          siblingsCount: [0,Validators.required], // this is optional if you want to trigger the generation
+          educationSponsor: ['',Validators.required],
+          weeklyAllowance: ['',Validators.required],
           firstGenerationStudent: [false],
           memberOfIndigenousPeople: [false],
           memberOfIndigenousCulturalCommunity: [false],
@@ -740,16 +987,20 @@ export class StudentDataComponent implements OnInit {
 
   // Checkbox change handler
   onMaritalStatusCheckboxChange(status: string) {
-  if (this.selectedMaritalStatus === status) {
-    // uncheck it
-    this.selectedMaritalStatus = '';
-    this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.setValue('');
-  } else {
-    // set the selected one and uncheck others
-    this.selectedMaritalStatus = status;
-    this.studentForm.get('studentRequest.family.parentsMaritalStatus')?.setValue(status);
+    if (this.selectedMaritalStatus === status) {
+      // uncheck it
+      this.selectedMaritalStatus = '';
+      this.studentForm
+        .get('studentRequest.family.parentsMaritalStatus')
+        ?.setValue('');
+    } else {
+      // set the selected one and uncheck others
+      this.selectedMaritalStatus = status;
+      this.studentForm
+        .get('studentRequest.family.parentsMaritalStatus')
+        ?.setValue(status);
+    }
   }
-}
 
   get siblingsArray(): FormArray {
     return this.studentForm.get('studentRequest.family.siblings') as FormArray;
@@ -802,5 +1053,52 @@ export class StudentDataComponent implements OnInit {
       'studentRequest.family.educationSponsor'
     );
     sponsorControl?.setValue(parts.join(', '));
+  }
+  loadRegions() {
+    this.http
+      .get<any[]>('https://psgc.gitlab.io/api/regions/')
+      .subscribe((data) => {
+        this.regionOptions = data;
+      });
+  }
+
+  onRegionChange(event: Event) {
+    const regionCode = (event.target as HTMLSelectElement).value;
+    this.provinceOptions = [];
+    this.cityOptions = [];
+    this.barangayOptions = [];
+
+    this.http
+      .get<any[]>(`https://psgc.gitlab.io/api/regions/${regionCode}/provinces/`)
+      .subscribe((data) => {
+        this.provinceOptions = data;
+      });
+  }
+
+  onProvinceChange(event: Event) {
+    const provinceCode = (event.target as HTMLSelectElement).value;
+    this.cityOptions = [];
+    this.barangayOptions = [];
+
+    this.http
+      .get<any[]>(
+        `https://psgc.gitlab.io/api/provinces/${provinceCode}/cities-municipalities/`
+      )
+      .subscribe((data) => {
+        this.cityOptions = data;
+      });
+  }
+
+  onCityChange(event: Event) {
+    const cityCode = (event.target as HTMLSelectElement).value;
+    this.barangayOptions = [];
+
+    this.http
+      .get<any[]>(
+        `https://psgc.gitlab.io/api/cities-municipalities/${cityCode}/barangays/`
+      )
+      .subscribe((data) => {
+        this.barangayOptions = data;
+      });
   }
 }

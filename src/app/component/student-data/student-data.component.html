@@ -643,20 +643,23 @@
 
         <!-- Height & Weight -->
         <div class="col-md-6">
-          <label for="height" class="form-label fw-semibold"
-            >Height (cm) <span class="text-danger">*</span></label
-          >
-          <input
-            type="number"
-            class="form-control"
+          <label for="height" class="form-label fw-semibold">
+            Height (cm) <span class="text-danger">*</span>
+          </label>
+          <select
+            class="form-select"
             id="height"
             formControlName="height"
-            placeholder="Enter height in cm"
             [class.is-invalid]="
               studentForm.get('studentRequest.height')?.invalid &&
               studentForm.get('studentRequest.height')?.touched
             "
-          />
+          >
+            <option value="" disabled selected>Select height</option>
+            <option *ngFor="let h of heightOptions" [value]="h">
+              {{ h }} cm
+            </option>
+          </select>
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.height')?.errors?.['required']"
@@ -666,20 +669,23 @@
         </div>
 
         <div class="col-md-6">
-          <label for="weight" class="form-label fw-semibold"
-            >Weight (kg) <span class="text-danger">*</span></label
-          >
-          <input
-            type="number"
-            class="form-control"
+          <label for="weight" class="form-label fw-semibold">
+            Weight (kg) <span class="text-danger">*</span>
+          </label>
+          <select
+            class="form-select"
             id="weight"
             formControlName="weight"
-            placeholder="Enter weight in kg"
             [class.is-invalid]="
               studentForm.get('studentRequest.weight')?.invalid &&
               studentForm.get('studentRequest.weight')?.touched
             "
-          />
+          >
+            <option value="" disabled selected>Select weight</option>
+            <option *ngFor="let w of weightOptions" [value]="w">
+              {{ w }} kg
+            </option>
+          </select>
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.weight')?.errors?.['required']"
@@ -746,20 +752,23 @@
 
         <!-- Citizenship & Religion -->
         <div class="col-md-6">
-          <label for="citizenship" class="form-label fw-semibold"
-            >Citizenship <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
+          <label for="citizenship" class="form-label fw-semibold">
+            Citizenship <span class="text-danger">*</span>
+          </label>
+          <select
+            class="form-select"
             id="citizenship"
             formControlName="citizenship"
-            placeholder="e.g., Filipino"
             [class.is-invalid]="
               studentForm.get('studentRequest.citizenship')?.invalid &&
               studentForm.get('studentRequest.citizenship')?.touched
             "
-          />
+          >
+            <option value="" disabled selected>Select citizenship</option>
+            <option *ngFor="let c of citizenshipOptions" [value]="c">
+              {{ c }}
+            </option>
+          </select>
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.citizenship')?.errors?.['required']"
@@ -769,20 +778,23 @@
         </div>
 
         <div class="col-md-6">
-          <label for="religion" class="form-label fw-semibold"
-            >Religion <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
+          <label for="religion" class="form-label fw-semibold">
+            Religion <span class="text-danger">*</span>
+          </label>
+          <select
+            class="form-select"
             id="religion"
             formControlName="religion"
-            placeholder="e.g., Roman Catholic"
             [class.is-invalid]="
               studentForm.get('studentRequest.religion')?.invalid &&
               studentForm.get('studentRequest.religion')?.touched
             "
-          />
+          >
+            <option value="" disabled selected>Select religion</option>
+            <option *ngFor="let r of religionOptions" [value]="r">
+              {{ r }}
+            </option>
+          </select>
           <div
             class="invalid-feedback"
             *ngIf="studentForm.get('studentRequest.religion')?.errors?.['required']"
@@ -815,100 +827,71 @@
           />
         </div>
 
-        <!-- Barangay (Required) -->
+        <!-- Region -->
         <div class="col-md-6 col-lg-4">
-          <label for="barangay" class="form-label"
-            >Barangay <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="barangay"
-            formControlName="barangay"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.address.barangay')?.invalid &&
-              studentForm.get('studentRequest.address.barangay')?.touched
-            "
-            placeholder="e.g., Brgy. Example"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.address.barangay')?.errors?.['required']"
-          >
-            Barangay is required.
-          </div>
-        </div>
-
-        <!-- City (Required) -->
-        <div class="col-md-6 col-lg-4">
-          <label for="city" class="form-label"
-            >City/Municipality <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="city"
-            formControlName="city"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.address.city')?.invalid &&
-              studentForm.get('studentRequest.address.city')?.touched
-            "
-            placeholder="e.g., Talisay City, Municipality of Hinigaran"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.address.city')?.errors?.['required']"
-          >
-            City/Municipality is required.
-          </div>
-        </div>
-
-        <!-- Province (Required) -->
-        <div class="col-md-6 col-lg-4">
-          <label for="province" class="form-label"
-            >Province <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="province"
-            formControlName="province"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.address.province')?.invalid &&
-              studentForm.get('studentRequest.address.province')?.touched
-            "
-            placeholder="e.g., Negros Occidental"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.address.province')?.errors?.['required']"
-          >
-            Province is required.
-          </div>
-        </div>
-
-        <!-- Region (Required) -->
-        <div class="col-md-6 col-lg-4">
-          <label for="region" class="form-label"
+          <label class="form-label"
             >Region <span class="text-danger">*</span></label
           >
-          <input
-            type="text"
-            class="form-control"
-            id="region"
+          <select
+            class="form-select"
             formControlName="region"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.address.region')?.invalid &&
-              studentForm.get('studentRequest.address.region')?.touched
-            "
-            placeholder="e.g., Region VI"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.address.region')?.errors?.['required']"
+            (change)="onRegionChange($event)"
           >
-            Region is required.
-          </div>
+            <option value="" disabled selected>Select Region</option>
+            <option *ngFor="let region of regionOptions" [value]="region.code">
+              {{ region.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Province -->
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label"
+            >Province <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            formControlName="province"
+            (change)="onProvinceChange($event)"
+          >
+            <option value="" disabled selected>Select Province</option>
+            <option
+              *ngFor="let province of provinceOptions"
+              [value]="province.code"
+            >
+              {{ province.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- City/Municipality -->
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label"
+            >City/Municipality <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            formControlName="city"
+            (change)="onCityChange($event)"
+          >
+            <option value="" disabled selected>Select City/Municipality</option>
+            <option *ngFor="let city of cityOptions" [value]="city.code">
+              {{ city.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Barangay -->
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label"
+            >Barangay <span class="text-danger">*</span></label
+          >
+          <select class="form-select" formControlName="barangay">
+            <option value="" disabled selected>Select Barangay</option>
+            <option *ngFor="let brgy of barangayOptions" [value]="brgy.name">
+              {{ brgy.name }}
+            </option>
+          </select>
         </div>
 
         <!-- Zip Code (Optional) -->
@@ -1013,22 +996,22 @@
 
             <div class="col-md-6">
               <label class="form-label">Suffix (if any)</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="extension"
-                placeholder="e.g., Jr., Sr."
-              />
+              <select class="form-select" formControlName="extension">
+                <option value="" selected>-- None --</option>
+                <option *ngFor="let suffix of suffixOptions" [value]="suffix">
+                  {{ suffix }}
+                </option>
+              </select>
             </div>
 
             <div class="col-md-6">
               <label class="form-label">Age</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="age"
-                placeholder="e.g., 50"
-              />
+              <select class="form-select" formControlName="age">
+                <option value="" disabled selected>Select age</option>
+                <option *ngFor="let age of ageOptions" [value]="age">
+                  {{ age }}
+                </option>
+              </select>
             </div>
 
             <div class="col-md-6">
@@ -1038,6 +1021,9 @@
                 class="form-control"
                 formControlName="mobileNumber"
                 placeholder="e.g., 09XXXXXXXXX"
+                maxlength="11"
+                (keypress)="isNumberKey($event)"
+                (paste)="preventNonNumericPaste($event)"
               />
             </div>
 
@@ -1051,14 +1037,17 @@
               />
             </div>
 
-            <div class="col-md-6">
+            <div class="col">
               <label class="form-label">Religion</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="religion"
-                placeholder="e.g., Catholic"
-              />
+              <select class="form-select" formControlName="religion">
+                <option value="" disabled selected>Select religion</option>
+                <option
+                  *ngFor="let religion of religionOptions"
+                  [value]="religion"
+                >
+                  {{ religion }}
+                </option>
+              </select>
             </div>
           </div>
 
@@ -1085,19 +1074,22 @@
           </div>
 
           <div class="mb-3">
-            <label class="form-label"
-              >Citizenship <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
+            <label class="form-label">
+              Citizenship <span class="text-danger">*</span>
+            </label>
+            <select
+              class="form-select"
               formControlName="citizenship"
               [class.is-invalid]="
                 studentForm.get('studentRequest.father.citizenship')?.invalid &&
                 studentForm.get('studentRequest.father.citizenship')?.touched
               "
-              placeholder="e.g., Filipino"
-            />
+            >
+              <option value="" disabled selected>Select citizenship</option>
+              <option *ngFor="let c of citizenshipOptions" [value]="c">
+                {{ c }}
+              </option>
+            </select>
             <div
               class="invalid-feedback"
               *ngIf="studentForm.get('studentRequest.father.citizenship')?.errors?.['required']"
@@ -1178,12 +1170,12 @@
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">Year of Death</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="yearOfDeath"
-                placeholder="e.g., 2020"
-              />
+              <select class="form-select" formControlName="yearOfDeath">
+                <option value="" disabled selected>Select year</option>
+                <option *ngFor="let year of yearOfDeathOptions" [value]="year">
+                  {{ year }}
+                </option>
+              </select>
             </div>
           </div>
 
@@ -1191,6 +1183,7 @@
           <fieldset formGroupName="address" class="border-top pt-3">
             <legend class="fs-6 text-muted mb-3">🏠 Address</legend>
             <div class="row g-2">
+              <!-- Street remains a text input -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Street <span class="text-danger">*</span></label
@@ -1214,45 +1207,31 @@
                   Street is required.
                 </div>
               </div>
-              <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Barangay <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="barangay"
-                  placeholder="e.g., Brgy. Sampaloc"
-                  [class.is-invalid]="
-                    studentForm.get('studentRequest.father.address.barangay')
-                      ?.invalid &&
-                    studentForm.get('studentRequest.father.address.barangay')
-                      ?.touched
-                  "
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.barangay')?.errors?.['required']"
-                >
-                  Barangay is required.
-                </div>
-              </div>
+
+              <!-- Region Dropdown -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Region <span class="text-danger">*</span></label
                 >
-                <input
-                  type="text"
-                  class="form-control"
+                <select
+                  class="form-select"
                   formControlName="region"
-                  placeholder="e.g., Region IV-A"
+                  (change)="onRegionChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.region')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.region')
                       ?.touched
                   "
-                />
+                >
+                  <option value="" disabled selected>Select Region</option>
+                  <option
+                    *ngFor="let region of regionOptions"
+                    [value]="region.code"
+                  >
+                    {{ region.name }}
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   *ngIf="studentForm.get('studentRequest.father.address.region')?.errors?.['required']"
@@ -1260,22 +1239,31 @@
                   Region is required.
                 </div>
               </div>
+
+              <!-- Province Dropdown -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Province <span class="text-danger">*</span></label
                 >
-                <input
-                  type="text"
-                  class="form-control"
+                <select
+                  class="form-select"
                   formControlName="province"
-                  placeholder="e.g., Cavite"
+                  (change)="onProvinceChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.province')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.province')
                       ?.touched
                   "
-                />
+                >
+                  <option value="" disabled selected>Select Province</option>
+                  <option
+                    *ngFor="let province of provinceOptions"
+                    [value]="province.code"
+                  >
+                    {{ province.name }}
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   *ngIf="studentForm.get('studentRequest.father.address.province')?.errors?.['required']"
@@ -1283,22 +1271,30 @@
                   Province is required.
                 </div>
               </div>
+
+              <!-- City/Municipality Dropdown -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >City/Municipality <span class="text-danger">*</span></label
                 >
-                <input
-                  type="text"
-                  class="form-control"
+                <select
+                  class="form-select"
                   formControlName="city"
-                  placeholder="e.g., Dasmariñas City"
+                  (change)="onCityChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.city')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.city')
                       ?.touched
                   "
-                />
+                >
+                  <option value="" disabled selected>
+                    Select City/Municipality
+                  </option>
+                  <option *ngFor="let city of cityOptions" [value]="city.code">
+                    {{ city.name }}
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   *ngIf="studentForm.get('studentRequest.father.address.city')?.errors?.['required']"
@@ -1306,6 +1302,38 @@
                   City/Municipality is required.
                 </div>
               </div>
+
+              <!-- Barangay Dropdown -->
+              <div class="col-md-6 mb-2">
+                <label class="form-label"
+                  >Barangay <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  formControlName="barangay"
+                  [class.is-invalid]="
+                    studentForm.get('studentRequest.father.address.barangay')
+                      ?.invalid &&
+                    studentForm.get('studentRequest.father.address.barangay')
+                      ?.touched
+                  "
+                >
+                  <option value="" disabled selected>Select Barangay</option>
+                  <option
+                    *ngFor="let barangay of barangayOptions"
+                    [value]="barangay.name"
+                  >
+                    {{ barangay.name }}
+                  </option>
+                </select>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.barangay')?.errors?.['required']"
+                >
+                  Barangay is required.
+                </div>
+              </div>
+
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Zip Code <span class="text-danger">*</span></label
@@ -1452,12 +1480,12 @@
 
             <div class="col-md-6">
               <label class="form-label">Age</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="age"
-                placeholder="e.g., 50"
-              />
+              <select class="form-select" formControlName="age">
+                <option value="" disabled selected>Select age</option>
+                <option *ngFor="let age of ageOptions" [value]="age">
+                  {{ age }}
+                </option>
+              </select>
             </div>
 
             <div class="col-md-6">
@@ -1467,6 +1495,9 @@
                 class="form-control"
                 formControlName="mobileNumber"
                 placeholder="e.g., 09123456789"
+                maxlength="11"
+                (keypress)="isNumberKey($event)"
+                (paste)="preventNonNumericPaste($event)"
               />
             </div>
 
@@ -1480,31 +1511,37 @@
               />
             </div>
 
-            <div class="col-md-6">
+            <div class="col">
               <label class="form-label">Religion</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="religion"
-                placeholder="e.g., Catholic"
-              />
+              <select class="form-select" formControlName="religion">
+                <option value="" disabled selected>Select religion</option>
+                <option
+                  *ngFor="let religion of religionOptions"
+                  [value]="religion"
+                >
+                  {{ religion }}
+                </option>
+              </select>
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label"
-              >Citizenship <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
+            <label class="form-label">
+              Citizenship <span class="text-danger">*</span>
+            </label>
+            <select
+              class="form-select"
               formControlName="citizenship"
               [class.is-invalid]="
                 studentForm.get('studentRequest.mother.citizenship')?.invalid &&
                 studentForm.get('studentRequest.mother.citizenship')?.touched
               "
-              placeholder="e.g., Filipino"
-            />
+            >
+              <option value="" disabled selected>Select citizenship</option>
+              <option *ngFor="let c of citizenshipOptions" [value]="c">
+                {{ c }}
+              </option>
+            </select>
             <div
               class="invalid-feedback"
               *ngIf="studentForm.get('studentRequest.mother.citizenship')?.errors?.['required']"
@@ -1555,12 +1592,12 @@
             </div>
             <div class="col-md-6">
               <label class="form-label">Year of Death</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="yearOfDeath"
-                placeholder="e.g., 2020"
-              />
+              <select class="form-select" formControlName="yearOfDeath">
+                <option value="" disabled selected>Select year</option>
+                <option *ngFor="let year of yearOfDeathOptions" [value]="year">
+                  {{ year }}
+                </option>
+              </select>
             </div>
           </div>
 
@@ -1602,6 +1639,7 @@
           <fieldset formGroupName="address" class="border-top pt-3">
             <legend class="fs-6 text-muted mb-3">🏠 Address</legend>
             <div class="row g-2">
+              <!-- Street (text input) -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Street <span class="text-danger">*</span></label
@@ -1625,45 +1663,31 @@
                   Street is required.
                 </div>
               </div>
-              <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Barangay <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="barangay"
-                  [class.is-invalid]="
-                    studentForm.get('studentRequest.mother.address.barangay')
-                      ?.invalid &&
-                    studentForm.get('studentRequest.mother.address.barangay')
-                      ?.touched
-                  "
-                  placeholder="e.g., Brgy. Example"
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.barangay')?.errors?.['required']"
-                >
-                  Barangay is required.
-                </div>
-              </div>
+
+              <!-- Region Dropdown -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Region <span class="text-danger">*</span></label
                 >
-                <input
-                  type="text"
-                  class="form-control"
+                <select
+                  class="form-select"
                   formControlName="region"
+                  (change)="onRegionChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.region')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.region')
                       ?.touched
                   "
-                  placeholder="e.g., Region VII"
-                />
+                >
+                  <option value="" disabled selected>Select Region</option>
+                  <option
+                    *ngFor="let region of regionOptions"
+                    [value]="region.code"
+                  >
+                    {{ region.name }}
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   *ngIf="studentForm.get('studentRequest.mother.address.region')?.errors?.['required']"
@@ -1671,22 +1695,31 @@
                   Region is required.
                 </div>
               </div>
+
+              <!-- Province Dropdown -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Province <span class="text-danger">*</span></label
                 >
-                <input
-                  type="text"
-                  class="form-control"
+                <select
+                  class="form-select"
                   formControlName="province"
+                  (change)="onProvinceChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.province')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.province')
                       ?.touched
                   "
-                  placeholder="e.g., Cebu"
-                />
+                >
+                  <option value="" disabled selected>Select Province</option>
+                  <option
+                    *ngFor="let province of provinceOptions"
+                    [value]="province.code"
+                  >
+                    {{ province.name }}
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   *ngIf="studentForm.get('studentRequest.mother.address.province')?.errors?.['required']"
@@ -1694,22 +1727,30 @@
                   Province is required.
                 </div>
               </div>
+
+              <!-- City/Municipality Dropdown -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >City/Municipality <span class="text-danger">*</span></label
                 >
-                <input
-                  type="text"
-                  class="form-control"
+                <select
+                  class="form-select"
                   formControlName="city"
+                  (change)="onCityChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.city')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.city')
                       ?.touched
                   "
-                  placeholder="e.g., Cebu City"
-                />
+                >
+                  <option value="" disabled selected>
+                    Select City/Municipality
+                  </option>
+                  <option *ngFor="let city of cityOptions" [value]="city.code">
+                    {{ city.name }}
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   *ngIf="studentForm.get('studentRequest.mother.address.city')?.errors?.['required']"
@@ -1717,6 +1758,39 @@
                   City/Municipality is required.
                 </div>
               </div>
+
+              <!-- Barangay Dropdown -->
+              <div class="col-md-6 mb-2">
+                <label class="form-label"
+                  >Barangay <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  formControlName="barangay"
+                  [class.is-invalid]="
+                    studentForm.get('studentRequest.mother.address.barangay')
+                      ?.invalid &&
+                    studentForm.get('studentRequest.mother.address.barangay')
+                      ?.touched
+                  "
+                >
+                  <option value="" disabled selected>Select Barangay</option>
+                  <option
+                    *ngFor="let barangay of barangayOptions"
+                    [value]="barangay.name"
+                  >
+                    {{ barangay.name }}
+                  </option>
+                </select>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.barangay')?.errors?.['required']"
+                >
+                  Barangay is required.
+                </div>
+              </div>
+
+              <!-- Zip Code (manual input or auto-fill based on city) -->
               <div class="col-md-6 mb-2">
                 <label class="form-label"
                   >Zip Code <span class="text-danger">*</span></label
@@ -1725,14 +1799,14 @@
                   type="text"
                   class="form-control"
                   formControlName="zipCode"
+                  (keypress)="isNumberKey($event)"
+                  (paste)="preventNonNumericPaste($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.zipCode')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.zipCode')
                       ?.touched
                   "
-                  (keypress)="isNumberKey($event)"
-                  (paste)="preventNonNumericPaste($event)"
                   placeholder="e.g., 6000"
                 />
                 <div
@@ -1860,6 +1934,7 @@
               class="form-control mt-2"
               *ngIf="othersSelected"
               [(ngModel)]="othersText"
+              formControlName="otherNatureOfResidence"
               (ngModelChange)="updateOthers()"
               placeholder="Specify other type of residence"
             />
@@ -1867,20 +1942,19 @@
         </div>
 
         <div class="col-md-6">
-  <label class="form-label mb-2">Parents' Marital Status</label>
-  <div *ngFor="let status of parentsMaritalStatusOptions">
-    <label class="form-check d-flex align-items-center gap-2">
-      <input
-        type="checkbox"
-        class="form-check-input"
-        [checked]="selectedMaritalStatus === status"
-        (change)="onMaritalStatusCheckboxChange(status)"
-      />
-      {{ status }}
-    </label>
-  </div>
-</div>
-
+          <label class="form-label mb-2">Parents' Marital Status</label>
+          <div *ngFor="let status of parentsMaritalStatusOptions">
+            <label class="form-check d-flex align-items-center gap-2">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [checked]="selectedMaritalStatus === status"
+                (change)="onMaritalStatusCheckboxChange(status)"
+              />
+              {{ status }}
+            </label>
+          </div>
+        </div>
       </div>
 
       <!-- Ordinal Position & Employed Siblings -->
@@ -1893,12 +1967,23 @@
             id="ordinalPosition"
             class="form-select"
             formControlName="ordinalPosition"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.family.ordinalPosition')
+                ?.invalid &&
+              studentForm.get('studentRequest.family.ordinalPosition')?.touched
+            "
           >
             <option value="" disabled selected>Select ordinal position</option>
             <option *ngFor="let pos of ordinalPositions" [value]="pos">
               {{ pos }}
             </option>
           </select>
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.family.ordinalPosition')?.errors?.['required']"
+          >
+            Ordinal Position is required.
+          </div>
         </div>
 
         <!-- Siblings Count Input -->
@@ -1915,7 +2000,17 @@
             #siblingsInput
             (input)="generateSiblingFields(siblingsInput.value)"
             placeholder="Enter number of siblings"
+            [class.is-invalid]="
+              studentForm.get('studentRequest.family.siblingsCount')?.invalid &&
+              studentForm.get('studentRequest.family.siblingsCount')?.touched
+            "
           />
+          <div
+            class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.family.siblingsCount')?.errors?.['required']"
+          >
+            Number of Siblings is required.
+          </div>
         </div>
 
         <!-- Siblings Input Fields -->
@@ -2000,6 +2095,15 @@
               (ngModelChange)="updateEducationSponsor()"
             />
           </div>
+        </div>
+        <div
+          class="text-danger small mt-1"
+          *ngIf="
+    studentForm.get('studentRequest.family.educationSponsor')?.errors?.['required'] &&
+    studentForm.get('studentRequest.family.educationSponsor')?.touched
+  "
+        >
+          Please select at least one sponsor.
         </div>
       </div>
 
