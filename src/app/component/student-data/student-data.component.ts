@@ -588,7 +588,7 @@ yearOfDeathOptions: number[] = Array.from({ length: new Date().getFullYear() - 1
       studentRequest: this.fb.group({
         lrn: ['', Validators.required],
         studentType: ['', Validators.required],
-        lastSchoolAttended: ['', Validators.required],
+        lastSchoolAttended: [''],
         yearLevel: ['', Validators.required],
         campus: ['', Validators.required],
         course: ['', Validators.required],
@@ -643,8 +643,8 @@ yearOfDeathOptions: number[] = Array.from({ length: new Date().getFullYear() - 1
           birthDate: ['', Validators.required],
           citizenship: ['', Validators.required],
           occupation: ['', Validators.required],
-          causeOfDeath: ['', Validators.required],
-          yearOfDeath: ['', Validators.required],
+          causeOfDeath: [''],
+          yearOfDeath: [''],
           address: this.fb.group({
             street: ['', Validators.required],
             barangay: ['', Validators.required],
@@ -688,10 +688,10 @@ yearOfDeathOptions: number[] = Array.from({ length: new Date().getFullYear() - 1
           parentsMaritalStatus: ['', Validators.required],
           ordinalPosition: ['',Validators.required],
           siblings: this.fb.array([]),
-          siblingsCount: [0,Validators.required], // this is optional if you want to trigger the generation
+          siblingsCount: [0], // this is optional if you want to trigger the generation
           educationSponsor: ['',Validators.required],
           otherSponsor:[''],
-          weeklyAllowance: ['',Validators.required],
+          weeklyAllowance: [''],
           firstGenerationStudent: [false],
           memberOfIndigenousPeople: [false],
           memberOfIndigenousCulturalCommunity: [false],
@@ -700,7 +700,7 @@ yearOfDeathOptions: number[] = Array.from({ length: new Date().getFullYear() - 1
         }),
 
         educationBackground: this.fb.group({
-          studentType: ['', Validators.required],
+          studentType: [''],
           elementarySchool: ['', Validators.required],
           elementarySchoolAddress: ['', Validators.required],
           yearGraduatedElementarySchool: ['', Validators.required],

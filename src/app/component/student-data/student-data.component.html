@@ -13,168 +13,101 @@
       <div class="row gy-4 gx-3">
         <!-- LRN -->
         <div class="col-md-4">
-          <label class="form-label"
-            >Learner's Reference Number (LRN)
-            <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            class="form-control"
-            formControlName="lrn"
-            placeholder="Enter LRN"
-            (keypress)="isNumberKey($event)"
-            (paste)="preventNonNumericPaste($event)"
+          <label class="form-label">Learner's Reference Number (LRN)
+            <span class="text-danger">*</span></label>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="lrn" class="form-control" formControlName="lrn"
+            placeholder="Enter LRN" (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)"
             [class.is-invalid]="
               studentForm.get('studentRequest.lrn')?.invalid &&
               studentForm.get('studentRequest.lrn')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.lrn')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.lrn')?.errors?.['required']">
             LRN is required.
           </div>
         </div>
 
         <!-- Year Level -->
         <div class="col-md-4">
-          <label for="yearLevel" class="form-label"
-            >Year Level <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="yearLevel"
-            formControlName="yearLevel"
-            [class.is-invalid]="
+          <label for="yearLevel" class="form-label">Year Level <span class="text-danger">*</span></label>
+          <select class="form-select" id="yearLevel" formControlName="yearLevel" [class.is-invalid]="
               studentForm.get('studentRequest.yearLevel')?.invalid &&
               studentForm.get('studentRequest.yearLevel')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select year level</option>
             <option *ngFor="let year of yearLevels" [value]="year.value">
               {{ year.label }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.yearLevel')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.yearLevel')?.errors?.['required']">
             Year level is required.
           </div>
         </div>
 
         <!-- Campus -->
         <div class="col-md-4">
-          <label for="campus" class="form-label"
-            >Campus <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="campus"
-            formControlName="campus"
-            [class.is-invalid]="
+          <label for="campus" class="form-label">Campus <span class="text-danger">*</span></label>
+          <select class="form-select" id="campus" formControlName="campus" [class.is-invalid]="
               studentForm.get('studentRequest.campus')?.invalid &&
               studentForm.get('studentRequest.campus')?.touched
-            "
-          >
+            ">
             <option value="" disabled>Select Campus</option>
-            <option
-              *ngFor="
+            <option *ngFor="
                 let campus of [
                   'Talisay',
                   'Alijis',
                   'Fortune Towne',
                   'Binalbagan'
                 ]
-              "
-              [value]="campus"
-            >
+              " [value]="campus">
               {{ campus }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.campus')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.campus')?.errors?.['required']">
             Campus is required.
           </div>
         </div>
 
         <!-- Course -->
         <div class="col-6">
-          <label for="course" class="form-label"
-            >Course <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="course"
-            formControlName="course"
-            [class.is-invalid]="
+          <label for="course" class="form-label">Course <span class="text-danger">*</span></label>
+          <select class="form-select" id="course" formControlName="course" [class.is-invalid]="
               studentForm.get('studentRequest.course')?.invalid &&
               studentForm.get('studentRequest.course')?.touched
-            "
-          >
+            ">
             <option value="" disabled>Select Course</option>
             <option *ngFor="let item of filteredCourses" [value]="item.course">
               {{ item.course }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.course')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.course')?.errors?.['required']">
             Course is required.
           </div>
         </div>
         <!-- Date Admitted -->
         <div class="col-6">
-          <label for="dateAdmitted" class="form-label"
-            >Date Admitted <span class="text-danger">*</span></label
-          >
-          <input
-            type="date"
-            class="form-control"
-            id="dateAdmitted"
-            formControlName="dateAdmitted"
-            [class.is-invalid]="
+          <label for="dateAdmitted" class="form-label">Date Admitted <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" id="dateAdmitted" formControlName="dateAdmitted" [class.is-invalid]="
               studentForm.get('studentRequest.dateAdmitted')?.invalid &&
               studentForm.get('studentRequest.dateAdmitted')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.dateAdmitted')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.dateAdmitted')?.errors?.['required']">
             Date Admitted is required.
           </div>
         </div>
 
         <!-- Major (if shown) -->
         <div class="col-md-4" *ngIf="showMajorField">
-          <label for="major" class="form-label"
-            >Major <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="major"
-            formControlName="major"
-            [class.is-invalid]="
+          <label for="major" class="form-label">Major <span class="text-danger">*</span></label>
+          <select class="form-select" id="major" formControlName="major" [class.is-invalid]="
               studentForm.get('studentRequest.major')?.invalid &&
               studentForm.get('studentRequest.major')?.touched
-            "
-          >
+            ">
             <option value="" disabled>Select Major</option>
             <option *ngFor="let major of availableMajors" [value]="major">
               {{ major }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.major')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.major')?.errors?.['required']">
             Major is required.
           </div>
         </div>
@@ -191,82 +124,53 @@
             </label>
             <div class="d-flex flex-column gap-2">
               <div class="form-check" *ngFor="let type of studentTypes">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  [value]="type.value"
-                  formControlName="studentType"
-                  [id]="type.value"
-                />
+                <input class="form-check-input" type="radio" [value]="type.value" formControlName="studentType"
+                  [id]="type.value" />
                 <label class="form-check-label ms-1" [for]="type.value">
                   {{ type.label }}
                 </label>
               </div>
             </div>
-            <div
-              class="invalid-feedback d-block"
-              *ngIf="
+            <div class="invalid-feedback d-block" *ngIf="
                 studentForm.get('studentRequest.studentType')?.touched &&
                 studentForm.get('studentRequest.studentType')?.invalid
-              "
-            >
+              ">
               Student type is required.
             </div>
           </div>
 
           <!-- Last School Attended (only for SHIFTEE) -->
-          <div
-            class="col-md-4"
-            *ngIf="studentForm.get('studentType')?.value === 'SHIFTEE'"
-          >
+          <div class="col-md-4" *ngIf="studentForm.get('studentType')?.value === 'SHIFTEE'">
             <label class="form-label fw-semibold">
               Last School Attended <span class="text-danger">*</span>
             </label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="lastSchoolAttended"
-              placeholder="Previous School"
+            <input type="text" class="form-control" formControlName="lastSchoolAttended" placeholder="Previous School"
               [class.is-invalid]="
                 studentForm.get('studentRequest.lastSchoolAttended')?.invalid &&
                 studentForm.get('studentRequest.lastSchoolAttended')?.touched
-              "
-            />
-            <div
-              class="invalid-feedback d-block"
-              *ngIf="
+              " />
+            <div class="invalid-feedback d-block" *ngIf="
                 studentForm.get('studentRequest.lastSchoolAttended')?.touched &&
                 studentForm.get('studentRequest.lastSchoolAttended')?.invalid
-              "
-            >
+              ">
               Last School Attended is required.
             </div>
           </div>
 
           <!-- Last School Attended (only for SHIFTEE) -->
-          <div
-            class="col-md-4"
-            *ngIf="
+          <div class="col-md-4" *ngIf="
               studentForm.get('studentRequest.studentType')?.value === 'SHIFTEE'
-            "
-          >
+            ">
             <label class="form-label fw-semibold">
               Last School Attended <span class="text-danger">*</span>
             </label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="lastSchoolAttended"
-              placeholder="Previous School"
+            <input type="text" class="form-control" formControlName="lastSchoolAttended" placeholder="Previous School"
               [class.is-invalid]="
                 studentForm.get('studentRequest.lastSchoolAttended')?.invalid &&
                 studentForm.get('studentRequest.lastSchoolAttended')?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.lastSchoolAttended')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.lastSchoolAttended')?.errors?.['required']">
               Last School Attended is required.
             </div>
           </div>
@@ -276,12 +180,7 @@
           <!-- Has a place to study -->
           <div class="col-md-4">
             <div class="form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="placeToStudy"
-                formControlName="placeToStudy"
-              />
+              <input type="checkbox" class="form-check-input" id="placeToStudy" formControlName="placeToStudy" />
               <label class="form-check-label" for="placeToStudy">
                 Has a place to study
               </label>
@@ -291,12 +190,7 @@
           <!-- Room is shared with others -->
           <div class="col-md-4">
             <div class="form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="roomIsShared"
-                formControlName="roomIsShared"
-              />
+              <input type="checkbox" class="form-check-input" id="roomIsShared" formControlName="roomIsShared" />
               <label class="form-check-label" for="roomIsShared">
                 Room is shared with others
               </label>
@@ -306,16 +200,9 @@
           <!-- Willing to discuss with Guidance Counselor -->
           <div class="col-md-4">
             <div class="form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="discussWithGuidanceCounselor"
-                formControlName="discussWithGuidanceCounselor"
-              />
-              <label
-                class="form-check-label"
-                for="discussWithGuidanceCounselor"
-              >
+              <input type="checkbox" class="form-check-input" id="discussWithGuidanceCounselor"
+                formControlName="discussWithGuidanceCounselor" />
+              <label class="form-check-label" for="discussWithGuidanceCounselor">
                 Willing to discuss with Guidance Counselor
               </label>
             </div>
@@ -327,12 +214,7 @@
           <!-- Is PWD Checkbox -->
           <div class="col-md-6">
             <div class="form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="isPwd"
-                formControlName="isPwd"
-              />
+              <input type="checkbox" class="form-check-input" id="isPwd" formControlName="isPwd" />
               <label class="form-check-label fw-semibold ms-1" for="isPwd">
                 Person with Disability (PWD)?
               </label>
@@ -340,31 +222,17 @@
           </div>
 
           <!-- PWD Details Input -->
-          <div
-            class="col-md-6"
-            *ngIf="studentForm.get('studentRequest.isPwd')?.value"
-          >
+          <div class="col-md-6" *ngIf="studentForm.get('studentRequest.isPwd')?.value">
             <label for="pwdDetails" class="form-label fw-semibold mb-1">
               Specify PWD Details
-              <span class="text-muted fw-normal ms-1"
-                >(e.g., visual impairment)</span
-              >
+              <span class="text-muted fw-normal ms-1">(e.g., visual impairment)</span>
             </label>
-            <input
-              type="text"
-              class="form-control"
-              id="pwdDetails"
-              formControlName="pwdDetails"
-              placeholder="Enter PWD details"
-              [class.is-invalid]="
+            <input type="text" class="form-control" id="pwdDetails" formControlName="pwdDetails"
+              placeholder="Enter PWD details" [class.is-invalid]="
                 studentForm.get('studentRequest.pwdDetails')?.invalid &&
                 studentForm.get('studentRequest.pwdDetails')?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.pwdDetails')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.pwdDetails')?.errors?.['required']">
               PWD details are required.
             </div>
           </div>
@@ -374,65 +242,34 @@
         <!-- Semester - Full Row -->
         <div class="col-6">
           <label for="semester" class="form-label">Semester</label>
-          <input
-            type="text"
-            class="form-control bg-light"
-            id="semester"
-            formControlName="semester"
-            readonly
-          />
+          <input type="text" class="form-control bg-light" id="semester" formControlName="semester" readonly />
         </div>
 
         <!-- Academic Year - Full Row -->
         <div class="col-6">
           <label for="academicYear" class="form-label">Academic Year</label>
-          <input
-            type="text"
-            class="form-control bg-light"
-            id="academicYear"
-            formControlName="academicYear"
-            readonly
-          />
+          <input type="text" class="form-control bg-light" id="academicYear" formControlName="academicYear" readonly />
         </div>
 
         <!-- Educational Needs -->
         <div class="col-md-6">
-          <label for="educationalNeeds" class="form-label"
-            >Educational Needs</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="educationalNeeds"
-            formControlName="educationalNeeds"
-            placeholder="Specify any educational needs"
-          />
+          <label for="educationalNeeds" class="form-label">Educational Needs</label>
+          <input type="text" class="form-control" id="educationalNeeds" formControlName="educationalNeeds"
+            placeholder="Specify any educational needs" />
         </div>
 
         <!-- Consulted Psychologist -->
         <div class="col-md-6">
-          <label for="consultedPsych" class="form-label"
-            >Consulted Psychologist / Diagnosis</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="consultedPsych"
-            formControlName="consultedPsych"
-            placeholder="Enter diagnosis or psychologist name"
-          />
+          <label for="consultedPsych" class="form-label">Consulted Psychologist / Diagnosis</label>
+          <input type="text" class="form-control" id="consultedPsych" formControlName="consultedPsych"
+            placeholder="Enter diagnosis or psychologist name" />
         </div>
 
         <!-- Concerns -->
         <div class="col-12">
           <label for="concerns" class="form-label">Concerns</label>
-          <textarea
-            class="form-control"
-            id="concerns"
-            rows="3"
-            formControlName="concerns"
-            placeholder="List any academic, personal, or emotional concerns..."
-          ></textarea>
+          <textarea class="form-control" id="concerns" rows="3" formControlName="concerns"
+            placeholder="List any academic, personal, or emotional concerns..."></textarea>
         </div>
       </div>
     </fieldset>
@@ -445,198 +282,111 @@
       <div class="row g-3">
         <!-- Full Name -->
         <div class="col-md-4">
-          <label for="firstName" class="form-label fw-semibold"
-            >First Name <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="firstName"
-            formControlName="firstName"
-            placeholder="FIRST NAME"
+          <label for="firstName" class="form-label fw-semibold">First Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="FIRST NAME"
             [class.is-invalid]="
               studentForm.get('studentRequest.firstName')?.invalid &&
               studentForm.get('studentRequest.firstName')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.firstName')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.firstName')?.errors?.['required']">
             First name is required.
           </div>
         </div>
 
         <div class="col-md-4">
-          <label for="middleName" class="form-label fw-semibold"
-            >Middle Name</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="middleName"
-            formControlName="middleName"
-            placeholder="Middle name"
-          />
+          <label for="middleName" class="form-label fw-semibold">Middle Name</label>
+          <input type="text" class="form-control" id="middleName" formControlName="middleName"
+            placeholder="Middle name" />
         </div>
 
         <div class="col-md-4">
-          <label for="lastName" class="form-label fw-semibold"
-            >Last Name <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="lastName"
-            formControlName="lastName"
-            placeholder="LAST NAME"
+          <label for="lastName" class="form-label fw-semibold">Last Name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="LAST NAME"
             [class.is-invalid]="
               studentForm.get('studentRequest.lastName')?.invalid &&
               studentForm.get('studentRequest.lastName')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.lastName')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.lastName')?.errors?.['required']">
             Last name is required.
           </div>
         </div>
 
         <!-- Extension Name, Birth Date, Birth Place -->
         <div class="col-md-4">
-          <label for="extensionName" class="form-label fw-semibold"
-            >Extension Name</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="extensionName"
-            formControlName="extensionName"
-            placeholder="e.g., Jr., Sr."
-          />
+          <label for="extensionName" class="form-label fw-semibold">Extension Name</label>
+          <input type="text" class="form-control" id="extensionName" formControlName="extensionName"
+            placeholder="e.g., Jr., Sr." />
         </div>
 
         <div class="col-md-4">
-          <label for="birthDate" class="form-label fw-semibold"
-            >Birth Date <span class="text-danger">*</span></label
-          >
-          <input
-            type="date"
-            class="form-control"
-            id="birthDate"
-            formControlName="birthDate"
-            [class.is-invalid]="
+          <label for="birthDate" class="form-label fw-semibold">Birth Date <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" id="birthDate" formControlName="birthDate" [class.is-invalid]="
               studentForm.get('studentRequest.birthDate')?.invalid &&
               studentForm.get('studentRequest.birthDate')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.birthDate')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.birthDate')?.errors?.['required']">
             Birth Date is required.
           </div>
         </div>
 
         <div class="col-md-4">
-          <label for="birthPlace" class="form-label fw-semibold"
-            >Birth Place <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="birthPlace"
-            formControlName="birthPlace"
-            placeholder="e.g., Bacolod City, Negros Occidental"
-            [class.is-invalid]="
+          <label for="birthPlace" class="form-label fw-semibold">Birth Place <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="birthPlace" formControlName="birthPlace"
+            placeholder="e.g., Bacolod City, Negros Occidental" [class.is-invalid]="
               studentForm.get('studentRequest.birthPlace')?.invalid &&
               studentForm.get('studentRequest.birthPlace')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.birthPlace')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.birthPlace')?.errors?.['required']">
             Birth Place is required.
           </div>
         </div>
 
         <!-- Gender & Civil Status -->
         <div class="col-md-6">
-          <label for="gender" class="form-label fw-semibold"
-            >Sexual Orientation <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="gender"
-            formControlName="gender"
-            (change)="onGenderChange()"
+          <label for="gender" class="form-label fw-semibold">Sexual Orientation <span
+              class="text-danger">*</span></label>
+          <select class="form-select" id="gender" formControlName="gender" (change)="onGenderChange()"
             [class.is-invalid]="
               studentForm.get('studentRequest.gender')?.invalid &&
               studentForm.get('studentRequest.gender')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select your orientation</option>
             <option *ngFor="let option of sexualOrientations" [value]="option">
               {{ option }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.gender')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.gender')?.errors?.['required']">
             Sexual orientation is required.
           </div>
 
           <!-- Others Field -->
           <div class="mt-2" *ngIf="isOtherGenderSelected">
-            <label for="otherGender" class="form-label fw-semibold"
-              >Please specify</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="otherGender"
-              formControlName="otherGender"
-              placeholder="Enter your orientation"
-              [class.is-invalid]="
+            <label for="otherGender" class="form-label fw-semibold">Please specify</label>
+            <input type="text" class="form-control" id="otherGender" formControlName="otherGender"
+              placeholder="Enter your orientation" [class.is-invalid]="
                 studentForm.get('studentRequest.otherGender')?.invalid &&
                 studentForm.get('studentRequest.otherGender')?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.otherGender')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.otherGender')?.errors?.['required']">
               This field is required when 'Others' is selected.
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
-          <label for="civilStatus" class="form-label fw-semibold"
-            >Civil Status <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="civilStatus"
-            formControlName="civilStatus"
-            [class.is-invalid]="
+          <label for="civilStatus" class="form-label fw-semibold">Civil Status <span
+              class="text-danger">*</span></label>
+          <select class="form-select" id="civilStatus" formControlName="civilStatus" [class.is-invalid]="
               studentForm.get('studentRequest.civilStatus')?.invalid &&
               studentForm.get('studentRequest.civilStatus')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select status</option>
             <option value="Single">Single</option>
             <option value="Married">Married</option>
             <option value="Widowed">Widowed</option>
             <option value="Divorced">Divorced</option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.civilStatus')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.civilStatus')?.errors?.['required']">
             Civil Status is required.
           </div>
         </div>
@@ -646,24 +396,16 @@
           <label for="height" class="form-label fw-semibold">
             Height (cm) <span class="text-danger">*</span>
           </label>
-          <select
-            class="form-select"
-            id="height"
-            formControlName="height"
-            [class.is-invalid]="
+          <select class="form-select" id="height" formControlName="height" [class.is-invalid]="
               studentForm.get('studentRequest.height')?.invalid &&
               studentForm.get('studentRequest.height')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select height</option>
             <option *ngFor="let h of heightOptions" [value]="h">
               {{ h }} cm
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.height')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.height')?.errors?.['required']">
             Height is required.
           </div>
         </div>
@@ -672,80 +414,45 @@
           <label for="weight" class="form-label fw-semibold">
             Weight (kg) <span class="text-danger">*</span>
           </label>
-          <select
-            class="form-select"
-            id="weight"
-            formControlName="weight"
-            [class.is-invalid]="
+          <select class="form-select" id="weight" formControlName="weight" [class.is-invalid]="
               studentForm.get('studentRequest.weight')?.invalid &&
               studentForm.get('studentRequest.weight')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select weight</option>
             <option *ngFor="let w of weightOptions" [value]="w">
               {{ w }} kg
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.weight')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.weight')?.errors?.['required']">
             Weight is required.
           </div>
         </div>
 
         <!-- Contact Information -->
         <div class="col-md-6">
-          <label for="emailAddress" class="form-label fw-semibold"
-            >Email Address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="emailAddress"
-            formControlName="emailAddress"
-            placeholder="e.g., sample@example.com"
-            [class.is-invalid]="
+          <label for="emailAddress" class="form-label fw-semibold">Email Address</label>
+          <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress"
+            placeholder="e.g., sample@example.com" [class.is-invalid]="
               studentForm.get('studentRequest.emailAddress')?.invalid &&
               studentForm.get('studentRequest.emailAddress')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['email']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.emailAddress')?.errors?.['email']">
             Please enter a valid email address.
           </div>
         </div>
 
         <div class="col-md-6">
-          <label for="mobileNumber" class="form-label fw-semibold"
-            >Mobile Number</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="mobileNumber"
-            formControlName="mobileNumber"
-            maxlength="11"
-            (keypress)="isNumberKey($event)"
-            (paste)="preventNonNumericPaste($event)"
-            placeholder="e.g., 09123456789"
+          <label for="mobileNumber" class="form-label fw-semibold">Mobile Number</label>
+          <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber" maxlength="11"
+            (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" placeholder="e.g., 09123456789"
             [class.is-invalid]="
               studentForm.get('studentRequest.mobileNumber')?.invalid &&
               studentForm.get('studentRequest.mobileNumber')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['pattern']"
-          >
+            " />
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['pattern']">
             Mobile number must start with 09 and be exactly 11 digits.
           </div>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['maxlength']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.mobileNumber')?.errors?.['maxlength']">
             Maximum of 11 digits allowed.
           </div>
         </div>
@@ -755,24 +462,16 @@
           <label for="citizenship" class="form-label fw-semibold">
             Citizenship <span class="text-danger">*</span>
           </label>
-          <select
-            class="form-select"
-            id="citizenship"
-            formControlName="citizenship"
-            [class.is-invalid]="
+          <select class="form-select" id="citizenship" formControlName="citizenship" [class.is-invalid]="
               studentForm.get('studentRequest.citizenship')?.invalid &&
               studentForm.get('studentRequest.citizenship')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select citizenship</option>
             <option *ngFor="let c of citizenshipOptions" [value]="c">
               {{ c }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.citizenship')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.citizenship')?.errors?.['required']">
             Citizenship is required.
           </div>
         </div>
@@ -781,24 +480,16 @@
           <label for="religion" class="form-label fw-semibold">
             Religion <span class="text-danger">*</span>
           </label>
-          <select
-            class="form-select"
-            id="religion"
-            formControlName="religion"
-            [class.is-invalid]="
+          <select class="form-select" id="religion" formControlName="religion" [class.is-invalid]="
               studentForm.get('studentRequest.religion')?.invalid &&
               studentForm.get('studentRequest.religion')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select religion</option>
             <option *ngFor="let r of religionOptions" [value]="r">
               {{ r }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.religion')?.errors?.['required']"
-          >
+          <div class="invalid-feedback" *ngIf="studentForm.get('studentRequest.religion')?.errors?.['required']">
             Religion is required.
           </div>
         </div>
@@ -806,10 +497,7 @@
     </fieldset>
 
     <!-- Address -->
-    <fieldset
-      formGroupName="address"
-      class="border rounded p-4 mt-4 shadow-sm bg-light-subtle"
-    >
+    <fieldset formGroupName="address" class="border rounded p-4 mt-4 shadow-sm bg-light-subtle">
       <legend class="float-none w-auto px-3 text-secondary fw-semibold">
         Home Address
       </legend>
@@ -818,25 +506,14 @@
         <!-- Street (Optional) -->
         <div class="col-md-6 col-lg-4">
           <label for="street" class="form-label">Street</label>
-          <input
-            type="text"
-            class="form-control"
-            id="street"
-            formControlName="street"
-            placeholder="e.g., Lot 1 Block 12"
-          />
+          <input type="text" class="form-control" id="street" formControlName="street"
+            placeholder="e.g., Lot 1 Block 12" />
         </div>
 
         <!-- Region -->
         <div class="col-md-6 col-lg-4">
-          <label class="form-label"
-            >Region <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            formControlName="region"
-            (change)="onRegionChange($event)"
-          >
+          <label class="form-label">Region <span class="text-danger">*</span></label>
+          <select class="form-select" formControlName="region" (change)="onRegionChange($event)">
             <option value="" disabled selected>Select Region</option>
             <option *ngFor="let region of regionOptions" [value]="region.code">
               {{ region.name }}
@@ -846,19 +523,10 @@
 
         <!-- Province -->
         <div class="col-md-6 col-lg-4">
-          <label class="form-label"
-            >Province <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            formControlName="province"
-            (change)="onProvinceChange($event)"
-          >
+          <label class="form-label">Province <span class="text-danger">*</span></label>
+          <select class="form-select" formControlName="province" (change)="onProvinceChange($event)">
             <option value="" disabled selected>Select Province</option>
-            <option
-              *ngFor="let province of provinceOptions"
-              [value]="province.code"
-            >
+            <option *ngFor="let province of provinceOptions" [value]="province.code">
               {{ province.name }}
             </option>
           </select>
@@ -866,14 +534,8 @@
 
         <!-- City/Municipality -->
         <div class="col-md-6 col-lg-4">
-          <label class="form-label"
-            >City/Municipality <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            formControlName="city"
-            (change)="onCityChange($event)"
-          >
+          <label class="form-label">City/Municipality <span class="text-danger">*</span></label>
+          <select class="form-select" formControlName="city" (change)="onCityChange($event)">
             <option value="" disabled selected>Select City/Municipality</option>
             <option *ngFor="let city of cityOptions" [value]="city.code">
               {{ city.name }}
@@ -883,9 +545,7 @@
 
         <!-- Barangay -->
         <div class="col-md-6 col-lg-4">
-          <label class="form-label"
-            >Barangay <span class="text-danger">*</span></label
-          >
+          <label class="form-label">Barangay <span class="text-danger">*</span></label>
           <select class="form-select" formControlName="barangay">
             <option value="" disabled selected>Select Barangay</option>
             <option *ngFor="let brgy of barangayOptions" [value]="brgy.name">
@@ -897,15 +557,8 @@
         <!-- Zip Code (Optional) -->
         <div class="col-md-6 col-lg-4">
           <label for="zipCode" class="form-label">Zip Code</label>
-          <input
-            type="text"
-            class="form-control"
-            id="zipCode"
-            formControlName="zipCode"
-            (keypress)="isNumberKey($event)"
-            (paste)="preventNonNumericPaste($event)"
-            placeholder="e.g., 6100"
-          />
+          <input type="text" class="form-control" id="zipCode" formControlName="zipCode"
+            (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" placeholder="e.g., 6100" />
         </div>
       </div>
     </fieldset>
@@ -920,76 +573,44 @@
 
           <div class="row g-2 mb-3">
             <div class="col-md-6">
-              <label class="form-label"
-                >FIRST NAME <span class="text-danger">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="firstName"
-                placeholder="FIRST NAME"
+              <label class="form-label">FIRST NAME <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="firstName" placeholder="FIRST NAME"
                 [class.is-invalid]="
                   studentForm.get('studentRequest.father.firstName')?.invalid &&
                   studentForm.get('studentRequest.father.firstName')?.touched
-                "
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.father.firstName')?.errors?.['required']"
-              >
+                " />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.father.firstName')?.errors?.['required']">
                 FIRST NAME is required.
               </div>
             </div>
 
             <div class="col-md-6">
               <label class="form-label">Middle name</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="middleName"
-                placeholder="Middle name"
-              />
+              <input type="text" class="form-control" formControlName="middleName" placeholder="Middle name" />
             </div>
 
             <div class="col-md-6">
-              <label class="form-label"
-                >LAST NAME <span class="text-danger">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="lastName"
-                placeholder="LAST NAME"
+              <label class="form-label">LAST NAME <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="lastName" placeholder="LAST NAME"
                 [class.is-invalid]="
                   studentForm.get('studentRequest.father.lastName')?.invalid &&
                   studentForm.get('studentRequest.father.lastName')?.touched
-                "
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.father.lastName')?.errors?.['required']"
-              >
+                " />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.father.lastName')?.errors?.['required']">
                 LAST NAME is required.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label class="form-label"
-                >Birth Date <span class="text-danger">*</span></label
-              >
-              <input
-                type="date"
-                class="form-control"
-                formControlName="birthDate"
-                [class.is-invalid]="
+              <label class="form-label">Birth Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control" formControlName="birthDate" [class.is-invalid]="
                   studentForm.get('studentRequest.father.birthDate')?.invalid &&
                   studentForm.get('studentRequest.father.birthDate')?.touched
-                "
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.father.birthDate')?.errors?.['required']"
-              >
+                " />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.father.birthDate')?.errors?.['required']">
                 Birth Date is required.
               </div>
             </div>
@@ -1016,35 +637,20 @@
 
             <div class="col-md-6">
               <label class="form-label">Mobile Number</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="mobileNumber"
-                placeholder="e.g., 09XXXXXXXXX"
-                maxlength="11"
-                (keypress)="isNumberKey($event)"
-                (paste)="preventNonNumericPaste($event)"
-              />
+              <input type="text" class="form-control" formControlName="mobileNumber" placeholder="e.g., 09XXXXXXXXX"
+                maxlength="11" (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" />
             </div>
 
             <div class="col-md-6">
               <label class="form-label">Birth Place</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="birthPlace"
-                placeholder="e.g., Cebu City"
-              />
+              <input type="text" class="form-control" formControlName="birthPlace" placeholder="e.g., Cebu City" />
             </div>
 
             <div class="col">
               <label class="form-label">Religion</label>
               <select class="form-select" formControlName="religion">
                 <option value="" disabled selected>Select religion</option>
-                <option
-                  *ngFor="let religion of religionOptions"
-                  [value]="religion"
-                >
+                <option *ngFor="let religion of religionOptions" [value]="religion">
                   {{ religion }}
                 </option>
               </select>
@@ -1052,23 +658,13 @@
           </div>
 
           <div class="mb-3">
-            <label class="form-label"
-              >Occupation <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="occupation"
-              [class.is-invalid]="
+            <label class="form-label">Occupation <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="occupation" [class.is-invalid]="
                 studentForm.get('studentRequest.father.occupation')?.invalid &&
                 studentForm.get('studentRequest.father.occupation')?.touched
-              "
-              placeholder="e.g., Farmer"
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.father.occupation')?.errors?.['required']"
-            >
+              " placeholder="e.g., Farmer" />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.father.occupation')?.errors?.['required']">
               Occupation is required.
             </div>
           </div>
@@ -1077,44 +673,32 @@
             <label class="form-label">
               Citizenship <span class="text-danger">*</span>
             </label>
-            <select
-              class="form-select"
-              formControlName="citizenship"
-              [class.is-invalid]="
+            <select class="form-select" formControlName="citizenship" [class.is-invalid]="
                 studentForm.get('studentRequest.father.citizenship')?.invalid &&
                 studentForm.get('studentRequest.father.citizenship')?.touched
-              "
-            >
+              ">
               <option value="" disabled selected>Select citizenship</option>
               <option *ngFor="let c of citizenshipOptions" [value]="c">
                 {{ c }}
               </option>
             </select>
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.father.citizenship')?.errors?.['required']"
-            >
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.father.citizenship')?.errors?.['required']">
               Citizenship is required.
             </div>
           </div>
 
           <div class="mb-4">
-            <label class="form-label"
-              >Highest Educational Attainment
-              <span class="text-danger">*</span></label
-            >
-            <select
-              class="form-select"
-              formControlName="highestEducationAttainment"
-              [class.is-invalid]="
+            <label class="form-label">Highest Educational Attainment
+              <span class="text-danger">*</span></label>
+            <select class="form-select" formControlName="highestEducationAttainment" [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.father.highestEducationAttainment'
                 )?.invalid &&
                 studentForm.get(
                   'studentRequest.father.highestEducationAttainment'
                 )?.touched
-              "
-            >
+              ">
               <option value="" disabled>Select education level</option>
               <option>No Formal Education</option>
               <option>Elementary Graduate</option>
@@ -1124,49 +708,34 @@
               <option>College Graduate</option>
               <option>Post Graduate</option>
             </select>
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.father.highestEducationAttainment')?.errors?.['required']"
-            >
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.father.highestEducationAttainment')?.errors?.['required']">
               This field is required.
             </div>
           </div>
 
           <!-- Life Status -->
           <div class="mb-3">
-            <label class="form-label"
-              >Life Status <span class="text-danger">*</span></label
-            >
-            <select
-              class="form-select"
-              formControlName="lifeStatus"
-              [class.is-invalid]="
+            <label class="form-label">Life Status <span class="text-danger">*</span></label>
+            <select class="form-select" formControlName="lifeStatus" [class.is-invalid]="
                 studentForm.get('studentRequest.father.lifeStatus')?.invalid &&
                 studentForm.get('studentRequest.father.lifeStatus')?.touched
-              "
-            >
+              ">
               <option value="" disabled>Select status</option>
-              <option value="ALIVE">Alive</option>
+              <option value="LIVING">Alive</option>
               <option value="DECEASED">Deceased</option>
             </select>
           </div>
 
           <!-- Cause & Year of Death - only if DECEASED -->
-          <div
-            class="row g-2"
-            *ngIf="
+          <div class="row g-2" *ngIf="
               studentForm.get('studentRequest.father.lifeStatus')?.value ===
               'DECEASED'
-            "
-          >
+            ">
             <div class="col-md-6 mb-2">
               <label class="form-label">Cause of Death</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="causeOfDeath"
-                placeholder="e.g., Illness, Accident"
-              />
+              <input type="text" class="form-control" formControlName="causeOfDeath"
+                placeholder="e.g., Illness, Accident" />
             </div>
             <div class="col-md-6 mb-2">
               <label class="form-label">Year of Death</label>
@@ -1185,109 +754,71 @@
             <div class="row g-2">
               <!-- Street remains a text input -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Street <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="street"
-                  placeholder="e.g., Lot 1 Block 12"
+                <label class="form-label">Street <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="street" placeholder="e.g., Lot 1 Block 12"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.street')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.street')
                       ?.touched
-                  "
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.street')?.errors?.['required']"
-                >
+                  " />
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.street')?.errors?.['required']">
                   Street is required.
                 </div>
               </div>
 
               <!-- Region Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Region <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="region"
-                  (change)="onRegionChange($event)"
+                <label class="form-label">Region <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="region" (change)="onRegionChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.region')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.region')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>Select Region</option>
-                  <option
-                    *ngFor="let region of regionOptions"
-                    [value]="region.code"
-                  >
+                  <option *ngFor="let region of regionOptions" [value]="region.code">
                     {{ region.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.region')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.region')?.errors?.['required']">
                   Region is required.
                 </div>
               </div>
 
               <!-- Province Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Province <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="province"
-                  (change)="onProvinceChange($event)"
+                <label class="form-label">Province <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="province" (change)="onProvinceChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.province')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.province')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>Select Province</option>
-                  <option
-                    *ngFor="let province of provinceOptions"
-                    [value]="province.code"
-                  >
+                  <option *ngFor="let province of provinceOptions" [value]="province.code">
                     {{ province.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.province')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.province')?.errors?.['required']">
                   Province is required.
                 </div>
               </div>
 
               <!-- City/Municipality Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >City/Municipality <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="city"
-                  (change)="onCityChange($event)"
-                  [class.is-invalid]="
+                <label class="form-label">City/Municipality <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="city" (change)="onCityChange($event)" [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.city')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.city')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>
                     Select City/Municipality
                   </option>
@@ -1295,67 +826,43 @@
                     {{ city.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.city')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.city')?.errors?.['required']">
                   City/Municipality is required.
                 </div>
               </div>
 
               <!-- Barangay Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Barangay <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="barangay"
-                  [class.is-invalid]="
+                <label class="form-label">Barangay <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="barangay" [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.barangay')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.barangay')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>Select Barangay</option>
-                  <option
-                    *ngFor="let barangay of barangayOptions"
-                    [value]="barangay.name"
-                  >
+                  <option *ngFor="let barangay of barangayOptions" [value]="barangay.name">
                     {{ barangay.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.barangay')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.barangay')?.errors?.['required']">
                   Barangay is required.
                 </div>
               </div>
 
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Zip Code <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="zipCode"
-                  placeholder="e.g., 4114"
-                  (keypress)="isNumberKey($event)"
-                  (paste)="preventNonNumericPaste($event)"
-                  [class.is-invalid]="
+                <label class="form-label">Zip Code <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="zipCode" placeholder="e.g., 4114"
+                  (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" [class.is-invalid]="
                     studentForm.get('studentRequest.father.address.zipCode')
                       ?.invalid &&
                     studentForm.get('studentRequest.father.address.zipCode')
                       ?.touched
-                  "
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.father.address.zipCode')?.errors?.['required']"
-                >
+                  " />
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.father.address.zipCode')?.errors?.['required']">
                   Zip Code is required.
                 </div>
               </div>
@@ -1373,107 +880,60 @@
 
           <div class="row g-2 mb-3">
             <div class="col-md-6">
-              <label class="form-label"
-                >FIRST NAME <span class="text-danger">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="firstName"
-                [class.is-invalid]="
+              <label class="form-label">FIRST NAME <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="firstName" [class.is-invalid]="
                   studentForm.get('studentRequest.mother.firstName')?.invalid &&
                   studentForm.get('studentRequest.mother.firstName')?.touched
-                "
-                placeholder="FIRST NAME"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.mother.firstName')?.errors?.['required']"
-              >
+                " placeholder="FIRST NAME" />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.mother.firstName')?.errors?.['required']">
                 FIRST NAME is required.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label class="form-label"
-                >Middle name <span class="text-danger">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="middleName"
-                [class.is-invalid]="
+              <label class="form-label">Middle name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="middleName" [class.is-invalid]="
                   studentForm.get('studentRequest.mother.middleName')
                     ?.invalid &&
                   studentForm.get('studentRequest.mother.middleName')?.touched
-                "
-                placeholder="Middle name"
-              />
+                " placeholder="Middle name" />
               <div class="invalid-feedback">Middle name is required.</div>
             </div>
 
             <div class="col-md-6">
-              <label class="form-label"
-                >LAST NAME <span class="text-danger">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="lastName"
-                [class.is-invalid]="
+              <label class="form-label">LAST NAME <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="lastName" [class.is-invalid]="
                   studentForm.get('studentRequest.mother.lastName')?.invalid &&
                   studentForm.get('studentRequest.mother.lastName')?.touched
-                "
-                placeholder="LAST NAME"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.mother.lastName')?.errors?.['required']"
-              >
+                " placeholder="LAST NAME" />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.mother.lastName')?.errors?.['required']">
                 LAST NAME is required.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label class="form-label"
-                >Occupation <span class="text-danger">*</span></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="occupation"
-                [class.is-invalid]="
+              <label class="form-label">Occupation <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="occupation" [class.is-invalid]="
                   studentForm.get('studentRequest.mother.occupation')
                     ?.invalid &&
                   studentForm.get('studentRequest.mother.occupation')?.touched
-                "
-                placeholder="e.g., Teacher, OFW"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.mother.occupation')?.errors?.['required']"
-              >
+                " placeholder="e.g., Teacher, OFW" />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.mother.occupation')?.errors?.['required']">
                 Occupation is required.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label class="form-label"
-                >Birth Date <span class="text-danger">*</span></label
-              >
-              <input
-                type="date"
-                class="form-control"
-                formControlName="birthDate"
-                [class.is-invalid]="
+              <label class="form-label">Birth Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control" formControlName="birthDate" [class.is-invalid]="
                   studentForm.get('studentRequest.mother.birthDate')?.invalid &&
                   studentForm.get('studentRequest.mother.birthDate')?.touched
-                "
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="studentForm.get('studentRequest.mother.birthDate')?.errors?.['required']"
-              >
+                " />
+              <div class="invalid-feedback"
+                *ngIf="studentForm.get('studentRequest.mother.birthDate')?.errors?.['required']">
                 Birth date is required.
               </div>
             </div>
@@ -1490,35 +950,20 @@
 
             <div class="col-md-6">
               <label class="form-label">Mobile Number</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="mobileNumber"
-                placeholder="e.g., 09123456789"
-                maxlength="11"
-                (keypress)="isNumberKey($event)"
-                (paste)="preventNonNumericPaste($event)"
-              />
+              <input type="text" class="form-control" formControlName="mobileNumber" placeholder="e.g., 09123456789"
+                maxlength="11" (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" />
             </div>
 
             <div class="col-md-6">
               <label class="form-label">Birth Place</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="birthPlace"
-                placeholder="e.g., Cebu City"
-              />
+              <input type="text" class="form-control" formControlName="birthPlace" placeholder="e.g., Cebu City" />
             </div>
 
             <div class="col">
               <label class="form-label">Religion</label>
               <select class="form-select" formControlName="religion">
                 <option value="" disabled selected>Select religion</option>
-                <option
-                  *ngFor="let religion of religionOptions"
-                  [value]="religion"
-                >
+                <option *ngFor="let religion of religionOptions" [value]="religion">
                   {{ religion }}
                 </option>
               </select>
@@ -1529,66 +974,44 @@
             <label class="form-label">
               Citizenship <span class="text-danger">*</span>
             </label>
-            <select
-              class="form-select"
-              formControlName="citizenship"
-              [class.is-invalid]="
+            <select class="form-select" formControlName="citizenship" [class.is-invalid]="
                 studentForm.get('studentRequest.mother.citizenship')?.invalid &&
                 studentForm.get('studentRequest.mother.citizenship')?.touched
-              "
-            >
+              ">
               <option value="" disabled selected>Select citizenship</option>
               <option *ngFor="let c of citizenshipOptions" [value]="c">
                 {{ c }}
               </option>
             </select>
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.mother.citizenship')?.errors?.['required']"
-            >
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.mother.citizenship')?.errors?.['required']">
               Citizenship is required.
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label"
-              >Life Status <span class="text-danger">*</span></label
-            >
-            <select
-              class="form-select"
-              formControlName="lifeStatus"
-              [class.is-invalid]="
+            <label class="form-label">Life Status <span class="text-danger">*</span></label>
+            <select class="form-select" formControlName="lifeStatus" [class.is-invalid]="
                 studentForm.get('studentRequest.mother.lifeStatus')?.invalid &&
                 studentForm.get('studentRequest.mother.lifeStatus')?.touched
-              "
-            >
+              ">
               <option value="" disabled>Select status</option>
-              <option value="ALIVE">Alive</option>
+              <option value="LIVING">Alive</option>
               <option value="DECEASED">Deceased</option>
             </select>
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.mother.lifeStatus')?.errors?.['required']"
-            >
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.mother.lifeStatus')?.errors?.['required']">
               Life Status is required.
             </div>
           </div>
 
-          <div
-            class="row g-2"
-            *ngIf="
+          <div class="row g-2" *ngIf="
               studentForm.get('studentRequest.mother.lifeStatus')?.value ===
               'DECEASED'
-            "
-          >
+            ">
             <div class="col-md-6">
               <label class="form-label">Cause of Death</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="causeOfDeath"
-                placeholder="e.g., Illness"
-              />
+              <input type="text" class="form-control" formControlName="causeOfDeath" placeholder="e.g., Illness" />
             </div>
             <div class="col-md-6">
               <label class="form-label">Year of Death</label>
@@ -1602,22 +1025,16 @@
           </div>
 
           <div class="mb-4 mt-3">
-            <label class="form-label"
-              >Highest Educational Attainment
-              <span class="text-danger">*</span></label
-            >
-            <select
-              class="form-select"
-              formControlName="highestEducationAttainment"
-              [class.is-invalid]="
+            <label class="form-label">Highest Educational Attainment
+              <span class="text-danger">*</span></label>
+            <select class="form-select" formControlName="highestEducationAttainment" [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.mother.highestEducationAttainment'
                 )?.invalid &&
                 studentForm.get(
                   'studentRequest.mother.highestEducationAttainment'
                 )?.touched
-              "
-            >
+              ">
               <option value="" disabled>Select education level</option>
               <option>No Formal Education</option>
               <option>Elementary Graduate</option>
@@ -1627,10 +1044,8 @@
               <option>College Graduate</option>
               <option>Post Graduate</option>
             </select>
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.mother.highestEducationAttainment')?.errors?.['required']"
-            >
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.mother.highestEducationAttainment')?.errors?.['required']">
               This field is required.
             </div>
           </div>
@@ -1641,109 +1056,70 @@
             <div class="row g-2">
               <!-- Street (text input) -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Street <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="street"
-                  [class.is-invalid]="
+                <label class="form-label">Street <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="street" [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.street')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.street')
                       ?.touched
-                  "
-                  placeholder="e.g., Lot 1 Block 12"
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.street')?.errors?.['required']"
-                >
+                  " placeholder="e.g., Lot 1 Block 12" />
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.street')?.errors?.['required']">
                   Street is required.
                 </div>
               </div>
 
               <!-- Region Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Region <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="region"
-                  (change)="onRegionChange($event)"
+                <label class="form-label">Region <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="region" (change)="onRegionChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.region')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.region')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>Select Region</option>
-                  <option
-                    *ngFor="let region of regionOptions"
-                    [value]="region.code"
-                  >
+                  <option *ngFor="let region of regionOptions" [value]="region.code">
                     {{ region.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.region')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.region')?.errors?.['required']">
                   Region is required.
                 </div>
               </div>
 
               <!-- Province Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Province <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="province"
-                  (change)="onProvinceChange($event)"
+                <label class="form-label">Province <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="province" (change)="onProvinceChange($event)"
                   [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.province')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.province')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>Select Province</option>
-                  <option
-                    *ngFor="let province of provinceOptions"
-                    [value]="province.code"
-                  >
+                  <option *ngFor="let province of provinceOptions" [value]="province.code">
                     {{ province.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.province')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.province')?.errors?.['required']">
                   Province is required.
                 </div>
               </div>
 
               <!-- City/Municipality Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >City/Municipality <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="city"
-                  (change)="onCityChange($event)"
-                  [class.is-invalid]="
+                <label class="form-label">City/Municipality <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="city" (change)="onCityChange($event)" [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.city')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.city')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>
                     Select City/Municipality
                   </option>
@@ -1751,68 +1127,44 @@
                     {{ city.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.city')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.city')?.errors?.['required']">
                   City/Municipality is required.
                 </div>
               </div>
 
               <!-- Barangay Dropdown -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Barangay <span class="text-danger">*</span></label
-                >
-                <select
-                  class="form-select"
-                  formControlName="barangay"
-                  [class.is-invalid]="
+                <label class="form-label">Barangay <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="barangay" [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.barangay')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.barangay')
                       ?.touched
-                  "
-                >
+                  ">
                   <option value="" disabled selected>Select Barangay</option>
-                  <option
-                    *ngFor="let barangay of barangayOptions"
-                    [value]="barangay.name"
-                  >
+                  <option *ngFor="let barangay of barangayOptions" [value]="barangay.name">
                     {{ barangay.name }}
                   </option>
                 </select>
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.barangay')?.errors?.['required']"
-                >
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.barangay')?.errors?.['required']">
                   Barangay is required.
                 </div>
               </div>
 
               <!-- Zip Code (manual input or auto-fill based on city) -->
               <div class="col-md-6 mb-2">
-                <label class="form-label"
-                  >Zip Code <span class="text-danger">*</span></label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="zipCode"
-                  (keypress)="isNumberKey($event)"
-                  (paste)="preventNonNumericPaste($event)"
-                  [class.is-invalid]="
+                <label class="form-label">Zip Code <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="zipCode" (keypress)="isNumberKey($event)"
+                  (paste)="preventNonNumericPaste($event)" [class.is-invalid]="
                     studentForm.get('studentRequest.mother.address.zipCode')
                       ?.invalid &&
                     studentForm.get('studentRequest.mother.address.zipCode')
                       ?.touched
-                  "
-                  placeholder="e.g., 6000"
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="studentForm.get('studentRequest.mother.address.zipCode')?.errors?.['required']"
-                >
+                  " placeholder="e.g., 6000" />
+                <div class="invalid-feedback"
+                  *ngIf="studentForm.get('studentRequest.mother.address.zipCode')?.errors?.['required']">
                   Zip Code is required.
                 </div>
               </div>
@@ -1824,10 +1176,7 @@
 
     <!-- Family Info -->
     <!-- FAMILY INFORMATION -->
-    <fieldset
-      formGroupName="family"
-      class="border rounded p-4 mt-4 shadow-sm bg-light"
-    >
+    <fieldset formGroupName="family" class="border rounded p-4 mt-4 shadow-sm bg-light">
       <legend class="float-none w-auto px-3 text-primary fs-5 mb-3">
         👨‍👩‍👧‍👦 Family Information
       </legend>
@@ -1838,24 +1187,17 @@
           <label class="form-label" for="familySize">
             Family Size <span class="text-danger">*</span>
           </label>
-          <select
-            id="familySize"
-            class="form-select"
-            formControlName="familySize"
-            [class.is-invalid]="
-              studentForm.get('studentRequest.family.familySize')?.invalid &&
+          <select id="familySize" class="form-select" formControlName="familySize" [class.is-invalid]="
+              studentForm.get('studentRequest.family. ')?.invalid &&
               studentForm.get('studentRequest.family.familySize')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select family size</option>
             <option *ngFor="let size of familySizes" [value]="size">
               {{ size }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.family.familySize')?.errors?.['required']"
-          >
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.family.familySize')?.errors?.['required']">
             Family Size is required.
           </div>
         </div>
@@ -1864,17 +1206,12 @@
           <label class="form-label" for="monthlyGrossIncome">
             Monthly Gross Income <span class="text-danger">*</span>
           </label>
-          <select
-            id="monthlyGrossIncome"
-            class="form-select"
-            formControlName="monthlyGrossIncome"
-            [class.is-invalid]="
+          <select id="monthlyGrossIncome" class="form-select" formControlName="monthlyGrossIncome" [class.is-invalid]="
               studentForm.get('studentRequest.family.monthlyGrossIncome')
                 ?.invalid &&
               studentForm.get('studentRequest.family.monthlyGrossIncome')
                 ?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>
               Select gross income range
             </option>
@@ -1886,12 +1223,17 @@
             <option value="₱131,484 - ₱219,139">₱131,484 - ₱219,139</option>
             <option value="₱219,140 and above">₱219,140 and above</option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.family.monthlyGrossIncome')?.errors?.['required']"
-          >
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.family.monthlyGrossIncome')?.errors?.['required']">
             Monthly Gross Income is required.
           </div>
+        </div>
+        <div class="col">
+          <label for="weeklyAllowance" class="form-label">
+            Weekly Allowance <span class="text-muted">(in PHP)</span>
+          </label>
+          <input type="number" class="form-control" id="weeklyAllowance" formControlName="weeklyAllowance"
+            placeholder="e.g., 500" min="0" (keypress)="isNumberKey($event)" />
         </div>
       </div>
 
@@ -1902,42 +1244,20 @@
             Nature of Residence <span class="text-danger">*</span>
           </label>
 
-          <div
-            class="form-check"
-            *ngFor="let option of natureOfResidenceOptions"
-          >
-            <input
-              type="checkbox"
-              class="form-check-input"
-              [id]="option"
-              [value]="option"
-              (change)="onNatureOfResidenceChange($event)"
-              [checked]="selectedResidences.includes(option)"
-            />
+          <div class="form-check" *ngFor="let option of natureOfResidenceOptions">
+            <input type="checkbox" class="form-check-input" [id]="option" [value]="option"
+              (change)="onNatureOfResidenceChange($event)" [checked]="selectedResidences.includes(option)" />
             <label class="form-check-label" [for]="option">{{ option }}</label>
           </div>
 
           <!-- Others input -->
           <div class="form-check mt-2">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="othersCheckbox"
-              (change)="toggleOthers($event)"
-              [checked]="othersSelected"
-            />
-            <label class="form-check-label" for="othersCheckbox"
-              >Others, please specify:</label
-            >
-            <input
-              type="text"
-              class="form-control mt-2"
-              *ngIf="othersSelected"
-              [(ngModel)]="othersText"
-              formControlName="otherNatureOfResidence"
-              (ngModelChange)="updateOthers()"
-              placeholder="Specify other type of residence"
-            />
+            <input type="checkbox" class="form-check-input" id="othersCheckbox" (change)="toggleOthers($event)"
+              [checked]="othersSelected" />
+            <label class="form-check-label" for="othersCheckbox">Others, please specify:</label>
+            <input type="text" class="form-control mt-2" *ngIf="othersSelected" [(ngModel)]="othersText"
+              formControlName="otherNatureOfResidence" (ngModelChange)="updateOthers()"
+              placeholder="Specify other type of residence" />
           </div>
         </div>
 
@@ -1945,12 +1265,8 @@
           <label class="form-label mb-2">Parents' Marital Status</label>
           <div *ngFor="let status of parentsMaritalStatusOptions">
             <label class="form-check d-flex align-items-center gap-2">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                [checked]="selectedMaritalStatus === status"
-                (change)="onMaritalStatusCheckboxChange(status)"
-              />
+              <input type="checkbox" class="form-check-input" [checked]="selectedMaritalStatus === status"
+                (change)="onMaritalStatusCheckboxChange(status)" />
               {{ status }}
             </label>
           </div>
@@ -1963,25 +1279,18 @@
           <label class="form-label" for="ordinalPosition">
             Ordinal Position <span class="text-danger">*</span>
           </label>
-          <select
-            id="ordinalPosition"
-            class="form-select"
-            formControlName="ordinalPosition"
-            [class.is-invalid]="
+          <select id="ordinalPosition" class="form-select" formControlName="ordinalPosition" [class.is-invalid]="
               studentForm.get('studentRequest.family.ordinalPosition')
                 ?.invalid &&
               studentForm.get('studentRequest.family.ordinalPosition')?.touched
-            "
-          >
+            ">
             <option value="" disabled selected>Select ordinal position</option>
             <option *ngFor="let pos of ordinalPositions" [value]="pos">
               {{ pos }}
             </option>
           </select>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.family.ordinalPosition')?.errors?.['required']"
-          >
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.family.ordinalPosition')?.errors?.['required']">
             Ordinal Position is required.
           </div>
         </div>
@@ -1991,24 +1300,14 @@
           <label class="form-label" for="siblingsCount">
             Number of Siblings <span class="text-danger">*</span>
           </label>
-          <input
-            type="number"
-            min="0"
-            id="siblingsCount"
-            class="form-control"
-            formControlName="siblingsCount"
-            #siblingsInput
-            (input)="generateSiblingFields(siblingsInput.value)"
-            placeholder="Enter number of siblings"
+          <input type="number" min="0" id="siblingsCount" class="form-control" formControlName="siblingsCount"
+            #siblingsInput (input)="generateSiblingFields(siblingsInput.value)" placeholder="Enter number of siblings"
             [class.is-invalid]="
               studentForm.get('studentRequest.family.siblingsCount')?.invalid &&
               studentForm.get('studentRequest.family.siblingsCount')?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.family.siblingsCount')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.family.siblingsCount')?.errors?.['required']">
             Number of Siblings is required.
           </div>
         </div>
@@ -2019,38 +1318,21 @@
             👨‍👩‍👧‍👦 Sibling's Details
           </label>
           <div formArrayName="siblings" class="d-flex flex-column gap-3">
-            <div
-              class="card shadow-sm border-0 p-3 sibling-entry"
-              *ngFor="let sibling of siblingsArray.controls; let i = index"
-              [formGroupName]="i"
-            >
+            <div class="card shadow-sm border-0 p-3 sibling-entry"
+              *ngFor="let sibling of siblingsArray.controls; let i = index" [formGroupName]="i">
               <div class="row g-3 align-items-end">
                 <div class="col-md-3">
                   <label class="form-label fw-medium">First Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="firstName"
-                    placeholder="Enter first name"
-                  />
+                  <input type="text" class="form-control" formControlName="firstName" placeholder="Enter first name" />
                 </div>
                 <div class="col-md-3">
                   <label class="form-label fw-medium">Middle Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="middleName"
-                    placeholder="Enter middle name"
-                  />
+                  <input type="text" class="form-control" formControlName="middleName"
+                    placeholder="Enter middle name" />
                 </div>
                 <div class="col-md-3">
                   <label class="form-label fw-medium">Last Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="lastName"
-                    placeholder="Enter last name"
-                  />
+                  <input type="text" class="form-control" formControlName="lastName" placeholder="Enter last name" />
                 </div>
                 <div class="col-md-3">
                   <label class="form-label fw-medium">Gender</label>
@@ -2068,54 +1350,33 @@
 
       <!-- Education Sponsor & Weekly Allowance -->
       <div class="col-md-12 mb-4">
-        <label class="form-label fw-semibold mb-2"
-          >Who Finances Your Schooling</label
-        >
+        <label class="form-label fw-semibold mb-2">Who Finances Your Schooling</label>
 
         <div class="form-check" *ngFor="let option of sponsorOptions">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            [value]="option.value"
-            [checked]="selectedSponsors.includes(option.value)"
-            (change)="onSponsorChange($event, option)"
-            [id]="option.value"
-          />
+          <input class="form-check-input" type="checkbox" [value]="option.value"
+            [checked]="selectedSponsors.includes(option.value)" (change)="onSponsorChange($event, option)"
+            [id]="option.value" />
           <label class="form-check-label" [for]="option.value">
             {{ option.label }}
           </label>
 
           <!-- Conditional input -->
           <div *ngIf="showInput[option.value]" class="mt-2 ms-4">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="otherSponsor"
-              [placeholder]="option.placeholder"
-              [(ngModel)]="extraDetails[option.value]"
-              (ngModelChange)="updateEducationSponsor()"
-            />
+            <input type="text" class="form-control" formControlName="otherSponsor" [placeholder]="option.placeholder"
+              [(ngModel)]="extraDetails[option.value]" (ngModelChange)="updateEducationSponsor()" />
           </div>
         </div>
-        <div
-          class="text-danger small mt-1"
-          *ngIf="
+        <div class="text-danger small mt-1" *ngIf="
     studentForm.get('studentRequest.family.educationSponsor')?.errors?.['required'] &&
     studentForm.get('studentRequest.family.educationSponsor')?.touched
-  "
-        >
+  ">
           Please select at least one sponsor.
         </div>
       </div>
 
       <!-- First Gen College Student -->
       <div class="form-check mb-4">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          id="firstGenStudent"
-          formControlName="firstGenerationStudent"
-        />
+        <input type="checkbox" class="form-check-input" id="firstGenStudent" formControlName="firstGenerationStudent" />
         <label class="form-check-label fw-semibold" for="firstGenStudent">
           I am a first-generation college student
         </label>
@@ -2129,58 +1390,35 @@
 
         <!-- Indigenous People -->
         <div class="form-check mb-2">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="memberOfIndigenousPeople"
-            formControlName="memberOfIndigenousPeople"
-          />
+          <input class="form-check-input" type="checkbox" id="memberOfIndigenousPeople"
+            formControlName="memberOfIndigenousPeople" />
           <label class="form-check-label" for="memberOfIndigenousPeople">
             Member of Indigenous People
           </label>
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             studentForm.get('studentRequest.family.memberOfIndigenousPeople')
               ?.value
-          "
-        >
-          <input
-            type="text"
-            class="form-control mt-1 mb-3"
-            placeholder="Please specify details"
-            formControlName="indigenousCommunity"
-          />
+          ">
+          <input type="text" class="form-control mt-1 mb-3" placeholder="Please specify details"
+            formControlName="indigenousCommunity" />
         </div>
 
         <!-- Indigenous Cultural Community -->
         <div class="form-check mb-2">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="memberOfIndigenousCulturalCommunity"
-            formControlName="memberOfIndigenousCulturalCommunity"
-          />
-          <label
-            class="form-check-label"
-            for="memberOfIndigenousCulturalCommunity"
-          >
+          <input class="form-check-input" type="checkbox" id="memberOfIndigenousCulturalCommunity"
+            formControlName="memberOfIndigenousCulturalCommunity" />
+          <label class="form-check-label" for="memberOfIndigenousCulturalCommunity">
             Member of Indigenous Cultural Community
           </label>
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             studentForm.get(
               'studentRequest.family.memberOfIndigenousCulturalCommunity'
             )?.value
-          "
-        >
-          <input
-            type="text"
-            class="form-control mt-1"
-            placeholder="Please specify details"
-            formControlName="indigenousCulturalCommunityDetails"
-          />
+          ">
+          <input type="text" class="form-control mt-1" placeholder="Please specify details"
+            formControlName="indigenousCulturalCommunityDetails" />
         </div>
       </div>
     </fieldset>
@@ -2194,50 +1432,32 @@
       <div class="row g-3">
         <!-- First Name -->
         <div class="col-md-4">
-          <label class="form-label"
-            >FIRST NAME <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="firstName"
-            placeholder="FIRST NAME"
-            [class.is-invalid]="
+          <label class="form-label">FIRST NAME <span class="text-danger">*</span></label>
+          <input type="text" id="emergencyFirstName" class="form-control" formControlName="firstName"
+            placeholder="FIRST NAME" [class.is-invalid]="
               studentForm.get('studentRequest.emergencyContact.firstName')
                 ?.invalid &&
               studentForm.get('studentRequest.emergencyContact.firstName')
                 ?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emergencyContact.firstName')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emergencyContact.firstName')?.errors?.['required']">
             First Name is required.
           </div>
         </div>
 
         <!-- Last Name -->
         <div class="col-md-4">
-          <label class="form-label"
-            >LAST NAME <span class="text-danger">*</span></label
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="lastName"
-            placeholder="LAST NAME"
-            [class.is-invalid]="
+          <label class="form-label">LAST NAME <span class="text-danger">*</span></label>
+          <input type="text" id="emergencyLastName" class="form-control" formControlName="lastName"
+            placeholder="LAST NAME" [class.is-invalid]="
               studentForm.get('studentRequest.emergencyContact.lastName')
                 ?.invalid &&
               studentForm.get('studentRequest.emergencyContact.lastName')
                 ?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emergencyContact.lastName')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emergencyContact.lastName')?.errors?.['required']">
             Last Name is required.
           </div>
         </div>
@@ -2245,54 +1465,35 @@
         <!-- Middle Name -->
         <div class="col-md-4">
           <label class="form-label">Middle name</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="middleName"
-            placeholder="MIDDLE NAME"
-          />
+          <input type="text" id="emergencyMiddleName" class="form-control" formControlName="middleName"
+            placeholder="MIDDLE NAME" />
         </div>
 
         <!-- Contact Number -->
         <div class="col-md-4">
           <label class="form-label">Contact Number</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="contactNumber"
-            maxlength="11"
-            (keypress)="isNumberKey($event)"
-            (paste)="preventNonNumericPaste($event)"
-            placeholder="09XXXXXXXXX"
-            [class.is-invalid]="
+          <input type="text" id="emergencyContactNumber" class="form-control" formControlName="contactNumber"
+            maxlength="11" (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)"
+            placeholder="09XXXXXXXXX" [class.is-invalid]="
               studentForm.get('studentRequest.emergencyContact.contactNumber')
                 ?.invalid &&
               studentForm.get('studentRequest.emergencyContact.contactNumber')
                 ?.touched
-            "
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['required']"
-          >
+            " />
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['required']">
             Contact Number is required.
           </div>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['pattern']"
-          >
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['pattern']">
             Contact number must start with 09 and contain exactly 11 digits.
           </div>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['minlength']"
-          >
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['minlength']">
             Contact number must be exactly 11 digits long.
           </div>
-          <div
-            class="invalid-feedback"
-            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['maxlength']"
-          >
+          <div class="invalid-feedback"
+            *ngIf="studentForm.get('studentRequest.emergencyContact.contactNumber')?.errors?.['maxlength']">
             Contact number must be exactly 11 digits long.
           </div>
         </div>
@@ -2304,125 +1505,78 @@
         <div class="row g-3">
           <!-- Street -->
           <div class="col-md-6 col-lg-4">
-            <label for="street" class="form-label"
-              >Street <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="street"
-              formControlName="street"
-              placeholder="e.g., Lot 1 Block 12"
-              [class.is-invalid]="
+            <label for="street" class="form-label">Street <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="street" formControlName="street"
+              placeholder="e.g., Lot 1 Block 12" [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.emergencyContact.address.street'
                 )?.invalid &&
                 studentForm.get(
                   'studentRequest.emergencyContact.address.street'
                 )?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.emergencyContact.address.street')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.emergencyContact.address.street')?.errors?.['required']">
               Street is required.
             </div>
           </div>
 
           <!-- Barangay -->
           <div class="col-md-6 col-lg-4">
-            <label for="barangay" class="form-label"
-              >Barangay <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="barangay"
-              formControlName="barangay"
-              placeholder="e.g., Brgy. Example"
-              [class.is-invalid]="
+            <label for="barangay" class="form-label">Barangay <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="barangay" formControlName="barangay"
+              placeholder="e.g., Brgy. Example" [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.emergencyContact.address.barangay'
                 )?.invalid &&
                 studentForm.get(
                   'studentRequest.emergencyContact.address.barangay'
                 )?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.emergencyContact.address.barangay')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.emergencyContact.address.barangay')?.errors?.['required']">
               Barangay is required.
             </div>
           </div>
 
           <!-- City/Municipality -->
           <div class="col-md-6 col-lg-4">
-            <label for="city" class="form-label"
-              >City/Municipality <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="city"
-              formControlName="city"
-              placeholder="e.g., Talisay City"
+            <label for="city" class="form-label">City/Municipality <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="city" formControlName="city" placeholder="e.g., Talisay City"
               [class.is-invalid]="
                 studentForm.get('studentRequest.emergencyContact.address.city')
                   ?.invalid &&
                 studentForm.get('studentRequest.emergencyContact.address.city')
                   ?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.emergencyContact.address.city')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.emergencyContact.address.city')?.errors?.['required']">
               City/Municipality is required.
             </div>
           </div>
 
           <!-- Province -->
           <div class="col-md-6 col-lg-4">
-            <label for="province" class="form-label"
-              >Province <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="province"
-              formControlName="province"
-              placeholder="e.g., Negros Occidental"
-              [class.is-invalid]="
+            <label for="province" class="form-label">Province <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="province" formControlName="province"
+              placeholder="e.g., Negros Occidental" [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.emergencyContact.address.province'
                 )?.invalid &&
                 studentForm.get(
                   'studentRequest.emergencyContact.address.province'
                 )?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.emergencyContact.address.province')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.emergencyContact.address.province')?.errors?.['required']">
               Province is required.
             </div>
           </div>
 
           <!-- Region -->
           <div class="col-md-6 col-lg-4">
-            <label for="region" class="form-label"
-              >Region <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="region"
-              formControlName="region"
-              placeholder="e.g., Region VI"
+            <label for="region" class="form-label">Region <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="region" formControlName="region" placeholder="e.g., Region VI"
               [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.emergencyContact.address.region'
@@ -2430,42 +1584,27 @@
                 studentForm.get(
                   'studentRequest.emergencyContact.address.region'
                 )?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.emergencyContact.address.region')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.emergencyContact.address.region')?.errors?.['required']">
               Region is required.
             </div>
           </div>
 
           <!-- Zip Code -->
           <div class="col-md-6 col-lg-4">
-            <label for="zipCode" class="form-label"
-              >Zip Code <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="zipCode"
-              formControlName="zipCode"
-              placeholder="e.g., 6100"
-              (keypress)="isNumberKey($event)"
-              (paste)="preventNonNumericPaste($event)"
-              [class.is-invalid]="
+            <label for="zipCode" class="form-label">Zip Code <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="zipCode" formControlName="zipCode" placeholder="e.g., 6100"
+              (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" [class.is-invalid]="
                 studentForm.get(
                   'studentRequest.emergencyContact.address.zipCode'
                 )?.invalid &&
                 studentForm.get(
                   'studentRequest.emergencyContact.address.zipCode'
                 )?.touched
-              "
-            />
-            <div
-              class="invalid-feedback"
-              *ngIf="studentForm.get('studentRequest.emergencyContact.address.zipCode')?.errors?.['required']"
-            >
+              " />
+            <div class="invalid-feedback"
+              *ngIf="studentForm.get('studentRequest.emergencyContact.address.zipCode')?.errors?.['required']">
               Zip Code is required.
             </div>
           </div>
@@ -2475,10 +1614,7 @@
 
     <!-- Education Background -->
     <!-- Start of Education Background -->
-    <fieldset
-      formGroupName="educationBackground"
-      class="border rounded p-3 mt-4"
-    >
+    <fieldset formGroupName="educationBackground" class="border rounded p-3 mt-4">
       <legend class="float-none w-auto px-2 text-secondary">
         🎓 Education Background
       </legend>
@@ -2488,37 +1624,19 @@
         <h6 class="text-primary fw-bold">Elementary School</h6>
         <div class="row g-3">
           <div class="col-md-4">
-            <label class="form-label"
-              >School Name <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="elementarySchool"
-              placeholder="Enter school name"
-            />
+            <label class="form-label">School Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="elementarySchool"
+              placeholder="Enter school name" />
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >School Address <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="elementarySchoolAddress"
-              placeholder="Enter address"
-            />
+            <label class="form-label">School Address <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="elementarySchoolAddress"
+              placeholder="Enter address" />
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >Year Graduated <span class="text-danger">*</span></label
-            >
-            <input
-              type="number"
-              class="form-control"
-              formControlName="yearGraduatedElementarySchool"
-              placeholder="e.g., 2012"
-            />
+            <label class="form-label">Year Graduated <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" formControlName="yearGraduatedElementarySchool"
+              placeholder="e.g., 2012" />
           </div>
         </div>
       </div>
@@ -2528,46 +1646,23 @@
         <h6 class="text-primary fw-bold">Junior High School</h6>
         <div class="row g-3">
           <div class="col-md-3">
-            <label class="form-label"
-              >School Name <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="juniorHighSchool"
-              placeholder="Enter school name"
-            />
+            <label class="form-label">School Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="juniorHighSchool"
+              placeholder="Enter school name" />
           </div>
           <div class="col-md-3">
-            <label class="form-label"
-              >School Address <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="juniorHighSchoolAddress"
-              placeholder="Enter address"
-            />
+            <label class="form-label">School Address <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="juniorHighSchoolAddress"
+              placeholder="Enter address" />
           </div>
           <div class="col-md-3">
-            <label class="form-label"
-              >Year Graduated <span class="text-danger">*</span></label
-            >
-            <input
-              type="number"
-              class="form-control"
-              formControlName="yearGraduatedJuniorHighSchool"
-              placeholder="e.g., 2016"
-            />
+            <label class="form-label">Year Graduated <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" formControlName="yearGraduatedJuniorHighSchool"
+              placeholder="e.g., 2016" />
           </div>
           <div class="col-md-3">
             <label class="form-label">General Average</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="generalAverageJS"
-              placeholder="e.g., 89.5"
-            />
+            <input type="text" class="form-control" formControlName="generalAverageJS" placeholder="e.g., 89.5" />
           </div>
         </div>
       </div>
@@ -2577,71 +1672,36 @@
         <h6 class="text-primary fw-bold">Senior High School</h6>
         <div class="row g-3">
           <div class="col-md-4">
-            <label class="form-label d-block fw-semibold"
-              >School Type <span class="text-danger">*</span></label
-            >
+            <label class="form-label d-block fw-semibold">School Type <span class="text-danger">*</span></label>
             <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                formControlName="seniorHighSchoolType"
-                id="shsPrivate"
-                value="Private"
-              />
+              <input class="form-check-input" type="radio" formControlName="seniorHighSchoolType" id="shsPrivate"
+                value="Private" />
               <label class="form-check-label" for="shsPrivate">Private</label>
             </div>
             <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                formControlName="seniorHighSchoolType"
-                id="shsPublic"
-                value="Public"
-              />
+              <input class="form-check-input" type="radio" formControlName="seniorHighSchoolType" id="shsPublic"
+                value="Public" />
               <label class="form-check-label" for="shsPublic">Public</label>
             </div>
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >School Name <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="seniorHighSchool"
-              placeholder="Enter school name"
-            />
+            <label class="form-label">School Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="seniorHighSchool"
+              placeholder="Enter school name" />
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >School Address <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="seniorHighSchoolAddress"
-              placeholder="Enter address"
-            />
+            <label class="form-label">School Address <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="seniorHighSchoolAddress"
+              placeholder="Enter address" />
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >Year Graduated <span class="text-danger">*</span></label
-            >
-            <input
-              type="number"
-              class="form-control"
-              formControlName="yearGraduatedSeniorHighSchool"
-              placeholder="e.g., 2018"
-            />
+            <label class="form-label">Year Graduated <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" formControlName="yearGraduatedSeniorHighSchool"
+              placeholder="e.g., 2018" />
           </div>
           <div class="col-md-4">
             <label class="form-label">General Average</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="generalAverageSHS"
-              placeholder="e.g., 91.2"
-            />
+            <input type="text" class="form-control" formControlName="generalAverageSHS" placeholder="e.g., 91.2" />
           </div>
         </div>
       </div>
@@ -2651,111 +1711,52 @@
         <h6 class="text-primary fw-bold">College</h6>
         <div class="row g-3">
           <div class="col-md-4">
-            <label class="form-label d-block fw-semibold"
-              >Student Type <span class="text-danger">*</span></label
-            >
+            <label class="form-label d-block fw-semibold">Student Type <span class="text-danger">*</span></label>
             <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                formControlName="studentType"
-                id="freshGrad"
-                value="Fresh Graduate"
-              />
-              <label class="form-check-label" for="freshGrad"
-                >Fresh Graduate</label
-              >
+              <input class="form-check-input" type="radio" formControlName="studentType" id="freshGrad"
+                value="Fresh Graduate" />
+              <label class="form-check-label" for="freshGrad">Fresh Graduate</label>
             </div>
             <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                formControlName="studentType"
-                id="transferee"
-                value="Transferee"
-              />
-              <label class="form-check-label" for="transferee"
-                >Transferee</label
-              >
+              <input class="form-check-input" type="radio" formControlName="studentType" id="transferee"
+                value="Transferee" />
+              <label class="form-check-label" for="transferee">Transferee</label>
             </div>
           </div>
         </div>
 
-        <div
-          class="row g-3 mt-3"
-          *ngIf="
+        <div class="row g-3 mt-3" *ngIf="
             studentForm.get('studentRequest.educationBackground.studentType')
               ?.value === 'Transferee'
-          "
-        >
+          ">
           <div class="col-md-4">
-            <label class="form-label d-block fw-semibold"
-              >School Type <span class="text-danger">*</span></label
-            >
+            <label class="form-label d-block fw-semibold">School Type <span class="text-danger">*</span></label>
             <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                formControlName="collegeType"
-                id="collegePrivate"
-                value="Private"
-              />
-              <label class="form-check-label" for="collegePrivate"
-                >Private</label
-              >
+              <input class="form-check-input" type="radio" formControlName="collegeType" id="collegePrivate"
+                value="Private" />
+              <label class="form-check-label" for="collegePrivate">Private</label>
             </div>
             <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                formControlName="collegeType"
-                id="collegePublic"
-                value="Public"
-              />
+              <input class="form-check-input" type="radio" formControlName="collegeType" id="collegePublic"
+                value="Public" />
               <label class="form-check-label" for="collegePublic">Public</label>
             </div>
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >College Name <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="collegeName"
-              placeholder="Enter college name"
-            />
+            <label class="form-label">College Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="collegeName" placeholder="Enter college name" />
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >College Address <span class="text-danger">*</span></label
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="collegeAddress"
-              placeholder="Enter address"
-            />
+            <label class="form-label">College Address <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="collegeAddress" placeholder="Enter address" />
           </div>
           <div class="col-md-4">
-            <label class="form-label"
-              >Year Graduated <span class="text-danger">*</span></label
-            >
-            <input
-              type="number"
-              class="form-control"
-              formControlName="yearGraduatedCollege"
-              placeholder="e.g., 2022"
-            />
+            <label class="form-label">Year Graduated <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" formControlName="yearGraduatedCollege" placeholder="e.g., 2022" />
           </div>
           <div class="col-md-4">
             <label class="form-label">General Average</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="generalAverageCollege"
-              placeholder="e.g., 93.5"
-            />
+            <input type="text" class="form-control" formControlName="generalAverageCollege" placeholder="e.g., 93.5" />
           </div>
         </div>
       </div>
@@ -2766,95 +1767,60 @@
         <div class="row g-3">
           <div class="col-md-4">
             <label class="form-label">Program</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="scholarshipProgram"
-              placeholder="e.g., CHED, DOST, etc."
-            />
+            <input type="text" class="form-control" formControlName="scholarshipProgram"
+              placeholder="e.g., CHED, DOST, etc." />
           </div>
           <div class="col-md-4">
             <label class="form-label">Office Address</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="scholarshipOfficeAddress"
-              placeholder="Enter office address"
-            />
+            <input type="text" class="form-control" formControlName="scholarshipOfficeAddress"
+              placeholder="Enter office address" />
           </div>
           <div class="col-md-4">
             <label class="form-label">Contact Number</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="contactNumber"
-              maxlength="11"
-              (keypress)="isNumberKey($event)"
-              (paste)="preventNonNumericPaste($event)"
-            />
+            <input type="text" class="form-control" formControlName="contactNumber" maxlength="11"
+              (keypress)="isNumberKey($event)" (paste)="preventNonNumericPaste($event)" />
           </div>
         </div>
       </div>
     </fieldset>
 
     <!-- Equity Target Indicators -->
-    <fieldset
-      formArrayName="equityTargetIndicatorsRequest"
-      class="border rounded p-3 mt-4"
-    >
+    <fieldset formArrayName="equityTargetIndicatorsRequest" class="border rounded p-3 mt-4">
       <legend class="float-none w-auto px-2 text-secondary">
         Equity Target Indicators <span class="text-danger">*</span>
       </legend>
 
-      <div
-        *ngFor="let group of equityTargetIndicators.controls; let i = index"
-        [formGroupName]="i"
-        class="mb-3 border rounded p-3 bg-light"
-      >
+      <div *ngFor="let group of equityTargetIndicators.controls; let i = index" [formGroupName]="i"
+        class="mb-3 border rounded p-3 bg-light">
         <div class="form-check mb-2">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            [id]="'indicator_' + i"
-            formControlName="selected"
-          />
+          <input type="checkbox" class="form-check-input" [id]="'indicator_' + i" formControlName="selected" />
           <label class="form-check-label" [for]="'indicator_' + i">
             {{ formatIndicatorLabel(indicatorOptions[i]) }}
           </label>
         </div>
 
         <!-- Show textarea only if selected and not NOT_APPLICABLE -->
-        <textarea
-          *ngIf="
+        <textarea *ngIf="
             group.get('selected')?.value &&
             indicatorOptions[i] !== 'NOT_APPLICABLE'
-          "
-          class="form-control"
-          rows="2"
-          placeholder="Details"
-          formControlName="details"
-          [class.is-invalid]="
+          " class="form-control" rows="2" placeholder="Details" formControlName="details" [class.is-invalid]="
             group.get('details')?.invalid && group.get('details')?.touched
-          "
-        >
+          ">
         </textarea>
 
-        <div
-          class="invalid-feedback"
-          *ngIf="
+        <div class="invalid-feedback" *ngIf="
             group.get('selected')?.value &&
             indicatorOptions[i] !== 'NOT_APPLICABLE' &&
             group.get('details')?.hasError('required') &&
             group.get('details')?.touched
-          "
-        >
+          ">
           Details are required when this indicator is selected.
         </div>
       </div>
     </fieldset>
 
     <div class="d-flex justify-content-end mt-4">
-      <button type="submit" class="btn btn-success px-4">Submit</button>
+      <button type="submit" id="submit-button" class="btn btn-success px-4">Submit</button>
     </div>
   </div>
 </form>
